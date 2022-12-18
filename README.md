@@ -1,2 +1,2 @@
 # proyecto-analisis-algoritmos
-Creando Quizzes Raritos
+Creando Quizzes Bonitos
