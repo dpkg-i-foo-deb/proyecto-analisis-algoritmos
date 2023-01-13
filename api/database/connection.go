@@ -18,4 +18,6 @@ func init() {
 	util.HandleErrorStop(err)
 
 	migrateModels()
+
+	checkAdministrator()
 }
