@@ -14,10 +14,18 @@ func LoginService(c *fiber.Ctx) error {
 	var user models.User
 	var pass string
 	var tk models.JWTPair
+	var role string
 
 	res := models.Response{
 		Status:  string(models.DENIED),
 		Message: "Invalid credentials",
+	}
+
+	role = c.Params("role")
+
+	if role != string(models.STUDENT) && role != string(models.ADMINISTRATOR) {
+		res.Message = "Bad route"
+		return c.Status(400).JSON(res)
 	}
 
 	err := c.BodyParser(&user)
@@ -41,7 +49,7 @@ func LoginService(c *fiber.Ctx) error {
 		return c.Status(401).JSON(res)
 	}
 
-	tk, err = auth.GenerateJWTPair(user.Email, "student")
+	tk, err = auth.GenerateJWTPair(user.Email, role)
 
 	if err != nil {
 		res.Status = string(models.ERROR)

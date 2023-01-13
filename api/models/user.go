@@ -9,3 +9,10 @@ type User struct {
 	Name     string `json:"name"`
 	Type     string `json:"type"`
 }
+
+type Role string
+
+const (
+	ADMINISTRATOR Role = "admin"
+	STUDENT       Role = "student"
+)
