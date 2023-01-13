@@ -43,6 +43,11 @@ func LoginService(c *fiber.Ctx) error {
 		return c.Status(401).JSON(res)
 	}
 
+	if user.Type != c.Params("role") {
+		res.Message = "Not enough privilieges"
+		return c.Status(401).JSON(res)
+	}
+
 	err = bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(pass))
 
 	if err != nil {
