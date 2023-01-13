@@ -10,6 +10,8 @@ func migrateModels() {
 		&models.User{},
 		&models.Administrator{},
 		&models.Student{},
+		&models.Question{},
+		&models.Option{},
 	)
 
 	util.HandleErrorStop(err)
