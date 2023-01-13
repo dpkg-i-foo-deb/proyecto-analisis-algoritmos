@@ -13,8 +13,6 @@ func migrateModels() {
 
 	err = DB.AutoMigrate(
 		&models.User{},
-		&models.Administrator{},
-		&models.Student{},
 		&models.Question{},
 		&models.Option{},
 		&models.Exam{},

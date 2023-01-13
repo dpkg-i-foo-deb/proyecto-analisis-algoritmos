@@ -12,7 +12,6 @@ import (
 func LoginService(c *fiber.Ctx) error {
 
 	var user models.User
-	var student models.Student
 	var pass string
 	var tk models.JWTPair
 
@@ -31,12 +30,6 @@ func LoginService(c *fiber.Ctx) error {
 	pass = user.Password
 
 	err = database.DB.Where("email = ?", user.Email).First(&user).Error
-
-	if err != nil {
-		return c.Status(401).JSON(res)
-	}
-
-	err = database.DB.Where("user_id = ?", user.ID).First(&student).Error
 
 	if err != nil {
 		return c.Status(401).JSON(res)
