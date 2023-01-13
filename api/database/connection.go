@@ -16,4 +16,6 @@ func init() {
 	DB, err = gorm.Open(sqlite.Open("exams.db"), &gorm.Config{})
 
 	util.HandleErrorStop(err)
+
+	migrateModels()
 }
