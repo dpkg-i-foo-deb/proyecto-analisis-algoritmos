@@ -5,6 +5,7 @@ go 1.18
 require (
 	github.com/glebarez/sqlite v1.6.0
 	github.com/gofiber/fiber/v2 v2.41.0
+	github.com/golang-jwt/jwt v3.2.2+incompatible
 	gorm.io/gorm v1.24.3
 )
 
