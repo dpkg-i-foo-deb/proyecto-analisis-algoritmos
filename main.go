@@ -9,6 +9,11 @@ import (
 )
 
 func main() {
+
+	generar()
+}
+
+func generar() {
 	rand.Seed(time.Now().UnixNano())
 
 	matriz := utilidades.GenerateMatrix(1000, 1000)
