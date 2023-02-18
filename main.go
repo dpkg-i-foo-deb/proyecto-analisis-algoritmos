@@ -2,15 +2,12 @@ package main
 
 import (
 	"encoding/json"
+	"generador/modelos"
 	"math/rand"
 	"os"
 	"strconv"
 	"time"
 )
-
-type Matriz struct {
-	Datos [][]int `json:"datos"`
-}
 
 func main() {
 	rand.Seed(time.Now().UnixNano())
@@ -26,32 +23,32 @@ func main() {
 	defer file2.Close()
 }
 
-func generateMatrix(rows int, cols int) Matriz {
+func generateMatrix(rows int, cols int) modelos.Matriz {
 	datos := make([][]int, rows)
 
 	for i := 0; i < rows; i++ {
 		datos[i] = make([]int, cols)
-		
+
 		for j := 0; j < cols; j++ {
 			datos[i][j] = rand.Intn(10000)
 		}
 	}
 
-	matriz := Matriz{Datos: datos}
+	matriz := modelos.Matriz{Datos: datos}
 
 	return matriz
 }
 
-func writeMatrix(file *os.File, m Matriz) {
+func writeMatrix(file *os.File, m modelos.Matriz) {
 	encoder := json.NewEncoder(file)
 
 	encoder.Encode(m)
 }
 
-func readMatrix(file *os.File) Matriz {
+func readMatrix(file *os.File) modelos.Matriz {
 	decoder := json.NewDecoder(file)
 
-	matriz := Matriz{}
+	matriz := modelos.Matriz{}
 
 	decoder.Decode(&matriz)
 
