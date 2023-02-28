@@ -2,7 +2,6 @@ package algoritmos_test
 
 import (
 	"generador/algoritmos"
-	"generador/utilidades"
 	"reflect"
 	"testing"
 )
@@ -26,9 +25,7 @@ func TestNaivStandard(t *testing.T) {
 
 	resultado := algoritmos.NaivStandard(a, b)
 
-	if reflect.DeepEqual(resultado, esperado) {
-		utilidades.ImprimirMatriz(resultado)
-		utilidades.ImprimirMatriz(esperado)
+	if !reflect.DeepEqual(resultado, esperado) {
 		t.Error("NaivStandard ha fallado")
 	}
 }
