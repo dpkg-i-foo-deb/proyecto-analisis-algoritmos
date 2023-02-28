@@ -1,2 +1,4 @@
 # proyecto-analisis-algoritmos
-Creando Quizzes Bonitos
+## ¿Cómo ejecutar las pruebas?
+Ejecutar en la RAIZ del proyecto
+`go test ./...`
