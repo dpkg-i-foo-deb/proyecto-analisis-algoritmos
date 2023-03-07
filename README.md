@@ -1,2 +1,5 @@
 # proyecto-analisis-algoritmos
-Creando matrices raritas
+
+## ¿Cómo ejecutar las pruebas?
+Ejecutar en la RAIZ del proyecto
+`go test ./...`
