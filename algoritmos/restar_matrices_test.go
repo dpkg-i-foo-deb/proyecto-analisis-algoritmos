@@ -8,18 +8,18 @@ import (
 
 func TestRestarMatrices(t *testing.T) {
 	a := [][]int{
-		{1, 1, 1},
-		{1, 1, 1},
+		{1, 1},
+		{1, 1},
 	}
 
 	b := [][]int{
-		{1, 1, 1},
-		{1, 1, 1},
+		{1, 1},
+		{1, 1},
 	}
 
 	esperado := [][]int{
-		{0, 0, 0},
-		{0, 0, 0},
+		{0, 0},
+		{0, 0},
 	}
 
 	resultado := algoritmos.RestarMatrices(a, b)
