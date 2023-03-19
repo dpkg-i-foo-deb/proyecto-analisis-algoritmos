@@ -32,9 +32,7 @@ func III_SequentialBlock(a, b [][]int) [][]int {
 }
 
 /*
- * Size: Tamaño de las matrices NxN.
- * l1: Tamaño de la memoria caché L1.
- * l2: Tamaño de la memoria caché L2.
+ * cacheSize: Tamaño total de la memoria cache.
  */
 func calcularTamanoBloque(cacheSize int) int {
 	block_size := int(math.Sqrt(float64(cacheSize / (2 * int(unsafe.Sizeof(int(0)))))))
