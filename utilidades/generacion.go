@@ -14,9 +14,9 @@ func GenerarMatrices() {
 
 	rand.Seed(time.Now().UnixNano())
 
-	matriz512 := GenerateMatrix(512, 512)
-	matriz1024 := GenerateMatrix(1024, 1024)
-	matriz2048 := GenerateMatrix(2048, 2028)
+	matriz512 := generateMatrix(512, 512)
+	matriz1024 := generateMatrix(1024, 1024)
+	matriz2048 := generateMatrix(2048, 2028)
 
 	archivo512, err := os.Create("matriz-512x512.json")
 
@@ -34,8 +34,8 @@ func GenerarMatrices() {
 	defer archivo1024.Close()
 	defer archivo2048.Close()
 
-	WriteMatrix(archivo512, matriz512)
-	WriteMatrix(archivo1024, matriz1024)
-	WriteMatrix(archivo2048, matriz2048)
+	writeMatrix(archivo512, matriz512)
+	writeMatrix(archivo1024, matriz1024)
+	writeMatrix(archivo2048, matriz2048)
 
 }
