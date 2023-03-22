@@ -1,6 +1,7 @@
 package main
 
 import (
+	"generador/algoritmos"
 	"generador/utilidades"
 	"math/rand"
 	"os"
@@ -9,7 +10,6 @@ import (
 )
 
 func main() {
-
 	generar()
 }
 
@@ -23,6 +23,8 @@ func generar() {
 	defer file.Close()
 
 	file2, _ := os.Open("Matriz_" + strconv.Itoa(1000) + "x" + strconv.Itoa(1000) + ".json")
-	utilidades.ReadMatrix(file2)
+	matrizB := utilidades.ReadMatrix(file2)
 	defer file2.Close()
+
+	algoritmos.NaivLoopUnrollingTwo(matrizB.Datos, matrizB.Datos)
 }
