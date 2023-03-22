@@ -86,6 +86,7 @@ La función `NaivLoopUnrollingFour` toma dos matrices `a` y `b` como entrada y d
 En resumen, la función utiliza la técnica de desenrollado de bucles para mejorar el rendimiento de la multiplicación de matrices y se encarga de procesar todas las columnas de la matriz `b` de manera eficiente, dependiendo de la cantidad de columnas que tenga.
 
 ### III. Sequential Block
+
 1. Se definen las dos matrices que se desean multiplicar, A y B, y se crea una matriz C de tamaño adecuado para almacenar el resultado.
 
 2. Se define el tamaño del bloque block_size a utilizar en la multiplicación. Este valor se calcula en función del tamaño de la caché del procesador, de manera que cada bloque quepa completamente en la caché para minimizar los accesos a memoria. Por ejemplo, si la caché tiene un tamaño de 8 KB y las matrices son de tamaño 1000x1000, entonces se podría usar un block_size de 125 (ya que 125x125xsizeof(elemento) = 8KB).
