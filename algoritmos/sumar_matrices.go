@@ -2,10 +2,13 @@ package algoritmos
 
 func SumarMatrices(a [][]int, b [][]int) [][]int {
 
-	resultado := make([][]int, 0)
+	resultado := make([][]int, len(a))
+
+	for i := range resultado {
+		resultado[i] = make([]int, len(a))
+	}
 
 	for i := range a {
-		resultado = append(resultado, make([]int, len(a)))
 		for j := range a[i] {
 			resultado[i][j] = a[i][j] + b[i][j]
 		}

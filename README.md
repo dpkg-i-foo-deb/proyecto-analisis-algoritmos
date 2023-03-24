@@ -5,13 +5,40 @@ Ejecutar en la RAIZ del proyecto
 `go test ./...`
 
 ## Métodos
-### NaivLoopUnrollingTwo
-# proyecto-analisis-algoritmos
-## ¿Cómo ejecutar las pruebas?
-Ejecutar en la RAIZ del proyecto
-`go test ./...`
 
-## Métodos
+### NaivStandard
+El método __`NaivStandard`__ obedece al algoritmo de multiplicación de matrices que hemos utilizado
+toda la vida, recibe dos matrices a y b de números enteros y retorna la matriz resultado, es bastante
+intuitivo de entender pero igualmente ineficiente.
+
+El algoritmo funciona de la siguiente manera:
+
+1. Se crea una matriz vacía llamada __`resultado`__.
+
+2. Se realiza un recorrido de filas y columnas tradicional para almacenar los resultados en la matriz resultado.
+
+3. Se genera un tercer ciclo durante el recorrido de filas y columnas que se encarga de multiplicar las columnas de a por las filas de b.
+
+4. El resultado de cada multiplicación realizada en el tercer ciclo es almacenado de manera temporal en una variable auxiliar llamada acumulador.
+
+5. Al finalizar el tercer ciclo, se almacena el valor del acumulador en la posición i,j de la matriz resultado.
+
+6. El proceso de repite hasta que el recorrido de filas y columnas ha finalizado.
+
+### NaivOnArray
+El método __`NaivOnArray`__ tiene exactamente el mismo recorrido visto en __`NaivStandard`__. Sin embargo, es un poco más eficiente en el uso de recursos al no utilizar una variable extra como acumulador. En su lugar, almacena la productoria de las filas de a y las columnas de b directamente en la matriz resultado. A pesar de esto, la implementación sigue teniendo un orden de complejidad de O(n^3)
+
+### NaivKahan
+El método __`NaivKahan`__ nuevamente posee el mismo comportamiento que __`NaivStandard`__ en el recorrido de las matrices. Sin embargo, emplea la sumatoria de Kahan para almacenar el resultado de la productoria. Este método ayuda a reducir la inestabilidad numérica al momento de las sumas.
+
+Es necesario tener en cuenta lo siguiente:
+
+1. Se declaran variables extra para almacenar el resultado de la suma y el error.
+
+2. A través de la suma de Kahan, se cancela el error de la suma en la siguiente iteración, corrigiendo así posibles defectos en las operaciones.
+
+A pesar de incrementar la estabilidad numérica de la productoria, este método sigue teniendo la complejidad de O(n^3) de las implementaciones tradicionales de multiplicación de matrices.
+
 ### NaivLoopUnrollingTwo
 El método __`NaivLoopUnrollingTwo`__ recibe dos matrices a y b de enteros y retorna la multiplicación de ambas matrices como una nueva matriz de enteros. Este método utiliza una técnica de optimización llamada "loop unrolling" para mejorar el rendimiento de la multiplicación de matrices.
 
@@ -86,6 +113,7 @@ La función `NaivLoopUnrollingFour` toma dos matrices `a` y `b` como entrada y d
 En resumen, la función utiliza la técnica de desenrollado de bucles para mejorar el rendimiento de la multiplicación de matrices y se encarga de procesar todas las columnas de la matriz `b` de manera eficiente, dependiendo de la cantidad de columnas que tenga.
 
 ### III. Sequential Block
+
 1. Se definen las dos matrices que se desean multiplicar, A y B, y se crea una matriz C de tamaño adecuado para almacenar el resultado.
 
 2. Se define el tamaño del bloque block_size a utilizar en la multiplicación. Este valor se calcula en función del tamaño de la caché del procesador, de manera que cada bloque quepa completamente en la caché para minimizar los accesos a memoria. Por ejemplo, si la caché tiene un tamaño de 8 KB y las matrices son de tamaño 1000x1000, entonces se podría usar un block_size de 125 (ya que 125x125xsizeof(elemento) = 8KB).
