@@ -6,13 +6,6 @@ Ejecutar en la RAIZ del proyecto
 
 ## Métodos
 ### NaivLoopUnrollingTwo
-# proyecto-analisis-algoritmos
-## ¿Cómo ejecutar las pruebas?
-Ejecutar en la RAIZ del proyecto
-`go test ./...`
-
-## Métodos
-### NaivLoopUnrollingTwo
 El método __`NaivLoopUnrollingTwo`__ recibe dos matrices a y b de enteros y retorna la multiplicación de ambas matrices como una nueva matriz de enteros. Este método utiliza una técnica de optimización llamada "loop unrolling" para mejorar el rendimiento de la multiplicación de matrices.
 
 El algoritmo funciona de la siguiente manera:
@@ -68,7 +61,9 @@ El algoritmo funciona de la siguiente manera:
     
 4. Se retorna __`resultado`__.
 
+
 ### NaivLoopUnrollingFour
+
 La función `NaivLoopUnrollingFour` toma dos matrices `a` y `b` como entrada y devuelve una matriz resultante que es el resultado de la multiplicación de matrices `a` y `b`. La función utiliza la técnica de desenrollado de bucles para mejorar el rendimiento de la multiplicación de matrices.
 
 1.  Se inicializan las variables `n`, `p`, y `m` con la longitud de la matriz `a`, la cantidad de filas de la matriz `b`, y la longitud de la primera fila de la matriz `b`, respectivamente. También se inicializa una matriz vacía `result` que almacenará el resultado final de la multiplicación.
