@@ -68,7 +68,25 @@ El algoritmo funciona de la siguiente manera:
     
 4. Se retorna __`resultado`__.
 
-## III. Sequential Block
+### NaivLoopUnrollingFour
+La función `NaivLoopUnrollingFour` toma dos matrices `a` y `b` como entrada y devuelve una matriz resultante que es el resultado de la multiplicación de matrices `a` y `b`. La función utiliza la técnica de desenrollado de bucles para mejorar el rendimiento de la multiplicación de matrices.
+
+1.  Se inicializan las variables `n`, `p`, y `m` con la longitud de la matriz `a`, la cantidad de filas de la matriz `b`, y la longitud de la primera fila de la matriz `b`, respectivamente. También se inicializa una matriz vacía `result` que almacenará el resultado final de la multiplicación.
+    
+2.  Si la cantidad de filas de la matriz `b` es divisible por 4 y el residuo es 1, se ejecuta el siguiente bloque de código. En este bloque, se itera sobre cada fila `i` de la matriz `a` y se calcula la suma de productos de los elementos correspondientes de la fila `i` de la matriz `a` y las columnas de la matriz `b`. Se utiliza un bucle `for` con incrementos de 4 para procesar 4 columnas de la matriz `b` al mismo tiempo. El resultado se almacena en la variable `suma` y se agrega a una fila auxiliar `filaAux`. Al final de la iteración de cada fila `i`, se agrega la fila `filaAux` a la matriz `result`.
+    
+3.  Si la cantidad de filas de la matriz `b` es divisible por 4 y el residuo es 2, se ejecuta el siguiente bloque de código. En este bloque, se realiza el mismo proceso que en el bloque anterior, pero se procesan 2 columnas adicionales de la matriz `b` que quedaron por fuera del primer bloque. El resultado se calcula de manera similar a como se hizo en el primer bloque y se agrega a la fila auxiliar `filaAux`.
+    
+4.  Si la cantidad de filas de la matriz `b` es divisible por 4 y el residuo es 3, se ejecuta el siguiente bloque de código. En este bloque, se procesan 3 columnas adicionales de la matriz `b` que quedaron por fuera de los dos bloques anteriores. El resultado se calcula de manera similar a como se hizo en los bloques anteriores y se agrega a la fila auxiliar `filaAux`.
+    
+5.  Si la cantidad de filas de la matriz `b` no es divisible por 4, se ejecuta el siguiente bloque de código. En este bloque, se procesan las columnas restantes de la matriz `b` que no fueron procesadas en los bloques anteriores. El resultado se calcula de manera similar a como se hizo en los bloques anteriores y se agrega a la fila auxiliar `filaAux`.
+    
+6.  Al finalizar el procesamiento de todas las filas de la matriz `a`, la función devuelve la matriz `result` como resultado final de la multiplicación de matrices.
+    
+En resumen, la función utiliza la técnica de desenrollado de bucles para mejorar el rendimiento de la multiplicación de matrices y se encarga de procesar todas las columnas de la matriz `b` de manera eficiente, dependiendo de la cantidad de columnas que tenga.
+
+### III. Sequential Block
+
 1. Se definen las dos matrices que se desean multiplicar, A y B, y se crea una matriz C de tamaño adecuado para almacenar el resultado.
 
 2. Se define el tamaño del bloque block_size a utilizar en la multiplicación. Este valor se calcula en función del tamaño de la caché del procesador, de manera que cada bloque quepa completamente en la caché para minimizar los accesos a memoria. Por ejemplo, si la caché tiene un tamaño de 8 KB y las matrices son de tamaño 1000x1000, entonces se podría usar un block_size de 125 (ya que 125x125xsizeof(elemento) = 8KB).
