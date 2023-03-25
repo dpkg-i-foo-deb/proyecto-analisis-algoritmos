@@ -2,23 +2,25 @@ package utilidades
 
 import (
 	"fmt"
+	"generador/modelos"
+	"generador/resultados"
 	"strconv"
 	"time"
 )
 
-func MedirTiempo(algoritmo modelos.AlrogitmoOrdenamiento, cantidadElementos int) func() time.Duration {
+func MedirTiempo(algoritmo modelos.AlgoritmoMultuplicacion, n int) func() time.Duration {
 	inicio := time.Now()
 	return func() time.Duration {
 		resultado := modelos.Resultado{
-			Titulo:            string(algoritmo) + " " + strconv.FormatInt(int64(cantidadElementos), 10) + " Elementos",
-			Algoritmo:         algoritmo,
-			CantidadElementos: cantidadElementos,
-			Duracion:          time.Since(inicio),
+			Titulo:    string(algoritmo) + " " + strconv.FormatInt(int64(n), 10) + " Elementos",
+			Algoritmo: algoritmo,
+			N:         n,
+			Duracion:  time.Since(inicio),
 		}
 
 		resultados.Resultados = append(resultados.Resultados, resultado)
 
-		fmt.Printf("%s %d Elementos: Tiempo %v\n", algoritmo, cantidadElementos, time.Since(inicio))
+		fmt.Printf("%s %d x %d Tiempo %v\n", algoritmo, n, n, time.Since(inicio))
 
 		return time.Since(inicio)
 	}
