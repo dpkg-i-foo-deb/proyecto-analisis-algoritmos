@@ -29,7 +29,7 @@ func writeMatrix(file *os.File, m modelos.Matriz) {
 	encoder.Encode(m)
 }
 
-func ReadMatrix(file *os.File) modelos.Matriz {
+func readMatrix(file *os.File) modelos.Matriz {
 	decoder := json.NewDecoder(file)
 
 	matriz := modelos.Matriz{}

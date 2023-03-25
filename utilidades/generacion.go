@@ -1,41 +1,30 @@
 package utilidades
 
 import (
-	"log"
+	"math"
 	"math/rand"
 	"os"
+	"strconv"
+
 	"time"
 )
 
-func GenerarMatrices() {
+const CASOS_PRUEBA = 12
 
-	log.Println("Generando matrices...")
-	defer log.Println("Matrices generadas")
+func GenerarMatrices() {
 
 	rand.Seed(time.Now().UnixNano())
 
-	matriz512 := generateMatrix(512, 512)
-	matriz1024 := generateMatrix(1024, 1024)
-	matriz2048 := generateMatrix(2048, 2028)
+	for i := 1; i <= CASOS_PRUEBA; i++ {
+		cantidad := int64(math.Pow(2.0, float64(i)))
 
-	archivo512, err := os.Create("matriz-512x512.json")
+		matriz := generateMatrix(int(cantidad), int(cantidad))
 
-	VerificarError(err)
+		archivo, err := os.Create("matriz_" + strconv.FormatInt(cantidad, 10) + "x" + strconv.FormatInt(cantidad, 10) + ".json")
 
-	archivo1024, err := os.Create("matriz-1024x1024.json")
+		VerificarError(err)
 
-	VerificarError(err)
-
-	archivo2048, err := os.Create("matriz-2048x2048.json")
-
-	VerificarError(err)
-
-	defer archivo512.Close()
-	defer archivo1024.Close()
-	defer archivo2048.Close()
-
-	writeMatrix(archivo512, matriz512)
-	writeMatrix(archivo1024, matriz1024)
-	writeMatrix(archivo2048, matriz2048)
+		writeMatrix(archivo, matriz)
+	}
 
 }

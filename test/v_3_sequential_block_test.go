@@ -1,4 +1,4 @@
-package algoritmos_test
+package test
 
 import (
 	"generador/algoritmos"
@@ -6,7 +6,7 @@ import (
 	"testing"
 )
 
-func Test_IV_3_Sequential_Block(t *testing.T) {
+func TestV_3_SequentialBlock(t *testing.T) {
 
 	A := [][]int{
 		{1, 2},
@@ -23,9 +23,9 @@ func Test_IV_3_Sequential_Block(t *testing.T) {
 		{43, 50},
 	}
 
-	resultado := algoritmos.IV_3_SequentialBlock(A, B)
+	resultado := algoritmos.V_3_SequentialBlock(A, B)
 
 	if !reflect.DeepEqual(resultado, esperado) {
-		t.Error("IV.3 Sequential Block ha fallado")
+		t.Error("V.3 Sequential Block ha fallado")
 	}
 }
