@@ -1,4 +1,4 @@
-package algoritmos_test
+package test
 
 import (
 	"generador/algoritmos"

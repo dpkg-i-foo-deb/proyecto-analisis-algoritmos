@@ -1,4 +1,4 @@
-package algoritmos_test
+package test
 
 import (
 	"generador/algoritmos"
@@ -6,7 +6,7 @@ import (
 	"testing"
 )
 
-func TestNaivStandard(t *testing.T) {
+func TestNaivKahan(t *testing.T) {
 	a := [][]int{
 		{1, 2, 3},
 		{4, 5, 6},
@@ -23,9 +23,10 @@ func TestNaivStandard(t *testing.T) {
 		{139, 154},
 	}
 
-	resultado := algoritmos.NaivStandard(a, b)
+	resultado := algoritmos.NaivKahan(a, b)
 
 	if !reflect.DeepEqual(resultado, esperado) {
-		t.Error("NaivStandard ha fallado")
+		t.Error("NaivKahan ha fallado")
 	}
+
 }

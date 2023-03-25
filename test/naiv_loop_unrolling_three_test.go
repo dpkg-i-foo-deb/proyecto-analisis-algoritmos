@@ -1,4 +1,4 @@
-package algoritmos_test
+package test
 
 import (
 	"generador/algoritmos"
@@ -6,8 +6,7 @@ import (
 	"testing"
 )
 
-func TestNaivLoopUnrollingTwo(t *testing.T) {
-
+func TestNaivLoopUnrollingThree(t *testing.T) {
 	a := [][]int{
 		{1, 2, 3},
 		{4, 5, 6},
@@ -24,10 +23,9 @@ func TestNaivLoopUnrollingTwo(t *testing.T) {
 		{139, 154},
 	}
 
-	resultado := algoritmos.NaivLoopUnrollingTwo(a, b)
+	resultado := algoritmos.NaivLoopUnrollingThree(a, b)
 
 	if !reflect.DeepEqual(resultado, esperado) {
-		t.Error("NaivLoopUnrollingTwo ha fallado")
+		t.Error("NaivLoopUnrollingThree ha fallado")
 	}
-
 }

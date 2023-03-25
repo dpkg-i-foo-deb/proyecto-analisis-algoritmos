@@ -1,4 +1,4 @@
-package algoritmos_test
+package test
 
 import (
 	"generador/algoritmos"
@@ -6,7 +6,7 @@ import (
 	"testing"
 )
 
-func TestNaivOnArray(t *testing.T) {
+func TestNaivLoopUnrollingTwo(t *testing.T) {
 
 	a := [][]int{
 		{1, 2, 3},
@@ -24,10 +24,10 @@ func TestNaivOnArray(t *testing.T) {
 		{139, 154},
 	}
 
-	resultado := algoritmos.NaivOnArray(a, b)
+	resultado := algoritmos.NaivLoopUnrollingTwo(a, b)
 
 	if !reflect.DeepEqual(resultado, esperado) {
-		t.Error("NaivOnArray ha fallado")
+		t.Error("NaivLoopUnrollingTwo ha fallado")
 	}
 
 }

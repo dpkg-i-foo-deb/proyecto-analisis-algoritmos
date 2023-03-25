@@ -1,4 +1,4 @@
-package algoritmos_test
+package test
 
 import (
 	"generador/algoritmos"
@@ -6,7 +6,7 @@ import (
 	"testing"
 )
 
-func TestSumarMatrices(t *testing.T) {
+func TestRestarMatrices(t *testing.T) {
 	a := [][]int{
 		{1, 1},
 		{1, 1},
@@ -18,11 +18,11 @@ func TestSumarMatrices(t *testing.T) {
 	}
 
 	esperado := [][]int{
-		{2, 2},
-		{2, 2},
+		{0, 0},
+		{0, 0},
 	}
 
-	resultado := algoritmos.SumarMatrices(a, b)
+	resultado := algoritmos.RestarMatrices(a, b)
 
 	if !reflect.DeepEqual(resultado, esperado) {
 		t.Error("Sumar matrices ha fallado")

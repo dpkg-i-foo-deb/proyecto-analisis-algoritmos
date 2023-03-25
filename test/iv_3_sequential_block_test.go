@@ -1,4 +1,4 @@
-package algoritmos_test
+package test
 
 import (
 	"generador/algoritmos"
@@ -6,13 +6,14 @@ import (
 	"testing"
 )
 
-func TestStrassenNaiv(t *testing.T) {
-	a := [][]int{
+func Test_IV_3_Sequential_Block(t *testing.T) {
+
+	A := [][]int{
 		{1, 2},
 		{3, 4},
 	}
 
-	b := [][]int{
+	B := [][]int{
 		{5, 6},
 		{7, 8},
 	}
@@ -22,10 +23,9 @@ func TestStrassenNaiv(t *testing.T) {
 		{43, 50},
 	}
 
-	resultado := algoritmos.StrassenNaiv(a, b)
+	resultado := algoritmos.IV_3_SequentialBlock(A, B)
 
 	if !reflect.DeepEqual(resultado, esperado) {
-		t.Error("StrassenNaiv ha fallado")
+		t.Error("IV.3 Sequential Block ha fallado")
 	}
-
 }
