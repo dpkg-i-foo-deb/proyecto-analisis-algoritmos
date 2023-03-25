@@ -26,4 +26,5 @@ func GenerarMatrices() {
 
 		writeMatrix(archivo, matriz)
 	}
+
 }
