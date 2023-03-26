@@ -1,8 +1,6 @@
 package cmd
 
 import (
-	"generador/utilidades"
-
 	"github.com/spf13/cobra"
 )
 
@@ -18,6 +16,5 @@ func init() {
 }
 
 func benchmark(cmd *cobra.Command, args []string) {
-	matrices := utilidades.LeerMatrices()
 
 }
