@@ -122,3 +122,46 @@ En resumen, la función utiliza la técnica de desenrollado de bucles para mejor
 4. Para cada par de bloques de A y B que se van a multiplicar, se realiza un bucle anidado sobre las filas y columnas de los bloques. Dentro de este bucle se realiza la multiplicación de la submatriz de A por la submatriz de B y se acumula el resultado en el bloque correspondiente de C.
 
 5. Se repite este proceso para todos los pares de bloques de C, y al final se obtiene la matriz resultante completa.
+
+### Strassen Winograd
+1. División de las matrices en submatrices:
+Se divide la matriz de entrada A en cuatro submatrices de igual tamaño: A11, A12, A21 y A22. Se divide la matriz de entrada B en cuatro submatrices de igual tamaño: B11, B12, B21 y B22. Cada submatriz tiene la mitad del tamaño de la matriz original.
+
+2. Cálculo de siete productos entre submatrices:
+Se calculan siete productos entre submatrices de las matrices A y B, utilizando las siguientes fórmulas:
+
+P1 = A11 * (B12 - B22)
+P2 = (A11 + A12) * B22
+P3 = (A21 + A22) * B11
+P4 = A22 * (B21 - B11)
+P5 = (A11 + A22) * (B11 + B22)
+P6 = (A12 - A22) * (B21 + B22)
+P7 = (A11 - A21) * (B11 + B12)
+
+Estas operaciones permiten calcular el producto de las matrices A y B con solo siete productos de submatrices en lugar de los ocho requeridos por el algoritmo estándar de multiplicación de matrices.
+
+3. Cálculo de las submatrices de la matriz de salida:
+Se calculan las cuatro submatrices de la matriz de salida C utilizando las siguientes fórmulas:
+
+C11 = P5 + P4 - P2 + P6
+C12 = P1 + P2
+C21 = P3 + P4
+C22 = P5 + P1 - P3 - P7
+
+Estas fórmulas combinan los siete productos de submatrices calculados en el paso anterior para obtener las submatrices de la matriz de salida.
+
+4. Unión de las submatrices:
+Las cuatro submatrices de la matriz de salida C se unen para formar la matriz de salida completa.
+    a. C11 = P5 + P4 - P2 + P6:
+    En esta operación, se suman los productos P5, P4 y P6 y se le resta el producto P2. El resultado se almacena en la submatriz C11 de la matriz de salida.
+
+    b. C12 = P1 + P2:
+    En esta operación, se suman los productos P1 y P2 y se almacena el resultado en la submatriz C12 de la matriz de salida.
+
+    c. C21 = P3 + P4:
+    En esta operación, se suman los productos P3 y P4 y se almacena el resultado en la submatriz C21 de la matriz de salida.
+
+    d. C22 = P5 + P1 - P3 - P7:
+    En esta operación, se suman los productos P5 y P1, y se les resta los productos P3 y P7. El resultado se almacena en la submatriz C22 de la matriz de salida.
+
+En resumen, el algoritmo de multiplicación de matrices Strassen-Winograd divide las matrices de entrada en submatrices más pequeñas, realiza siete productos de submatrices, combina los resultados para obtener las submatrices de la matriz de salida y luego une las submatrices para formar la matriz de salida completa.
