@@ -3,6 +3,7 @@ package cmd
 import (
 	"generador/benchmark"
 	"generador/modelos"
+	"generador/resultados"
 	"generador/utilidades"
 	"log"
 	"sync"
@@ -64,4 +65,6 @@ func benchmark_multiplicacion(cmd *cobra.Command, args []string) {
 	}
 
 	wg.Wait()
+
+	resultados.Consolidar()
 }

@@ -3,7 +3,7 @@ package benchmark
 import (
 	"generador/algoritmos"
 	"generador/modelos"
-	"generador/utilidades"
+	"generador/tiempo"
 	"sync"
 )
 
@@ -15,7 +15,7 @@ func Bmark_iv_3_sequential_block(matricesA []modelos.Matriz, matricesB []modelos
 }
 
 func iv_3_sequential_block(matrizA modelos.Matriz, matrizB modelos.Matriz, wg *sync.WaitGroup) {
-	defer utilidades.MedirTiempo(modelos.IV_3_SEQUENTIAL_BLOCK, len(matrizA.Datos))()
+	defer tiempo.MedirTiempo(modelos.IV_3_SEQUENTIAL_BLOCK, len(matrizA.Datos))()
 	defer wg.Done()
 
 	algoritmos.IV_3_SequentialBlock(matrizA.Datos, matrizB.Datos)

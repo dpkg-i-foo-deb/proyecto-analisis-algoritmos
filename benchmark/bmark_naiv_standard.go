@@ -3,7 +3,7 @@ package benchmark
 import (
 	"generador/algoritmos"
 	"generador/modelos"
-	"generador/utilidades"
+	"generador/tiempo"
 	"sync"
 )
 
@@ -15,7 +15,7 @@ func BmarkNaivStandard(matricesA []modelos.Matriz, matricesB []modelos.Matriz, w
 }
 
 func naivStandard(matrizA modelos.Matriz, matrizB modelos.Matriz, wg *sync.WaitGroup) {
-	defer utilidades.MedirTiempo(modelos.NAIV_STANDARD, len(matrizA.Datos))()
+	defer tiempo.MedirTiempo(modelos.NAIV_STANDARD, len(matrizA.Datos))()
 	defer wg.Done()
 
 	algoritmos.NaivStandard(matrizA.Datos, matrizB.Datos)

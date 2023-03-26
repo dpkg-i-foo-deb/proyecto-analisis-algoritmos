@@ -3,7 +3,7 @@ package benchmark
 import (
 	"generador/algoritmos"
 	"generador/modelos"
-	"generador/utilidades"
+	"generador/tiempo"
 	"sync"
 )
 
@@ -15,7 +15,7 @@ func BmarkStrassenWinograd(matricesA []modelos.Matriz, matricesB []modelos.Matri
 }
 
 func strassenWinograd(matrizA modelos.Matriz, matrizB modelos.Matriz, wg *sync.WaitGroup) {
-	defer utilidades.MedirTiempo(modelos.STRASSEN_WINOGRAD, len(matrizA.Datos))()
+	defer tiempo.MedirTiempo(modelos.STRASSEN_WINOGRAD, len(matrizA.Datos))()
 	defer wg.Done()
 
 	algoritmos.StrassenWinograd(matrizA.Datos, matrizB.Datos)

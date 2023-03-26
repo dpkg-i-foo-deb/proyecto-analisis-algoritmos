@@ -3,7 +3,7 @@ package benchmark
 import (
 	"generador/algoritmos"
 	"generador/modelos"
-	"generador/utilidades"
+	"generador/tiempo"
 	"sync"
 )
 
@@ -15,7 +15,7 @@ func BmarkWinogradScaled(matricesA []modelos.Matriz, matricesB []modelos.Matriz,
 }
 
 func winogradScaled(matrizA modelos.Matriz, matrizB modelos.Matriz, wg *sync.WaitGroup) {
-	defer utilidades.MedirTiempo(modelos.WINOGRAD_SCALED, len(matrizA.Datos))()
+	defer tiempo.MedirTiempo(modelos.WINOGRAD_SCALED, len(matrizA.Datos))()
 	defer wg.Done()
 
 	algoritmos.WinogradScaled(matrizA.Datos, matrizB.Datos)

@@ -3,7 +3,7 @@ package benchmark
 import (
 	"generador/algoritmos"
 	"generador/modelos"
-	"generador/utilidades"
+	"generador/tiempo"
 	"sync"
 )
 
@@ -15,7 +15,7 @@ func Bmark_V_4_parallel_block(matricesA []modelos.Matriz, matricesB []modelos.Ma
 }
 
 func v_4_parallel_block(matrizA modelos.Matriz, matrizB modelos.Matriz, wg *sync.WaitGroup) {
-	defer utilidades.MedirTiempo(modelos.V_4_PARALLEL_BLOCK, len(matrizA.Datos))()
+	defer tiempo.MedirTiempo(modelos.V_4_PARALLEL_BLOCK, len(matrizA.Datos))()
 	defer wg.Done()
 
 	algoritmos.V_4_ParallelBlock(matrizA.Datos, matrizB.Datos)
