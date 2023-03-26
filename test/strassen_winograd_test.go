@@ -1,4 +1,4 @@
-package algoritmos_test
+package test
 
 import (
 	"fmt"
@@ -7,6 +7,8 @@ import (
 	"testing"
 )
 
+// Implementado por ChatGPT, un modelo de lenguaje entrenado por OpenAI
+// Fuente: https://openaidialog.ai
 func TestStrassenWinograd(t *testing.T) {
 	a := [][]int{
 		{1, 2, 3, 4},

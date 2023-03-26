@@ -1,194 +1,76 @@
 package algoritmos
 
-import (
-	"generador/utilidades"
-	"math"
-)
+func StrassenWinograd(a [][]int, b [][]int) [][]int {
+	// Comprobamos si las matrices tienen tamaño 1
+	if len(a) == 1 && len(a[0]) == 1 && len(b) == 1 && len(b[0]) == 1 {
+		return [][]int{{a[0][0] * b[0][0]}}
+	}
 
-func StrassenWinogradOriginal(a, b [][]int) [][]int {
+	// Calculamos las dimensiones de las matrices
 	n := len(a)
-	p := len(b)
-	m := len(b[0])
+	m := n / 2
 
-	maxSize := utilidades.Max(n, p)
-	maxSize = utilidades.Max(maxSize, m)
+	// Dividimos cada matriz en cuatro submatrices de tamaño m x m
+	a11 := make([][]int, m)
+	a12 := make([][]int, m)
+	a21 := make([][]int, m)
+	a22 := make([][]int, m)
 
-	if maxSize < 16 {
-		maxSize = 16
+	b11 := make([][]int, m)
+	b12 := make([][]int, m)
+	b21 := make([][]int, m)
+	b22 := make([][]int, m)
+
+	for i := 0; i < m; i++ {
+		a11[i] = a[i][:m]
+		a12[i] = a[i][m:]
+		a21[i] = a[i+m][:m]
+		a22[i] = a[i+m][m:]
+
+		b11[i] = b[i][:m]
+		b12[i] = b[i][m:]
+		b21[i] = b[i+m][:m]
+		b22[i] = b[i+m][m:]
 	}
 
-	k := math.Floor(math.Log(float64(maxSize))/math.Log(2)) - 4
+	// Calcular s1 hasta s10
+	s1 := RestarMatrices(b12, b22)
+	s2 := SumarMatrices(a11, a12)
+	s3 := SumarMatrices(a21, a22)
+	s4 := RestarMatrices(b21, b11)
+	s5 := SumarMatrices(a11, a22)
+	s6 := SumarMatrices(b11, b22)
+	s7 := RestarMatrices(a12, a22)
+	s8 := SumarMatrices(b21, b22)
+	s9 := RestarMatrices(a11, a21)
+	s10 := SumarMatrices(b11, b12)
 
-	newM := int(float64(maxSize)*math.Pow(2, -k)) + 1
+	// Calcular p1 hasta p7
+	p1 := StrassenWinograd(a11, s1)
+	p2 := StrassenWinograd(s2, b22)
+	p3 := StrassenWinograd(s3, b11)
+	p4 := StrassenWinograd(a22, s4)
+	p5 := StrassenWinograd(s5, s6)
+	p6 := StrassenWinograd(s7, s8)
+	p7 := StrassenWinograd(s9, s10)
 
-	newSize := int(float64(newM) * math.Pow(2, k))
+	// Calcular las submatrices de la matriz resultante
+	c11 := SumarMatrices(RestarMatrices(SumarMatrices(p5, p4), p2), p6)
+	c12 := SumarMatrices(p1, p2)
+	c21 := SumarMatrices(p3, p4)
+	c22 := RestarMatrices(RestarMatrices(SumarMatrices(p5, p1), p3), p7)
 
-	newA := make([][]int, 0)
-	newB := make([][]int, 0)
-
-	for i := 0; i < n; i++ {
-		filaAux := make([]int, 0)
-		for j := 0; j < p; j++ {
-			filaAux = append(filaAux, a[i][j])
-		}
-		newA = append(newA, filaAux)
+	// Combinar las submatrices en una única matriz
+	c := make([][]int, n)
+	for i := 0; i < m; i++ {
+		c[i] = make([]int, n)
+		copy(c[i], c11[i])
+		copy(c[i][m:], c12[i])
 	}
-
-	for i := 0; i < p; i++ {
-		filaAux := make([]int, 0)
-		for j := 0; j < len(b[i]); j++ {
-			filaAux = append(filaAux, b[i][j])
-		}
-		newB = append(newB, filaAux)
+	for i := n / 2; i < n; i++ {
+		c[i] = make([]int, n)
+		copy(c[i], c21[i-m])
+		copy(c[i][m:], c22[i-m])
 	}
-
-	result := strassenWinogradStep(newA, newB, newSize, newM)
-
-	return result
-}
-
-func strassenWinogradStep(a, b [][]int, n, m int) [][]int {
-	var newSize int
-	result := make([][]int, n)
-
-	if n%2 == 0 && n > m {
-		newSize = n / 2
-
-		a11 := make([][]int, 0)
-		a12 := make([][]int, 0)
-		a21 := make([][]int, 0)
-		a22 := make([][]int, 0)
-		b11 := make([][]int, 0)
-		b12 := make([][]int, 0)
-		b21 := make([][]int, 0)
-		b22 := make([][]int, 0)
-
-		for i := 0; i < newSize; i++ {
-			filaAux := make([]int, 0)
-			for j := 0; j < newSize; j++ {
-				filaAux = append(filaAux, a[i][j])
-			}
-			a11 = append(a11, filaAux)
-		}
-
-		for i := 0; i < newSize; i++ {
-			filaAux := make([]int, 0)
-			for j := 0; j < newSize; j++ {
-				filaAux = append(filaAux, a[i][newSize+j])
-			}
-			a12 = append(a12, filaAux)
-		}
-
-		for i := 0; i < newSize; i++ {
-			filaAux := make([]int, 0)
-			for j := 0; j < newSize; j++ {
-				filaAux = append(filaAux, a[newSize+i][j])
-			}
-			a21 = append(a21, filaAux)
-		}
-
-		for i := 0; i < newSize; i++ {
-			filaAux := make([]int, 0)
-			for j := 0; j < newSize; j++ {
-				filaAux = append(filaAux, a[newSize+i][newSize+j])
-			}
-			a22 = append(a22, filaAux)
-		}
-
-		for i := 0; i < newSize; i++ {
-			filaAux := make([]int, 0)
-			for j := 0; j < newSize; j++ {
-				filaAux = append(filaAux, b[i][j])
-			}
-			b11 = append(b11, filaAux)
-		}
-
-		for i := 0; i < newSize; i++ {
-			filaAux := make([]int, 0)
-			for j := 0; j < newSize; j++ {
-				filaAux = append(filaAux, b[i][newSize+j])
-			}
-			b12 = append(b12, filaAux)
-		}
-
-		for i := 0; i < newSize; i++ {
-			filaAux := make([]int, 0)
-			for j := 0; j < newSize; j++ {
-				filaAux = append(filaAux, b[newSize+i][j])
-			}
-			b21 = append(b21, filaAux)
-		}
-
-		for i := 0; i < newSize; i++ {
-			filaAux := make([]int, 0)
-			for j := 0; j < newSize; j++ {
-				filaAux = append(filaAux, b[newSize+i][newSize+j])
-			}
-			b22 = append(b22, filaAux)
-		}
-
-		a1 := RestarMatrices(a11, a21)
-		a2 := RestarMatrices(a22, a1)
-		b1 := RestarMatrices(b22, b12)
-		b2 := SumarMatrices(b1, b11)
-
-		aux1 := strassenWinogradStep(a11, b11, newSize, m)
-		aux2 := strassenWinogradStep(a12, b21, newSize, m)
-		aux3 := strassenWinogradStep(a2, b2, newSize, m)
-		helper1 := SumarMatrices(a21, a22)
-		helper2 := SumarMatrices(b12, b11)
-
-		aux4 := strassenWinogradStep(helper1, helper2, newSize, m)
-		aux5 := strassenWinogradStep(a1, b1, newSize, m)
-		helper1 = RestarMatrices(a12, a2)
-
-		aux6 := strassenWinogradStep(helper1, b22, newSize, m)
-		helper1 = RestarMatrices(b21, b2)
-
-		aux7 := strassenWinogradStep(a22, helper1, newSize, m)
-		aux8 := SumarMatrices(aux1, aux3)
-		aux9 := SumarMatrices(aux8, aux4)
-
-		resultPart11 := SumarMatrices(aux1, aux2)
-		resultPart12 := SumarMatrices(aux9, aux6)
-		helper1 = SumarMatrices(aux8, aux5)
-		resultPart21 := SumarMatrices(helper1, aux7)
-		resultPart22 := SumarMatrices(aux9, aux5)
-
-		for i := 0; i < newSize; i++ {
-			filaAux := make([]int, 0)
-			for j := 0; j < newSize; j++ {
-				filaAux = append(filaAux, resultPart11[i][j])
-			}
-			result[i] = filaAux
-		}
-
-		for i := 0; i < newSize; i++ {
-			filaAux := make([]int, 0)
-			for j := 0; j < newSize; j++ {
-				filaAux = append(filaAux, resultPart12[i][j])
-			}
-			result[i] = filaAux
-		}
-
-		for i := 0; i < newSize; i++ {
-			filaAux := make([]int, 0)
-			for j := 0; j < newSize; j++ {
-				filaAux = append(filaAux, resultPart21[i][j])
-			}
-			result[i] = filaAux
-		}
-
-		for i := 0; i < newSize; i++ {
-			filaAux := make([]int, 0)
-			for j := 0; j < newSize; j++ {
-				filaAux = append(filaAux, resultPart22[i][j])
-			}
-			result[i] = filaAux
-		}
-	} else {
-		result = NaivStandard(a, b)
-	}
-
-	return result
+	return c
 }
