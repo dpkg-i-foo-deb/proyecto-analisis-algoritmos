@@ -6,6 +6,7 @@ type AlgoritmoMultuplicacion string
 
 const (
 	III_SEQUENTIAL_BLOCK      AlgoritmoMultuplicacion = "III Sequential Block"
+	III_PARALLEL_BLOCK        AlgoritmoMultuplicacion = "III Parallel Block"
 	IV_3_SEQUENTIAL_BLOCK     AlgoritmoMultuplicacion = "III 3 Sequential Block"
 	NAIV_KAHAN                AlgoritmoMultuplicacion = "NaivKahan"
 	NAIV_LOOP_UNROLLING_FOUR  AlgoritmoMultuplicacion = "Naiv Loop Unrolling Four"
