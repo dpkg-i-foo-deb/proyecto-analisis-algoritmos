@@ -14,6 +14,7 @@ const (
 	NAIV_ON_ARRAY             AlgoritmoMultuplicacion = "Naiv on array"
 	NAIV_STANDARD             AlgoritmoMultuplicacion = "Naiv Standard"
 	STRASSEN_NAIV             AlgoritmoMultuplicacion = "Strassen Naiv"
+	STRASSEN_WINOGRAD         AlgoritmoMultuplicacion = "Strassen Winograd"
 	V_3_SEQUENTIAL_BLOCK      AlgoritmoMultuplicacion = "V 3 Sequential Block"
 	V_4_PARALLEL_BLOCK        AlgoritmoMultuplicacion = "V 4 Pararell Block"
 	WINOGRAD_ORIGINAL         AlgoritmoMultuplicacion = "Winograd Original"
