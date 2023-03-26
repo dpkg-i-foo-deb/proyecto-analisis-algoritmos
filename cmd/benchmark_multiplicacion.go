@@ -3,6 +3,8 @@ package cmd
 import (
 	"generador/benchmark"
 	"generador/modelos"
+	"generador/utilidades"
+	"log"
 	"sync"
 
 	"github.com/spf13/cobra"
@@ -39,5 +41,24 @@ func init() {
 }
 
 func benchmark_multiplicacion(cmd *cobra.Command, args []string) {
+	matricesA, matricesB := utilidades.LeerMatrices()
 
+	log.Println("Ejecutando benchmarks... Tomará un rato")
+
+	var wg sync.WaitGroup
+
+	for i := range benchmarks {
+
+		copiaA := make([]modelos.Matriz, len(matricesA), cap(matricesA))
+
+		copiaB := make([]modelos.Matriz, len(matricesB), cap(matricesB))
+
+		copy(copiaA, matricesA)
+
+		copy(copiaB, matricesB)
+
+		benchmarks[i](copiaA, copiaB, &wg)
+	}
+
+	wg.Wait()
 }
