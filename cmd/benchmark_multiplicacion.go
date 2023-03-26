@@ -41,6 +41,9 @@ func init() {
 }
 
 func benchmark_multiplicacion(cmd *cobra.Command, args []string) {
+
+	log.Println("Buscando y leyendo matrices de archivos...")
+
 	matricesA, matricesB := utilidades.LeerMatrices()
 
 	log.Println("Ejecutando benchmarks... Tomará un rato")
