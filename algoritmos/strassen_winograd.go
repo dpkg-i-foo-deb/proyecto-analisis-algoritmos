@@ -5,7 +5,7 @@ import (
 	"math"
 )
 
-func StrassenWinograd(a, b [][]int) [][]int {
+func StrassenWinogradOriginal(a, b [][]int) [][]int {
 	n := len(a)
 	p := len(b)
 	m := len(b[0])

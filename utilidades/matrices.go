@@ -7,7 +7,7 @@ import (
 	"os"
 )
 
-func GenerateMatrix(rows int, cols int) modelos.Matriz {
+func generateMatrix(rows int, cols int) modelos.Matriz {
 	datos := make([][]int, rows)
 
 	for i := 0; i < rows; i++ {
@@ -23,13 +23,13 @@ func GenerateMatrix(rows int, cols int) modelos.Matriz {
 	return matriz
 }
 
-func WriteMatrix(file *os.File, m modelos.Matriz) {
+func writeMatrix(file *os.File, m modelos.Matriz) {
 	encoder := json.NewEncoder(file)
 
 	encoder.Encode(m)
 }
 
-func ReadMatrix(file *os.File) modelos.Matriz {
+func readMatrix(file *os.File) modelos.Matriz {
 	decoder := json.NewDecoder(file)
 
 	matriz := modelos.Matriz{}

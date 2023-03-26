@@ -1,4 +1,4 @@
-package algoritmos_test
+package test
 
 import (
 	"generador/algoritmos"
@@ -6,7 +6,8 @@ import (
 	"testing"
 )
 
-func TestNaivKahan(t *testing.T) {
+func TestNaivLoopUnrollingTwo(t *testing.T) {
+
 	a := [][]int{
 		{1, 2, 3},
 		{4, 5, 6},
@@ -23,10 +24,10 @@ func TestNaivKahan(t *testing.T) {
 		{139, 154},
 	}
 
-	resultado := algoritmos.NaivKahan(a, b)
+	resultado := algoritmos.NaivLoopUnrollingTwo(a, b)
 
 	if !reflect.DeepEqual(resultado, esperado) {
-		t.Error("NaivKahan ha fallado")
+		t.Error("NaivLoopUnrollingTwo ha fallado")
 	}
 
 }
