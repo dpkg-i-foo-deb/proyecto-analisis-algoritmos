@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"generador/modelos"
 	"generador/utilidades"
-	"os"
 	"sort"
 	"strconv"
 )
@@ -143,13 +142,5 @@ func EscribirResultadoJSON() {
 
 	utilidades.VerificarError(err)
 
-	archivo, err := os.Create("resultados.json")
-
-	utilidades.VerificarError(err)
-
-	defer archivo.Close()
-
-	_, err = archivo.Write(cadena)
-
-	utilidades.VerificarError(err)
+	utilidades.EscribirArchivo("resultados.json", cadena)
 }
