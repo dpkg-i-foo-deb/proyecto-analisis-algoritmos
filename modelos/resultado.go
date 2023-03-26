@@ -1,13 +1,12 @@
 package modelos
 
-import "time"
-
 type AlgoritmoMultuplicacion string
 
 const (
 	III_SEQUENTIAL_BLOCK      AlgoritmoMultuplicacion = "III Sequential Block"
 	III_PARALLEL_BLOCK        AlgoritmoMultuplicacion = "III Parallel Block"
 	IV_3_SEQUENTIAL_BLOCK     AlgoritmoMultuplicacion = "III 3 Sequential Block"
+	IV_4_PARALLEL_BLOCK       AlgoritmoMultuplicacion = "III 4 Parallel Block"
 	NAIV_KAHAN                AlgoritmoMultuplicacion = "NaivKahan"
 	NAIV_LOOP_UNROLLING_FOUR  AlgoritmoMultuplicacion = "Naiv Loop Unrolling Four"
 	NAIV_LOOP_UNROLLING_THREE AlgoritmoMultuplicacion = "Naiv Loop Unrolling Three"
@@ -26,5 +25,5 @@ type Resultado struct {
 	Titulo    string                  `json:"titulo"`
 	Algoritmo AlgoritmoMultuplicacion `json:"algoritmo"`
 	N         int                     `json:"n"`
-	Duracion  time.Duration           `json:"duracion"`
+	Duracion  int64                   `json:"duracion"`
 }

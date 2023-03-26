@@ -15,7 +15,7 @@ func MedirTiempo(algoritmo modelos.AlgoritmoMultuplicacion, n int) func() time.D
 			Titulo:    string(algoritmo) + " " + strconv.FormatInt(int64(n), 10) + " Elementos",
 			Algoritmo: algoritmo,
 			N:         n,
-			Duracion:  time.Since(inicio),
+			Duracion:  time.Since(inicio).Nanoseconds(),
 		}
 
 		resultados.Resultados = append(resultados.Resultados, resultado)
