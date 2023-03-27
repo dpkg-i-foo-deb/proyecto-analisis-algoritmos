@@ -1,21 +1,23 @@
 package algoritmos
 
-import "sync"
+import (
+	"sync"
+)
 
 func V_4_ParallelBlock(A [][]int, B [][]int) [][]int {
 	size := len(A)
-	bsize := 32 // default block size
+	bsize := len(A) * 2 // default block size
 	C := make([][]int, size)
 	for i := range C {
 		C[i] = make([]int, size)
 	}
 
 	var wg sync.WaitGroup
-	wg.Add(size / bsize * size / bsize)
+	wg.Add(-size / bsize * size / bsize)
 
 	for i1 := 0; i1 < size; i1 += bsize {
 		for j1 := 0; j1 < size; j1 += bsize {
-			wg.Add(1) // add a waitgroup counter
+			wg.Add(1)
 			go func(i1, j1 int) {
 				defer wg.Done()
 				for k1 := 0; k1 < size; k1 += bsize {
@@ -32,5 +34,6 @@ func V_4_ParallelBlock(A [][]int, B [][]int) [][]int {
 	}
 
 	wg.Wait()
+
 	return C
 }
