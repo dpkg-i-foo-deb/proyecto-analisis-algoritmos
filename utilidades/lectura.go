@@ -44,3 +44,13 @@ func LeerMatrices() ([]modelos.Matriz, []modelos.Matriz) {
 
 	return matricesA, matricesB
 }
+
+func LeerResultados() []modelos.Resultado {
+	archivo, err := os.Open("resultados.json")
+
+	VerificarError(err)
+
+	resultados := readResult(archivo)
+
+	return resultados
+}

@@ -45,3 +45,13 @@ func Max(a, b int) int {
 	}
 	return b
 }
+
+func readResult(file *os.File) []modelos.Resultado {
+	decoder := json.NewDecoder(file)
+
+	resultado := []modelos.Resultado{}
+
+	decoder.Decode(&resultado)
+
+	return resultado
+}

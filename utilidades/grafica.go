@@ -49,29 +49,47 @@ const FIN = `
 </body>
 </html>`
 
+var algoritmosOrdenados = []string{
+	string(modelos.NAIV_STANDARD),
+	string(modelos.NAIV_ON_ARRAY),
+	string(modelos.NAIV_KAHAN),
+	string(modelos.NAIV_LOOP_UNROLLING_TWO),
+	string(modelos.NAIV_LOOP_UNROLLING_THREE),
+	string(modelos.NAIV_LOOP_UNROLLING_FOUR),
+	string(modelos.WINOGRAD_ORIGINAL),
+	string(modelos.WINOGRAD_SCALED),
+	string(modelos.STRASSEN_NAIV),
+	string(modelos.STRASSEN_WINOGRAD),
+	string(modelos.III_SEQUENTIAL_BLOCK),
+	string(modelos.III_PARALLEL_BLOCK),
+	string(modelos.IV_3_SEQUENTIAL_BLOCK),
+	string(modelos.IV_4_PARALLEL_BLOCK),
+	string(modelos.V_3_SEQUENTIAL_BLOCK),
+	string(modelos.V_4_PARALLEL_BLOCK),
+}
+
 func GenerarGraficasPromedio(resultados []modelos.Resultado) {
 	promedios := make(map[string]float64)
 
 	for _, v := range resultados {
-		promedios[v.Titulo] += float64(v.Duracion)
-	}
-
-	for v := range promedios {
-		promedios[v] /= 12
+		promedios[string(v.Algoritmo)] += float64(v.Duracion)
 	}
 
 	var datos string
 
-	for v, p := range promedios {
-		datos += fmt.Sprintf("[\"%s\", %f, 'color: #76A7FA'],\n", v, p)
+	for _, aux := range algoritmosOrdenados {
+		tiempo := promedios[aux] / 12
+		datos += fmt.Sprintf("[\"%s\", %.2f, 'color: #76A7FA'],\n", aux, tiempo)
 	}
 
 	grafica := GRAFICA
 	grafica = strings.Replace(grafica, "{{ titulo }}", "Tiempo promedio de ejecución", -1)
 	grafica = strings.Replace(grafica, "{{ datos }}", datos, -1)
 
-	file, _ := os.Create("../graficas/graficaPromedios.html")
+	file, err := os.Create("graficas/graficaPromedios.html")
+	VerificarError(err)
+
 	defer file.Close()
-	
+
 	fmt.Fprint(file, INICIO+grafica+FIN)
 }
