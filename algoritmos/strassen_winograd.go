@@ -1,14 +1,15 @@
 package algoritmos
 
 func StrassenWinograd(a [][]int, b [][]int) [][]int {
-	// Comprobamos si las matrices tienen tamaño 1
-	if len(a) == 1 && len(a[0]) == 1 && len(b) == 1 && len(b[0]) == 1 {
-		return [][]int{{a[0][0] * b[0][0]}}
-	}
 
 	// Calculamos las dimensiones de las matrices
 	n := len(a)
 	m := n / 2
+
+	// Comprobamos si las matrices tienen tamaño 1
+	if len(a) <= 16 {
+		return NaivStandard(a, b)
+	}
 
 	// Dividimos cada matriz en cuatro submatrices de tamaño m x m
 	a11 := make([][]int, m)
