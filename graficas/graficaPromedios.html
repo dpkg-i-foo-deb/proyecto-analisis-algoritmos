@@ -1,0 +1,54 @@
+
+<html>
+<head>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+  google.charts.load("current", {packages:['corechart']});
+  google.charts.setOnLoadCallback(drawChart);
+  function drawChart() {
+
+var data = google.visualization.arrayToDataTable([
+	["Algoritmo", "Duración", { role: "style" } ],
+	["Naiv Standard", 112478962708.33, 'color: #76A7FA'],
+["Naiv on array", 131697340991.67, 'color: #76A7FA'],
+["NaivKahan", 115833011200.00, 'color: #76A7FA'],
+["Naiv Loop Unrolling Two", 111658725708.33, 'color: #76A7FA'],
+["Naiv Loop Unrolling Three", 24072207225.00, 'color: #76A7FA'],
+["Naiv Loop Unrolling Four", 107829488016.67, 'color: #76A7FA'],
+["Winograd Original", 113634277133.33, 'color: #76A7FA'],
+["Winograd Scaled", 103201619250.00, 'color: #76A7FA'],
+["Strassen Naiv", 453448374516.67, 'color: #76A7FA'],
+["Strassen Winograd", 454574036741.67, 'color: #76A7FA'],
+["III Sequential Block", 55453518416.67, 'color: #76A7FA'],
+["III Parallel Block", 492442291791.67, 'color: #76A7FA'],
+["III 3 Sequential Block", 52316862816.67, 'color: #76A7FA'],
+["III 4 Parallel Block", 491900730300.00, 'color: #76A7FA'],
+["V 3 Sequential Block", 136372578816.67, 'color: #76A7FA'],
+["V 4 Pararell Block", 143633228241.67, 'color: #76A7FA'],
+
+]);
+
+var view = new google.visualization.DataView(data);
+view.setColumns([0, 1,
+				 { calc: "stringify",
+				   sourceColumn: 1,
+				   type: "string",
+				   role: "annotation" },
+				 2]);
+
+var options = {
+  title: "Tiempo promedio de ejecución",
+  height: 800,
+  bar: {groupWidth: "95%"},
+  legend: { position: "none" },
+};
+var chart = new google.visualization.BarChart(document.getElementById("barchart_values"));
+chart.draw(view, options);
+
+  }
+  </script>
+</head>
+<body>
+  <div id="barchart_values"></div>
+</body>
+</html>
