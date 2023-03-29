@@ -1,10 +1,12 @@
 package algoritmos
 
 func StrassenNaiv(a [][]int, b [][]int) [][]int {
+
 	n := len(a)
 
-	if n == 1 { //El caso base es una matriz de 1x1
-		return [][]int{{a[0][0] * b[0][0]}}
+	//Quizá usar el block size
+	if n <= 16 { //El caso base es una matriz de 16x16
+		return NaivStandard(a, b)
 	}
 
 	mitad := n / 2
