@@ -119,7 +119,7 @@ func reconstruir() {
 
 func ordenarAscendente(arreglo []modelos.Resultado) func(int, int) bool {
 	return func(i, j int) bool {
-		if arreglo[i].Duracion > arreglo[j].Duracion {
+		if arreglo[i].N > arreglo[j].N {
 			return arreglo[i].N > arreglo[j].N
 
 		}
