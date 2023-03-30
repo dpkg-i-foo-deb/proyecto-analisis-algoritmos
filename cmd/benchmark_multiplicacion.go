@@ -6,12 +6,11 @@ import (
 	"generador/resultados"
 	"generador/utilidades"
 	"log"
-	"sync"
 
 	"github.com/spf13/cobra"
 )
 
-var benchmarks []func([]modelos.Matriz, []modelos.Matriz, *sync.WaitGroup)
+var benchmarks []func([]modelos.Matriz, []modelos.Matriz)
 
 var benchmarkCmd = &cobra.Command{
 	Use:   "benchmark-multiplicacion",
@@ -49,8 +48,6 @@ func benchmark_multiplicacion(cmd *cobra.Command, args []string) {
 
 	log.Println("Ejecutando benchmarks... Tomará un rato")
 
-	var wg sync.WaitGroup
-
 	for i := range benchmarks {
 
 		copiaA := make([]modelos.Matriz, len(matricesA), cap(matricesA))
@@ -61,10 +58,8 @@ func benchmark_multiplicacion(cmd *cobra.Command, args []string) {
 
 		copy(copiaB, matricesB)
 
-		benchmarks[i](copiaA, copiaB, &wg)
+		benchmarks[i](copiaA, copiaB)
 	}
-
-	wg.Wait()
 
 	resultados.Consolidar()
 }
