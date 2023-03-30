@@ -5,6 +5,7 @@ import (
 	"sync"
 )
 
+// Este algoritmo utiliza un tamaño de bloque de acuerdo a la memoria caché
 func III_ParallelBlock(a, b [][]int) [][]int {
 	// Get the dimensions of the matrices
 	filas := len(a)

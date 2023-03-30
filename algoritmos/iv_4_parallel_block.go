@@ -2,6 +2,7 @@ package algoritmos
 
 import "sync"
 
+// Este algoritmo utiliza un tamaño de bloque fijo, siempre es 2
 func IV_4_Pararell_Block(a, b [][]int) [][]int {
 	//Toca usar waitgroup para las gorutinas
 	var wg sync.WaitGroup
