@@ -165,3 +165,128 @@ Las cuatro submatrices de la matriz de salida C se unen para formar la matriz de
     En esta operación, se suman los productos P5 y P1, y se les resta los productos P3 y P7. El resultado se almacena en la submatriz C22 de la matriz de salida.
 
 En resumen, el algoritmo de multiplicación de matrices Strassen-Winograd divide las matrices de entrada en submatrices más pequeñas, realiza siete productos de submatrices, combina los resultados para obtener las submatrices de la matriz de salida y luego une las submatrices para formar la matriz de salida completa.
+
+### WinogradOiriginal
+El método __`WinogradOriginal`__ se trata de una variante del algoritmo de Straseen que utiliza menos operaciones de multiplicación y suma que el algoritmo clásico.
+
+`WinogradOriginal`__ multiplica dos matrices A y B de tamaño MxP y PxN respectivamente y consta de los siguientes pasos:
+
+1. Se definen las dimensiones de las matrices de entrada A y B
+Donde N (columnas de B), P (filas de B) y M (filas de A).
+
+2. Se crea una matriz Resultado de tamaño MxN 
+Para almacenar el resultado final de la multiplicación.
+
+3. Se define una variable auxiliar, i, j y k 
+Para los índices de los bucles.
+
+4. Se calcula el valor de "upsilon"
+Que es la cantidad de filas de B que quedan fuera de los cálculos auxiliares.
+
+5. Se define gamma 
+Como la cantidad de filas de B que se usan en los cálculos auxiliares.
+
+6. Se crea un vector "y" de tamaño M y un vector "z" de tamaño N 
+Para almacenar los resultados de los cálculos auxiliares.
+
+7.Se realiza un bucle para cada columna i de la matriz B, en el que se calcula el valor de "z[i]" como la suma de los productos de los elementos de las filas pares e impares de la columna i de B.
+
+8.Se realiza un bucle para cada columna i de la matriz B, en el que se calcula el valor de z[i] como la suma de los productos de los elementos de las filas pares e impares de la columna i de B.
+
+9. Si upsilon es igual a 1, entonces P es impar
+Se realiza un bucle anidado para calcular el resultado final de la multiplicación. Para cada par de índices i y k, se calcula aux como la suma de los productos de los elementos de las filas pares e impares de la fila i de A y la columna k de B, sumando el elemento A[i][P] de la fila i de A y el elemento B[P][k] de la columna k de B. Luego, se resta y[i] y z[k] y se agrega el resultado a Resultado[i][k].
+
+10. Si upsilon es diferente de 1, entonces P es par
+Se realiza un bucle anidado para calcular el resultado final de la multiplicación. Para cada par de índices i y k, se calcula aux como la suma de los productos de los elementos de las filas pares e impares de la fila i de A y la columna k de B, y se resta y[i] y z[k]. Luego, se agrega el resultado a Resultado[i][k].
+
+11.Se devuelve la matriz Resultado como el resultado final de la multiplicación de las matrices A y B.
+
+Este algoritmo es especialmente útil cuando ambas matrices de entrada son de gran tamaño.
+
+### WinogradScaled
+El método __`WinogradScaled`__ se basa en la técnica de multiplicación de matrices _'WinogradOriginal'_
+
+La diferencia radica en que antes de llamar dicho algoritmo, se escalan las matrices mediante la función _'MultiplicarEscalar'_ para mejorar la eficiencia de este método.
+
+El algoritmo inicia obteniendo las dimensiones de las matrices de entrada, creando copias escaladas de ambas matrices y calculando los factores de escala lambda, a y b. 
+
+1. ¿Cómo se calcula lambda? 
+lambda = floor(0.5 + log(b/a)/log(4))
+
+Donde "a" y "b" son los factores de normalización de las matrices de entrada A y B, respectivamente.
+
+Para obtener estos factores de normalización, se utiliza la función _'NormInf'_, que calcula la norma infinita de la matriz, es decir, el valor absoluto máximo de todos los elementos de la matriz.
+
+Una vez que se tienen los factores de normalización a y b, se calcula el valor de lambda utilizando la fórmula mencionada anteriormente. El valor obtenido de lambda se utiliza para ajustar el tamaño de ambas matrices mediante la función _'MultiplicarEscalar'_.
+
+Posteriormente, se llama a la función WinogradOriginal con las matrices escaladas, que devuelve la matriz resultado. 
+
+Finalmente, se devuelve el resultado de la multiplicación de matrices escaladas.
+
+Finalmente, algoritmo WinogradScaled utiliza la técnica WinogradOriginal para multiplicar matrices grandes y la mejora mediante la escala de matrices de entrada para reducir el costo computacional del algoritmo.
+
+### IV.3 Sequential block
+El método __`IV.3 Sequential block`__ implementa la multiplicación de matrices grandes utilizando el enfoque de bloques secuenciales.
+
+Los pasos presentes en este método son los siguientes: 
+
+1.Se define el tamaño de las matrices de entrada A y B.
+
+2. Se define el tamaño del bloque que se utilizará para dividir las matrices
+Dicho tamaño debe ser un divisor de filas y columnas de dichas matrices, además debería correponder a el tamaño de la caché L1 del procesador en KiB o aproximarse.
+
+3.Se crea la matriz de salida C, inicializada con ceros y del mismo tamaño que las matrices de entrada.
+
+4.Se inicia el bucle externo que recorre las filas de A y C en bloques de tamaño bsize.
+
+5.Dentro del bucle externo, se inicia un bucle que recorre las columnas de B y C en bloques de tamaño bsize.
+
+    6. En este se inicia un bucle que recorre las columnas de A y las filas de B en bloques de tamaño bsize.
+
+        7. Luego, se inicia un bucle que recorre las filas de A y las columnas de B en los bloques definidos en los bucles anteriores.
+
+8.Finalmente, retorna "C" la cual corresponde a la matriz resultante de la multiplicación.
+
+### V.3 Sequential block
+El método __`V.3 Sequential block`__ es similar al agoritmo __`IV.3 Sequential block`__ pero con una transposición de las matrices A y B. Es decir, en lugar de multiplicar la fila i de A por la columna j de B, se multiplicará la fila k de A por la columna j de B, y el resultado se almacenará en la posición (k, i) de la matriz resultante.
+
+1.Se define la dimensión de las matrices A y B y el tamaño del bloque (bsize) que se utilizará para dividir la matriz en submatrices más pequeñas.
+
+2.Se crea una matriz C del mismo tamaño que las matrices A y B, y se inicializa con ceros.
+
+3.Se inicia un bucle que se ejecutará para cada bloque de tamaño bsize. El bucle comienza por los índices i1, j1, y k1.
+
+4.Se inicia otro bucle anidado que recorre los elementos de la submatriz i1 a i1+bsize de la matriz A, desde el índice i hasta el índice ObtenerMinimo(i1+bsize, size).
+
+    La función ObtenerMinimo se usa para determinar la cantidad de filas y columnas de la matriz que se deben procesar en cada iteración de los bucles anidados que se utilizan para realizar la multiplicación de matrices en bloques.
+
+    La utilidad de esta función radica en que asegura que el algoritmo de multiplicación de matrices en bloques procese el menor número posible de filas y columnas en cada iteración de los bucles anidados, lo que aumenta la eficiencia del algoritmo y reduce el uso de recursos del sistema.
+
+5.Se inicia otro bucle anidado que recorre los elementos de la submatriz j1 a j1+bsize de la matriz B, desde el índice j hasta el índice ObtenerMinimo(j1+bsize, size).
+
+6.Se inicia otro bucle anidado que recorre los elementos de la submatriz k1 a k1+bsize de la matriz A transpuesta (A traspuesta), desde el índice k hasta el índice ObtenerMinimo(k1+bsize, size).
+
+7.Se realiza la multiplicación de los elementos A[k][j] y B[j][i], y se suma el resultado a la posición C[k][i].
+
+8.El algoritmo termina y se devuelve la matriz C resultante.
+
+### V.4 Parallel block
+El método __`V.4 Sequential block`__usa como idea principal la división de la tarea en múltiples subprocesos que puedan ejecutarse en paralelo, reduciendo el tiempo de ejecución total del algoritmo. 
+
+Los pasos presentes en dicho método son los siguientes: 
+
+1.Se obtiene el tamaño de la matriz y se establece un tamaño de bloque predeterminado para la multiplicación de matrices.
+
+2.Se inicializa la matriz C que contendrá el resultado de la multiplicación de matrices.
+
+3.Se crea una variable "wg" del tipo sync.WaitGroup para sincronizar la finalización de todos los subprocesos creados.
+
+4.Se establece la cantidad de subprocesos necesarios para recorrer la matriz de entrada A y B, la cual es igual a "-size / bsize * size / bsize". Esto se realiza para dividir la matriz en bloques de tamaño "bsize x bsize".
+
+5.Se recorre la matriz de entrada A y B por bloques. Por cada bloque (i1,j1) se crea un nuevo subproceso que recorrerá todos los elementos de la matriz C que están dentro del bloque (i1,j1). El subproceso calcula el producto punto a punto de la sección de la matriz A y la sección de la matriz B correspondiente y agrega el resultado al elemento correspondiente en la matriz C.
+
+6.Cada subproceso se agrega a la variable "wg" para esperar su finalización antes de devolver la matriz C.
+
+7.Se espera a que todos los subprocesos finalicen utilizando "wg.Wait()".
+
+8.Se devuelve la matriz C con el resultado de la multiplicación de matrices.
