@@ -4,19 +4,16 @@ import (
 	"generador/algoritmos"
 	"generador/modelos"
 	"generador/tiempo"
-	"sync"
 )
 
-func BmarkNaivLoopUnrollingFour(matricesA []modelos.Matriz, matricesB []modelos.Matriz, wg *sync.WaitGroup) {
+func BmarkNaivLoopUnrollingFour(matricesA []modelos.Matriz, matricesB []modelos.Matriz) {
 	for i := range matricesA {
-		wg.Add(1)
-		go naivLoopUnrollingFour(matricesA[i], matricesB[i], wg)
+		naivLoopUnrollingFour(matricesA[i], matricesB[i])
 	}
 }
 
-func naivLoopUnrollingFour(matrizA modelos.Matriz, matrizB modelos.Matriz, wg *sync.WaitGroup) {
+func naivLoopUnrollingFour(matrizA modelos.Matriz, matrizB modelos.Matriz) {
 	defer tiempo.MedirTiempo(modelos.NAIV_LOOP_UNROLLING_FOUR, len(matrizA.Datos))()
-	defer wg.Done()
 
 	algoritmos.NaivLoopUnrollingFour(matrizA.Datos, matrizB.Datos)
 }
