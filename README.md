@@ -290,5 +290,3 @@ Los pasos presentes en dicho método son los siguientes:
 7.Se espera a que todos los subprocesos finalicen utilizando "wg.Wait()".
 
 8.Se devuelve la matriz C con el resultado de la multiplicación de matrices.
-
-línea nueva
