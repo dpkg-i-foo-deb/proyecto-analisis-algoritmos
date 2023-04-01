@@ -51,6 +51,27 @@ const FIN_PROMEDIOS = `
 </body>
 </html>`
 
+const INICIO_CRECIENTE = `
+<html>
+<head>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+  google.charts.load("current", {packages:['corechart']});
+  google.charts.setOnLoadCallback(drawChart);
+  function drawChart() {
+`
+
+const GRAFICAS_CRECIENTE = ``
+
+const FIN_CRECIENTE = `
+	}
+	</script>
+</head>
+<body>
+	<div id="barchart_values"></div>
+</body>
+</html>`
+
 var algoritmosOrdenados = []string{
 	string(modelos.NAIV_STANDARD),
 	string(modelos.NAIV_ON_ARRAY),
@@ -99,8 +120,34 @@ func GenerarGraficasPromedio(resultados []modelos.Resultado) {
 	fmt.Fprint(file, INICIO_PROMEDIOS+grafica+FIN_PROMEDIOS)
 }
 
+func GenerarGraficasCreciente(resultados []modelos.Resultado) {
+
+	verificarDirectorioGraficas()
+
+	var ordenados []modelos.Resultado
+
+	copy(ordenados, resultados)
+
+	file, err := os.Create("graficas/graficaCreciente.html")
+	VerificarError(err)
+
+	defer file.Close()
+
+	fmt.Fprint(file, INICIO_CRECIENTE+FIN_CRECIENTE)
+}
+
 func verificarDirectorioGraficas() {
 	if os.MkdirAll("graficas", os.ModePerm) != nil {
 		log.Fatal("Error al crear el directorio de salida de gráficas")
+	}
+}
+
+func OrdenarAscendente(arreglo []modelos.Resultado) func(int, int) bool {
+	return func(i, j int) bool {
+		if arreglo[i].N > arreglo[j].N {
+			return arreglo[i].N > arreglo[j].N
+
+		}
+		return arreglo[i].N < arreglo[j].N
 	}
 }

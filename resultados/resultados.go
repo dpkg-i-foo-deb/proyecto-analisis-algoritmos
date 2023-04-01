@@ -92,24 +92,24 @@ func filtrar() {
 }
 
 func ordenar() {
-	sort.Slice(Resultados, ordenarAscendente(Resultados))
+	sort.Slice(Resultados, utilidades.OrdenarAscendente(Resultados))
 
-	sort.Slice(resultadosIII_parallel_block, ordenarAscendente(resultadosIII_parallel_block))
-	sort.Slice(resultadosIII_sequential_block, ordenarAscendente(resultadosIII_sequential_block))
-	sort.Slice(resultadosIV_3_sequential_block, ordenarAscendente(resultadosIV_3_sequential_block))
-	sort.Slice(resultadosIV_4_parallel_block, ordenarAscendente(resultadosIV_4_parallel_block))
-	sort.Slice(resultadosNaivKakan, ordenarAscendente(resultadosNaivKakan))
-	sort.Slice(resultadosNaivLoopUnrollingFour, ordenarAscendente(resultadosNaivLoopUnrollingFour))
-	sort.Slice(resultadosNaivLoopUnrollingThree, ordenarAscendente(resultadosNaivLoopUnrollingThree))
-	sort.Slice(resultadosNaivLoopUnrollingTwo, ordenarAscendente(resultadosNaivLoopUnrollingTwo))
-	sort.Slice(resultadosNaivOnArray, ordenarAscendente(resultadosNaivOnArray))
-	sort.Slice(resultadosNaivStandard, ordenarAscendente(resultadosNaivStandard))
-	sort.Slice(resultadosStrassenNaiv, ordenarAscendente(resultadosStrassenNaiv))
-	sort.Slice(resultadosStrassenWinograd, ordenarAscendente(resultadosStrassenWinograd))
-	sort.Slice(resultadosV_3_Sequential_block, ordenarAscendente(resultadosV_3_Sequential_block))
-	sort.Slice(resultadosV_4_parallel_block, ordenarAscendente(resultadosV_4_parallel_block))
-	sort.Slice(resultadosWinogradOriginal, ordenarAscendente(resultadosWinogradOriginal))
-	sort.Slice(resultadosWinogradScaled, ordenarAscendente(resultadosWinogradScaled))
+	sort.Slice(resultadosIII_parallel_block, utilidades.OrdenarAscendente(resultadosIII_parallel_block))
+	sort.Slice(resultadosIII_sequential_block, utilidades.OrdenarAscendente(resultadosIII_sequential_block))
+	sort.Slice(resultadosIV_3_sequential_block, utilidades.OrdenarAscendente(resultadosIV_3_sequential_block))
+	sort.Slice(resultadosIV_4_parallel_block, utilidades.OrdenarAscendente(resultadosIV_4_parallel_block))
+	sort.Slice(resultadosNaivKakan, utilidades.OrdenarAscendente(resultadosNaivKakan))
+	sort.Slice(resultadosNaivLoopUnrollingFour, utilidades.OrdenarAscendente(resultadosNaivLoopUnrollingFour))
+	sort.Slice(resultadosNaivLoopUnrollingThree, utilidades.OrdenarAscendente(resultadosNaivLoopUnrollingThree))
+	sort.Slice(resultadosNaivLoopUnrollingTwo, utilidades.OrdenarAscendente(resultadosNaivLoopUnrollingTwo))
+	sort.Slice(resultadosNaivOnArray, utilidades.OrdenarAscendente(resultadosNaivOnArray))
+	sort.Slice(resultadosNaivStandard, utilidades.OrdenarAscendente(resultadosNaivStandard))
+	sort.Slice(resultadosStrassenNaiv, utilidades.OrdenarAscendente(resultadosStrassenNaiv))
+	sort.Slice(resultadosStrassenWinograd, utilidades.OrdenarAscendente(resultadosStrassenWinograd))
+	sort.Slice(resultadosV_3_Sequential_block, utilidades.OrdenarAscendente(resultadosV_3_Sequential_block))
+	sort.Slice(resultadosV_4_parallel_block, utilidades.OrdenarAscendente(resultadosV_4_parallel_block))
+	sort.Slice(resultadosWinogradOriginal, utilidades.OrdenarAscendente(resultadosWinogradOriginal))
+	sort.Slice(resultadosWinogradScaled, utilidades.OrdenarAscendente(resultadosWinogradScaled))
 
 }
 
@@ -133,16 +133,6 @@ func reconstruir() {
 	Resultados = append(Resultados, resultadosV_3_Sequential_block...)
 	Resultados = append(Resultados, resultadosV_4_parallel_block...)
 
-}
-
-func ordenarAscendente(arreglo []modelos.Resultado) func(int, int) bool {
-	return func(i, j int) bool {
-		if arreglo[i].N > arreglo[j].N {
-			return arreglo[i].N > arreglo[j].N
-
-		}
-		return arreglo[i].N < arreglo[j].N
-	}
 }
 
 func EscribirResultadoTXT() {
