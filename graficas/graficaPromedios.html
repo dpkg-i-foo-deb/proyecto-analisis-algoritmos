@@ -1,0 +1,54 @@
+
+<html>
+<head>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+  google.charts.load("current", {packages:['corechart']});
+  google.charts.setOnLoadCallback(drawChart);
+  function drawChart() {
+
+var data = google.visualization.arrayToDataTable([
+	["Algoritmo", "Duración", { role: "style" } ],
+	["Naiv Standard", 244316974543.92, 'color: #76A7FA'],
+["Naiv on array", 254684683245.33, 'color: #76A7FA'],
+["NaivKahan", 241150430632.00, 'color: #76A7FA'],
+["Naiv Loop Unrolling Two", 264983297071.25, 'color: #76A7FA'],
+["Naiv Loop Unrolling Three", 313158561068.33, 'color: #76A7FA'],
+["Naiv Loop Unrolling Four", 260799004874.00, 'color: #76A7FA'],
+["Winograd Original", 0.00, 'color: #76A7FA'],
+["Winograd Scaled", 0.00, 'color: #76A7FA'],
+["Strassen Naiv", 8001702612.83, 'color: #76A7FA'],
+["Strassen Winograd", 0.00, 'color: #76A7FA'],
+["III Sequential Block - Bloque Caché", 30271251801.33, 'color: #76A7FA'],
+["III Parallel Block - Bloque Caché", 8142490604.83, 'color: #76A7FA'],
+["IV 3 Sequential Block - Bloque = 2", 23184662988.58, 'color: #76A7FA'],
+["IV 4 Parallel Block - Bloque = 2", 434783523366.25, 'color: #76A7FA'],
+["V 3 Sequential Block - Bloque = Matriz", 0.00, 'color: #76A7FA'],
+["V 4 Pararell Block - Bloque = Doble Matriz", 0.00, 'color: #76A7FA'],
+
+]);
+
+var view = new google.visualization.DataView(data);
+view.setColumns([0, 1,
+				 { calc: "stringify",
+				   sourceColumn: 1,
+				   type: "string",
+				   role: "annotation" },
+				 2]);
+
+var options = {
+  title: "Tiempo promedio de ejecución",
+  height: 800,
+  bar: {groupWidth: "95%"},
+  legend: { position: "none" },
+};
+var chart = new google.visualization.BarChart(document.getElementById("barchart_values"));
+chart.draw(view, options);
+
+  }
+  </script>
+</head>
+<body>
+  <div id="barchart_values"></div>
+</body>
+</html>

@@ -5,6 +5,7 @@ import (
 	"unsafe"
 )
 
+// Este algoritmo utiliza la memoria caché para el tamaño del bloque
 func III_SequentialBlock(a, b [][]int) [][]int {
 	size := len(a)
 	bsize := calcularTamanoBloque(323)
