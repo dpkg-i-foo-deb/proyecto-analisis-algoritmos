@@ -94,6 +94,23 @@ El algoritmo funciona de la siguiente manera:
     
 4. Se retorna __`resultado`__.
 
+### NaivLoopUnrollingThree
+La función `NaivLoopUnrollingThree` desenrosca el ciclo más interno (Aquel que recorre las columnas de la matriz `b`) en tres partes. Esto permite que el código sea más eficiente al reducir el número de iteraciones que se realizan en cada ciclo. La función toma dos matrices `a` y `b` como entrada y devuelve una matriz resultante que es el resultado de la multiplicación de matrices `a` y `b`.
+
+El proceso de la función es el siguiente:
+
+1. Se inicializan los ciclos `for` para recorrer las filas de la matriz `a` y las columnas de la matriz `b`. Se inicializa una matriz vacía `resultado` que almacenará el resultado final de la multiplicación.
+
+2. El tercer ciclo que recorre las columnas de a y las filas de b tendrá un incremento de 3 en 3. Lo que significa que se procesarán 3 columnas de la matriz `b` en cada iteración. Esto se hace para reducir el número de iteraciones que se realizan en cada ciclo.
+
+3. El funcionamiento del ciclo depende si la cantidad de columnas de la matriz `b` es divisible entre 3, en cuyo caso se tendrá en cuenta el último elemento de la matriz `b` en la multiplicación.
+
+4. En cuanto al último elemento se refiere, si `b` es divisible entre 3, se multiplica el último elemento de la fila `i` de la matriz `a` por el último elemento de la columna `j` de la matriz `b` y se suma a la posición `(i,j)` de la matriz `resultado`.
+
+    4.1 Si `b` no es divisible entre 3 y el resultado de la operación módulo es 1, el ciclo que va de k en k se ejecuta hasta la penúltima columna de la matriz `b`. En este caso, se multiplica el último elemento de la fila `i` de la matriz `a` por el último elemento de la columna `j` de la matriz `b` y se suma a la posición `(i,j)` de la matriz `resultado`.
+
+    4.2 Si `b` no es divisible entre 3 y el resultado de la operación módulo es mayor a 1, el ciclo que va de k en k se ejecuta hasta la antepenúltima columna de la matriz `b`. En este caso, se utilizan variables auxiliares para computar los últimos valores de las columnas de `b` con las filas de `a`.
+
 ### NaivLoopUnrollingFour
 La función `NaivLoopUnrollingFour` toma dos matrices `a` y `b` como entrada y devuelve una matriz resultante que es el resultado de la multiplicación de matrices `a` y `b`. La función utiliza la técnica de desenrollado de bucles para mejorar el rendimiento de la multiplicación de matrices.
 
