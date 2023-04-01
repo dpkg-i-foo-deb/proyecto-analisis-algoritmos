@@ -3,6 +3,7 @@ package utilidades
 import (
 	"fmt"
 	"generador/modelos"
+	"log"
 	"os"
 	"strings"
 )
@@ -69,6 +70,9 @@ var algoritmosOrdenados = []string{
 }
 
 func GenerarGraficasPromedio(resultados []modelos.Resultado) {
+
+	verificarDirectorioGraficas()
+
 	promedios := make(map[string]float64)
 
 	for _, v := range resultados {
@@ -92,4 +96,10 @@ func GenerarGraficasPromedio(resultados []modelos.Resultado) {
 	defer file.Close()
 
 	fmt.Fprint(file, INICIO+grafica+FIN)
+}
+
+func verificarDirectorioGraficas() {
+	if os.MkdirAll("graficas", os.ModePerm) != nil {
+		log.Fatal("Error al crear el directorio de salida de gráficas")
+	}
 }
