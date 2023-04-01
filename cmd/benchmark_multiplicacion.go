@@ -64,8 +64,4 @@ func benchmark_multiplicacion(cmd *cobra.Command, args []string) {
 		resultados.EscribirResultadoJSON()
 		resultados.EscribirResultadoTXT()
 	}
-
-	resultados.Consolidar()
-	resultados.EscribirResultadoJSON()
-	resultados.EscribirResultadoTXT()
 }
