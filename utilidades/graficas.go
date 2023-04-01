@@ -110,12 +110,6 @@ func GenerarGraficasCreciente(resultados []modelos.Resultado) {
 
 	pagina.SetLayout(components.PageFlexLayout)
 
-	var resultadosOrdenados []modelos.Resultado
-
-	copy(resultadosOrdenados, resultados)
-
-	sort.Slice(resultadosOrdenados, OrdenarAscendenteTiempo(resultadosOrdenados))
-
 	verificarDirectorioGraficas()
 
 	var resultados2 []modelos.Resultado
@@ -187,6 +181,7 @@ func GenerarGraficasCreciente(resultados []modelos.Resultado) {
 				opts.Title{
 					Title:    titulo,
 					Subtitle: subtitulo,
+					Right:    "40%",
 				}),
 			charts.WithXAxisOpts(opts.XAxis{
 				AxisLabel: &opts.AxisLabel{
@@ -199,12 +194,16 @@ func GenerarGraficasCreciente(resultados []modelos.Resultado) {
 			}),
 			charts.WithInitializationOpts(opts.Initialization{
 				Width:  "1200px",
-				Height: "800px",
+				Height: "700px",
 			}),
 			charts.WithGridOpts(opts.Grid{
-				Top:    "25%",
-				Bottom: "25%",
+				Left:   "20%",
+				Bottom: "15%",
 			}),
+			charts.WithTooltipOpts(opts.Tooltip{Show: true}),
+			charts.WithLegendOpts(opts.Legend{Show: true, Right: "80%"}),
+			charts.WithToolboxOpts(opts.Toolbox{Show: true}),
+			charts.WithLegendOpts(opts.Legend{Show: true, Right: "80%"}),
 		)
 
 		switch i {
@@ -247,6 +246,8 @@ func GenerarGraficasCreciente(resultados []modelos.Resultado) {
 
 		graficaBarras.AddSeries("Tiempo de ejecución", series)
 
+		graficaBarras.XYReversal()
+
 		pagina.AddCharts(graficaBarras)
 
 	}
@@ -277,9 +278,6 @@ func OrdenarAscendenteCantidad(arreglo []modelos.Resultado) func(int, int) bool 
 
 func OrdenarAscendenteTiempo(arreglo []modelos.Resultado) func(int, int) bool {
 	return func(i, j int) bool {
-		if arreglo[i].Duracion > arreglo[j].Duracion {
-			return arreglo[i].Duracion > arreglo[j].Duracion
-		}
-		return arreglo[i].Duracion < arreglo[j].Duracion
+		return arreglo[i].Duracion > arreglo[j].Duracion
 	}
 }
