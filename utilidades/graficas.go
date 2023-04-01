@@ -8,7 +8,7 @@ import (
 	"strings"
 )
 
-const INICIO = `
+const INICIO_PROMEDIOS = `
 <html>
 <head>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -17,7 +17,7 @@ const INICIO = `
   google.charts.setOnLoadCallback(drawChart);
   function drawChart() {
 `
-const GRAFICA = `
+const GRAFICA_PROMEDIOS = `
 var data = google.visualization.arrayToDataTable([
 	["Algoritmo", "Duración", { role: "style" } ],
 	{{ datos }}
@@ -41,7 +41,7 @@ var chart = new google.visualization.BarChart(document.getElementById("barchart_
 chart.draw(view, options);
 `
 
-const FIN = `
+const FIN_PROMEDIOS = `
   }
   </script>
 </head>
@@ -86,7 +86,7 @@ func GenerarGraficasPromedio(resultados []modelos.Resultado) {
 		datos += fmt.Sprintf("[\"%s\", %.2f, 'color: #76A7FA'],\n", aux, tiempo)
 	}
 
-	grafica := GRAFICA
+	grafica := GRAFICA_PROMEDIOS
 	grafica = strings.Replace(grafica, "{{ titulo }}", "Tiempo promedio de ejecución", -1)
 	grafica = strings.Replace(grafica, "{{ datos }}", datos, -1)
 
@@ -95,7 +95,7 @@ func GenerarGraficasPromedio(resultados []modelos.Resultado) {
 
 	defer file.Close()
 
-	fmt.Fprint(file, INICIO+grafica+FIN)
+	fmt.Fprint(file, INICIO_PROMEDIOS+grafica+FIN_PROMEDIOS)
 }
 
 func verificarDirectorioGraficas() {
