@@ -36,6 +36,7 @@ var options = {
   height: 800,
   bar: {groupWidth: "95%"},
   legend: { position: "none" },
+  chartArea:{ left:300 },
 };
 var chart = new google.visualization.BarChart(document.getElementById("barchart_values"));
 chart.draw(view, options);
