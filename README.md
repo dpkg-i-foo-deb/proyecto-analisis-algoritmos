@@ -140,6 +140,64 @@ En resumen, la función utiliza la técnica de desenrollado de bucles para mejor
 
 5. Se repite este proceso para todos los pares de bloques de C, y al final se obtiene la matriz resultante completa.
 
+### III. Parallel Block
+
+El método `III Parallel Block` utiliza la multiplicación de matrices por bloques de manera similar a `III Sequential Block` pero crea una gorutina por cada bloque de multiplicación que se realiza. Esto permite que la multiplicación de matrices se realice de manera paralela. El tamaño de bloque se calcula teniendo en cuenta el tamaño de la caché L1 del procesador, además debe ser un divisor de las columnas de a y las filas de b. El proceso se puede resumir al siguiente algoritmo:
+
+1. Se definen las dos matrices que se desean multiplicar, A y B, y se crea una matriz C de tamaño adecuado para almacenar el resultado.
+
+2. Se define el tamaño del bloque teniendo en cuenta la caché del procesador y las dimensiones de las matrices a y b.
+
+3. Se realiza una multiplicación por bloques similar a la vista en el método `III Sequential Block` pero en este caso se crea una gorutina por cada bloque de multiplicación que se realiza.
+
+4. Se sincronizan los índices de las matrices a y b para que se realice la multiplicación de matrices de manera correcta.
+
+5. Se espera a que cada gorutina finalice su ejecución.
+
+6. Se retorna el resultado.
+
+Este método es extremadamente eficiente ya que el tamaño de bloque permite al procesador realizar las operaciones directamente en la memoria caché (Esto sin tener en cuenta el sistema operativo u otras aplicaciones en ejecución) 
+
+### Strassen Naiv
+Strassen Naiv tiene realiza la multiplicación de matrices utilizando recursividad y la fórmula de Strassen, este método dice que la multiplicación de matrices se puede realizar de la siguiente manera:
+
+    ``C = A * B
+
+    C11 = A11 * B11 + A12 * B21
+    C12 = A11 * B12 + A12 * B22
+    C21 = A21 * B11 + A22 * B21
+    C22 = A21 * B12 + A22 * B22``
+
+Donde A11, A12, A21, A22, B11, B12, B21, B22 son submatrices de A y B. En palabras más simples, los cuadrantes superior izquierdo, superior derecho, inferior izquierdo e inferior derecho de las matrices a y b
+
+El algoritmo se resume a:
+
+1. Si las matrices son de tamaño 1x1, se realiza la multiplicación de matrices de manera normal. Cabe aclarar que siguiendo el algoritmo de Strassen de manera purista, deberíamos seguir este camino. Sin embargo, en la práctica, el algoritmo de Strassen es más lento que el algoritmo de multiplicación de matrices tradicional para matrices pequeñas. Por lo tanto, se utiliza el algoritmo de multiplicación de matrices tradicional `NaivStandard` para matrices pequeñas. En nuestro caso, aquellas de 16x16 o menos.
+
+2. Si las matrices son de tamaño mayor a 16x16, se divide la matriz de entrada A en cuatro submatrices de igual tamaño: A11, A12, A21 y A22. Se divide la matriz de entrada B en cuatro submatrices de igual tamaño: B11, B12, B21 y B22. Cada submatriz tiene la mitad del tamaño de la matriz original.
+
+3. Se encuentran siete productos m1, m2, m3, m4, m5, m6 y m7 utilizando las siguientes fórmulas:
+
+    ``m1 = (A11 + A22) * (B11 + B22)
+    m2 = (A21 + A22) * B11
+    m3 = A11 * (B12 - B22)
+    m4 = A22 * (B21 - B11)
+    m5 = (A11 + A12) * B22
+    m6 = (A21 - A11) * (B11 + B12)
+    m7 = (A12 - A22) * (B21 + B22)``
+
+    3.1 Para encontrar los productos es necesario realizar la multiplicación de sumas y restas de los cuadrantes de las matrices a y b, lo que significa que debemos llamar el algoritmo de Strassen para encontrar los productos m1, m2, m3, m4, m5, m6 y m7. Generando más llamadas recursivas.
+
+4. Una vez encontrados los productos m1, m2, m3, m4, m5, m6 y m7, se calculan los cuadrantes de la matriz resultante C utilizando las siguientes fórmulas:
+
+    ``C11 = m1 + m4 - m5 + m7
+    C12 = m3 + m5
+    C21 = m2 + m4
+    C22 = m1 - m2 + m3 + m6``
+
+5. Se construye una matriz resultado utilizando los cuadrantes C11, C12, C21 y C22 y es retornada.
+
+
 ### Strassen Winograd
 1. División de las matrices en submatrices:
 Se divide la matriz de entrada A en cuatro submatrices de igual tamaño: A11, A12, A21 y A22. Se divide la matriz de entrada B en cuatro submatrices de igual tamaño: B11, B12, B21 y B22. Cada submatriz tiene la mitad del tamaño de la matriz original.
@@ -206,9 +264,9 @@ Como la cantidad de filas de B que se usan en los cálculos auxiliares.
 6. Se crea un vector "y" de tamaño M y un vector "z" de tamaño N 
 Para almacenar los resultados de los cálculos auxiliares.
 
-7.Se realiza un bucle para cada columna i de la matriz B, en el que se calcula el valor de "z[i]" como la suma de los productos de los elementos de las filas pares e impares de la columna i de B.
+7. Se realiza un bucle para cada columna i de la matriz B, en el que se calcula el valor de "z[i]" como la suma de los productos de los elementos de las filas pares e impares de la columna i de B.
 
-8.Se realiza un bucle para cada columna i de la matriz B, en el que se calcula el valor de z[i] como la suma de los productos de los elementos de las filas pares e impares de la columna i de B.
+8. Se realiza un bucle para cada columna i de la matriz B, en el que se calcula el valor de z[i] como la suma de los productos de los elementos de las filas pares e impares de la columna i de B.
 
 9. Si upsilon es igual a 1, entonces P es impar
 Se realiza un bucle anidado para calcular el resultado final de la multiplicación. Para cada par de índices i y k, se calcula aux como la suma de los productos de los elementos de las filas pares e impares de la fila i de A y la columna k de B, sumando el elemento A[i][P] de la fila i de A y el elemento B[P][k] de la columna k de B. Luego, se resta y[i] y z[k] y se agrega el resultado a Resultado[i][k].
@@ -243,26 +301,46 @@ Finalmente, se devuelve el resultado de la multiplicación de matrices escaladas
 Finalmente, algoritmo WinogradScaled utiliza la técnica WinogradOriginal para multiplicar matrices grandes y la mejora mediante la escala de matrices de entrada para reducir el costo computacional del algoritmo.
 
 ### IV.3 Sequential block
-El método __`IV.3 Sequential block`__ implementa la multiplicación de matrices grandes utilizando el enfoque de bloques secuenciales.
+El método __`IV.3 Sequential block`__ implementa la multiplicación de matrices grandes utilizando el enfoque de bloques secuenciales. En este caso, el tamaño de bloque es fijo y se define en el código fuente.
 
 Los pasos presentes en este método son los siguientes: 
 
-1.Se define el tamaño de las matrices de entrada A y B.
+1. Se define el tamaño de las matrices de entrada A y B.
 
-2. Se define el tamaño del bloque que se utilizará para dividir las matrices
-Dicho tamaño debe ser un divisor de filas y columnas de dichas matrices, además debería correponder a el tamaño de la caché L1 del procesador en KiB o aproximarse.
+2. Se define el tamaño del bloque que se utilizará para dividir las matrices de entrada. En nuestro caso, está definido en 2.
 
-3.Se crea la matriz de salida C, inicializada con ceros y del mismo tamaño que las matrices de entrada.
+3. Se crea la matriz de salida C, inicializada con ceros y del mismo tamaño que las matrices de entrada.
 
-4.Se inicia el bucle externo que recorre las filas de A y C en bloques de tamaño bsize.
+4. Se inicia el bucle externo que recorre las filas de A y C en bloques de tamaño bsize.
 
-5.Dentro del bucle externo, se inicia un bucle que recorre las columnas de B y C en bloques de tamaño bsize.
+5. Dentro del bucle externo, se inicia un bucle que recorre las columnas de B y C en bloques de tamaño bsize.
 
     6. En este se inicia un bucle que recorre las columnas de A y las filas de B en bloques de tamaño bsize.
 
         7. Luego, se inicia un bucle que recorre las filas de A y las columnas de B en los bloques definidos en los bucles anteriores.
 
-8.Finalmente, retorna "C" la cual corresponde a la matriz resultante de la multiplicación.
+8. Finalmente, retorna "C" la cual corresponde a la matriz resultante de la multiplicación.
+
+Este método puede tener un rendimiento variable comparado con `III. Sequential Block` ya que el tamaño de bloque es fijo y podría no aprovechar el rendimiento de la CPU.
+
+### IV.4 Parallel Block
+El método `IV.4 Parallel Block` es el mismo que `III. Parallel Block`. Sin embargo, el tamaño de bloque es 2. Esto significa que para una matriz de 4096x4096, se dividirá en 2048 bloques de 2x2. En otras palabras, se crearán 2048 hilos para realizar la multiplicación de matrices. Esto no sólo significa que el procesador estará sobreutilizado, sino que también se desperdiciarán recursos de memoria y caché en operaciones que resultan demasiado pequeñas y repetitivas para aprovechar el rendimiento de la CPU. El algoritmo se resume a:
+
+1. Se define el tamaño de las matrices de entrada A y B.
+
+2. Se define el tamaño del bloque que se utilizará para dividir las matrices de entrada. En nuestro caso, está definido en 2.
+
+3. Se crea la matriz de salida C, inicializada con ceros y del mismo tamaño que las matrices de entrada.
+
+4. Se inician los ciclos externos que recorrerán las matrices a y b en bloques de tamaño 2.
+
+5. Se crea una gorutina por cada bloque de tamaño 2x2.
+
+6. Se sincronizan los índices de los ciclos externos y se espera a que todas las gorutinas finalicen su ejecución.
+
+7. Se retorna la matriz C.
+
+Este método es extremadamente ineficiente y no debe utilizarse para multiplicar matrices grandes. Esto gracias a la sobrecarga de procesador y memoria caché que causa la creación de tantos hilos. En la práctica es incluso más lento que `NaivStandard`
 
 ### V.3 Sequential block
 El método __`V.3 Sequential block`__ es similar al agoritmo __`IV.3 Sequential block`__ pero con una transposición de las matrices A y B. Es decir, en lugar de multiplicar la fila i de A por la columna j de B, se multiplicará la fila k de A por la columna j de B, y el resultado se almacenará en la posición (k, i) de la matriz resultante.
@@ -288,22 +366,24 @@ El método __`V.3 Sequential block`__ es similar al agoritmo __`IV.3 Sequential 
 8.El algoritmo termina y se devuelve la matriz C resultante.
 
 ### V.4 Parallel block
-El método __`V.4 Sequential block`__usa como idea principal la división de la tarea en múltiples subprocesos que puedan ejecutarse en paralelo, reduciendo el tiempo de ejecución total del algoritmo. 
+El método __`V.4 Parallel`__usa como idea principal la división de la tarea en múltiples subprocesos que puedan ejecutarse en paralelo, reduciendo el tiempo de ejecución total del algoritmo. En este caso implementamos un tamaño de bloque igual al doble del tamaño de las matrices
 
 Los pasos presentes en dicho método son los siguientes: 
 
-1.Se obtiene el tamaño de la matriz y se establece un tamaño de bloque predeterminado para la multiplicación de matrices.
+1. Se obtiene el tamaño de la matriz y se establece un tamaño de bloque predeterminado para la multiplicación de matrices.
 
-2.Se inicializa la matriz C que contendrá el resultado de la multiplicación de matrices.
+2. Se inicializa la matriz C que contendrá el resultado de la multiplicación de matrices.
 
-3.Se crea una variable "wg" del tipo sync.WaitGroup para sincronizar la finalización de todos los subprocesos creados.
+3. Se crea una variable "wg" del tipo sync.WaitGroup para sincronizar la finalización de todos los subprocesos creados.
 
-4.Se establece la cantidad de subprocesos necesarios para recorrer la matriz de entrada A y B, la cual es igual a "-size / bsize * size / bsize". Esto se realiza para dividir la matriz en bloques de tamaño "bsize x bsize".
+4. Se establece la cantidad de subprocesos necesarios para recorrer la matriz de entrada A y B, la cual es igual a "-size / bsize * size / bsize". Esto se realiza para dividir la matriz en bloques de tamaño "bsize x bsize".
 
-5.Se recorre la matriz de entrada A y B por bloques. Por cada bloque (i1,j1) se crea un nuevo subproceso que recorrerá todos los elementos de la matriz C que están dentro del bloque (i1,j1). El subproceso calcula el producto punto a punto de la sección de la matriz A y la sección de la matriz B correspondiente y agrega el resultado al elemento correspondiente en la matriz C.
+5. Se recorre la matriz de entrada A y B por bloques. Por cada bloque (i1,j1) se crea un nuevo subproceso que recorrerá todos los elementos de la matriz C que están dentro del bloque (i1,j1). El subproceso calcula el producto punto a punto de la sección de la matriz A y la sección de la matriz B correspondiente y agrega el resultado al elemento correspondiente en la matriz C.
 
-6.Cada subproceso se agrega a la variable "wg" para esperar su finalización antes de devolver la matriz C.
+6. Cada subproceso se agrega a la variable "wg" para esperar su finalización antes de devolver la matriz C.
 
-7.Se espera a que todos los subprocesos finalicen utilizando "wg.Wait()".
+7. Se espera a que todos los subprocesos finalicen utilizando "wg.Wait()".
 
-8.Se devuelve la matriz C con el resultado de la multiplicación de matrices.
+8. Se retorna la matriz C con el resultado de la multiplicación de matrices.
+
+Este algoritmo es extremadamente ineficiente, al tener un tamaño de bloque tan grande, no se crearán las suficientes gorutinas para aprovechar el paralelismo de la computadora, por lo que el algoritmo se ejecutará de forma secuencial llegando a tardar incluso más tiempo que `NaivStandard` en ejecutarse.
