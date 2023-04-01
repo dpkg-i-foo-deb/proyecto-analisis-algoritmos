@@ -2,7 +2,7 @@ package algoritmos
 
 func V_3_SequentialBlock(A [][]int, B [][]int) [][]int {
 	size := len(A)
-	bsize := 2
+	bsize := len(A)
 	C := make([][]int, size)
 	for i := range C {
 		C[i] = make([]int, size)

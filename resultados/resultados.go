@@ -28,6 +28,24 @@ var resultadosWinogradOriginal []modelos.Resultado
 var resultadosWinogradScaled []modelos.Resultado
 
 func Consolidar() {
+
+	resultadosIII_parallel_block = []modelos.Resultado{}
+	resultadosIII_sequential_block = []modelos.Resultado{}
+	resultadosIV_3_sequential_block = []modelos.Resultado{}
+	resultadosIV_4_parallel_block = []modelos.Resultado{}
+	resultadosNaivKakan = []modelos.Resultado{}
+	resultadosNaivLoopUnrollingFour = []modelos.Resultado{}
+	resultadosNaivLoopUnrollingThree = []modelos.Resultado{}
+	resultadosNaivLoopUnrollingTwo = []modelos.Resultado{}
+	resultadosNaivOnArray = []modelos.Resultado{}
+	resultadosNaivStandard = []modelos.Resultado{}
+	resultadosStrassenNaiv = []modelos.Resultado{}
+	resultadosStrassenWinograd = []modelos.Resultado{}
+	resultadosV_3_Sequential_block = []modelos.Resultado{}
+	resultadosV_4_parallel_block = []modelos.Resultado{}
+	resultadosWinogradOriginal = []modelos.Resultado{}
+	resultadosWinogradScaled = []modelos.Resultado{}
+
 	filtrar()
 	ordenar()
 	reconstruir()
@@ -119,7 +137,7 @@ func reconstruir() {
 
 func ordenarAscendente(arreglo []modelos.Resultado) func(int, int) bool {
 	return func(i, j int) bool {
-		if arreglo[i].Duracion > arreglo[j].Duracion {
+		if arreglo[i].N > arreglo[j].N {
 			return arreglo[i].N > arreglo[j].N
 
 		}

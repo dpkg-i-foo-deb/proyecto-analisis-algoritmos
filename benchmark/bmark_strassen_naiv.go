@@ -4,19 +4,18 @@ import (
 	"generador/algoritmos"
 	"generador/modelos"
 	"generador/tiempo"
-	"sync"
 )
 
-func BmarkStrassenNaiv(matricesA []modelos.Matriz, matricesB []modelos.Matriz, wg *sync.WaitGroup) {
+func BmarkStrassenNaiv(matricesA []modelos.Matriz, matricesB []modelos.Matriz) {
 	for i := range matricesA {
-		wg.Add(1)
-		go strassenNaiv(matricesA[i], matricesB[i], wg)
+		//wg.Add(1)
+		strassenNaiv(matricesA[i], matricesB[i])
 	}
 }
 
-func strassenNaiv(matrizA modelos.Matriz, matrizB modelos.Matriz, wg *sync.WaitGroup) {
+func strassenNaiv(matrizA modelos.Matriz, matrizB modelos.Matriz) {
 	defer tiempo.MedirTiempo(modelos.STRASSEN_NAIV, len(matrizA.Datos))()
-	defer wg.Done()
+	//defer wg.Done()
 
 	algoritmos.StrassenNaiv(matrizA.Datos, matrizB.Datos)
 }

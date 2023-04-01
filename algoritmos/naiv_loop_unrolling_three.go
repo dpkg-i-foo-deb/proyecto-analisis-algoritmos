@@ -25,7 +25,7 @@ func NaivLoopUnrollingThree(a [][]int, b [][]int) [][]int {
 					for k := 0; k < pp; k += 3 {
 						aux += a[i][k]*b[k][j] + a[i][k+1]*b[k+1][j] + a[i][k+2]*b[k+2][j]
 					}
-					resultado[i][j] = a[i][pp] * b[pp][j]
+					resultado[i][j] = aux + a[i][pp]*b[pp][j]
 				}
 			}
 		} else {

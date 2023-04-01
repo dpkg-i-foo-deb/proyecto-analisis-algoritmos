@@ -1,5 +1,6 @@
 package algoritmos
 
+// Este algoritmo utiliza un tamaño de bloque fijo, siempre es 2
 func IV_3_SequentialBlock(A [][]int, B [][]int) [][]int {
 	size := len(A)
 	bsize := 2

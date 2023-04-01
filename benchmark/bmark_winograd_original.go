@@ -4,19 +4,16 @@ import (
 	"generador/algoritmos"
 	"generador/modelos"
 	"generador/tiempo"
-	"sync"
 )
 
-func BmarkWinogradOriginal(matricesA []modelos.Matriz, matricesB []modelos.Matriz, wg *sync.WaitGroup) {
+func BmarkWinogradOriginal(matricesA []modelos.Matriz, matricesB []modelos.Matriz) {
 	for i := range matricesA {
-		wg.Add(1)
-		go winogradOriginal(matricesA[i], matricesB[i], wg)
+		winogradOriginal(matricesA[i], matricesB[i])
 	}
 }
 
-func winogradOriginal(matrizA modelos.Matriz, matrizB modelos.Matriz, wg *sync.WaitGroup) {
+func winogradOriginal(matrizA modelos.Matriz, matrizB modelos.Matriz) {
 	defer tiempo.MedirTiempo(modelos.WINOGRAD_ORIGINAL, len(matrizA.Datos))()
-	defer wg.Done()
 
 	algoritmos.WinogradOriginal(matrizA.Datos, matrizB.Datos)
 }

@@ -4,19 +4,16 @@ import (
 	"generador/algoritmos"
 	"generador/modelos"
 	"generador/tiempo"
-	"sync"
 )
 
-func BmarkNaivKahan(matricesA []modelos.Matriz, matricesB []modelos.Matriz, wg *sync.WaitGroup) {
+func BmarkNaivKahan(matricesA []modelos.Matriz, matricesB []modelos.Matriz) {
 	for i := range matricesA {
-		wg.Add(1)
-		go naivKahan(matricesA[i], matricesB[i], wg)
+		naivKahan(matricesA[i], matricesB[i])
 	}
 }
 
-func naivKahan(matrizA modelos.Matriz, matrizB modelos.Matriz, wg *sync.WaitGroup) {
+func naivKahan(matrizA modelos.Matriz, matrizB modelos.Matriz) {
 	defer tiempo.MedirTiempo(modelos.NAIV_KAHAN, len(matrizA.Datos))()
-	defer wg.Done()
 
 	algoritmos.NaivKahan(matrizA.Datos, matrizB.Datos)
 }

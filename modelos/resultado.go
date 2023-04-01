@@ -1,29 +1,32 @@
 package modelos
 
-type AlgoritmoMultuplicacion string
+import "time"
+
+type AlgoritmoMultiplicacion string
 
 const (
-	III_SEQUENTIAL_BLOCK      AlgoritmoMultuplicacion = "III Sequential Block"
-	III_PARALLEL_BLOCK        AlgoritmoMultuplicacion = "III Parallel Block"
-	IV_3_SEQUENTIAL_BLOCK     AlgoritmoMultuplicacion = "III 3 Sequential Block"
-	IV_4_PARALLEL_BLOCK       AlgoritmoMultuplicacion = "III 4 Parallel Block"
-	NAIV_KAHAN                AlgoritmoMultuplicacion = "NaivKahan"
-	NAIV_LOOP_UNROLLING_FOUR  AlgoritmoMultuplicacion = "Naiv Loop Unrolling Four"
-	NAIV_LOOP_UNROLLING_THREE AlgoritmoMultuplicacion = "Naiv Loop Unrolling Three"
-	NAIV_LOOP_UNROLLING_TWO   AlgoritmoMultuplicacion = "Naiv Loop Unrolling Two"
-	NAIV_ON_ARRAY             AlgoritmoMultuplicacion = "Naiv on array"
-	NAIV_STANDARD             AlgoritmoMultuplicacion = "Naiv Standard"
-	STRASSEN_NAIV             AlgoritmoMultuplicacion = "Strassen Naiv"
-	STRASSEN_WINOGRAD         AlgoritmoMultuplicacion = "Strassen Winograd"
-	V_3_SEQUENTIAL_BLOCK      AlgoritmoMultuplicacion = "V 3 Sequential Block"
-	V_4_PARALLEL_BLOCK        AlgoritmoMultuplicacion = "V 4 Pararell Block"
-	WINOGRAD_ORIGINAL         AlgoritmoMultuplicacion = "Winograd Original"
-	WINOGRAD_SCALED           AlgoritmoMultuplicacion = "Winograd Scaled"
+	III_SEQUENTIAL_BLOCK      AlgoritmoMultiplicacion = "III Sequential Block - Bloque Caché"
+	III_PARALLEL_BLOCK        AlgoritmoMultiplicacion = "III Parallel Block - Bloque Caché"
+	IV_3_SEQUENTIAL_BLOCK     AlgoritmoMultiplicacion = "IV 3 Sequential Block - Bloque = 2"
+	IV_4_PARALLEL_BLOCK       AlgoritmoMultiplicacion = "IV 4 Parallel Block - Bloque = 2"
+	NAIV_KAHAN                AlgoritmoMultiplicacion = "NaivKahan"
+	NAIV_LOOP_UNROLLING_FOUR  AlgoritmoMultiplicacion = "Naiv Loop Unrolling Four"
+	NAIV_LOOP_UNROLLING_THREE AlgoritmoMultiplicacion = "Naiv Loop Unrolling Three"
+	NAIV_LOOP_UNROLLING_TWO   AlgoritmoMultiplicacion = "Naiv Loop Unrolling Two"
+	NAIV_ON_ARRAY             AlgoritmoMultiplicacion = "Naiv on array"
+	NAIV_STANDARD             AlgoritmoMultiplicacion = "Naiv Standard"
+	STRASSEN_NAIV             AlgoritmoMultiplicacion = "Strassen Naiv"
+	STRASSEN_WINOGRAD         AlgoritmoMultiplicacion = "Strassen Winograd"
+	V_3_SEQUENTIAL_BLOCK      AlgoritmoMultiplicacion = "V 3 Sequential Block - Bloque = Matriz"
+	V_4_PARALLEL_BLOCK        AlgoritmoMultiplicacion = "V 4 Pararell Block - Bloque = Doble Matriz"
+	WINOGRAD_ORIGINAL         AlgoritmoMultiplicacion = "Winograd Original"
+	WINOGRAD_SCALED           AlgoritmoMultiplicacion = "Winograd Scaled"
 )
 
 type Resultado struct {
-	Titulo    string                  `json:"titulo"`
-	Algoritmo AlgoritmoMultuplicacion `json:"algoritmo"`
-	N         int                     `json:"n"`
-	Duracion  int64                   `json:"duracion"`
+	Titulo         string                  `json:"titulo"`
+	Algoritmo      AlgoritmoMultiplicacion `json:"algoritmo"`
+	N              int                     `json:"n"`
+	Duracion       int64                   `json:"duracion"`
+	DuracionHumano time.Duration           `json:"duracion-humano"`
 }
