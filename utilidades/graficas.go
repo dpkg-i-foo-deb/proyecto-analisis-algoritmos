@@ -6,6 +6,10 @@ import (
 	"log"
 	"os"
 	"strings"
+
+	"github.com/go-echarts/go-echarts/v2/charts"
+	"github.com/go-echarts/go-echarts/v2/components"
+	"github.com/go-echarts/go-echarts/v2/opts"
 )
 
 const INICIO_PROMEDIOS = `
@@ -48,27 +52,6 @@ const FIN_PROMEDIOS = `
 </head>
 <body>
   <div id="barchart_values"></div>
-</body>
-</html>`
-
-const INICIO_CRECIENTE = `
-<html>
-<head>
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<script type="text/javascript">
-  google.charts.load("current", {packages:['corechart']});
-  google.charts.setOnLoadCallback(drawChart);
-  function drawChart() {
-`
-
-const GRAFICAS_CRECIENTE = ``
-
-const FIN_CRECIENTE = `
-	}
-	</script>
-</head>
-<body>
-	<div id="barchart_values"></div>
 </body>
 </html>`
 
@@ -124,16 +107,66 @@ func GenerarGraficasCreciente(resultados []modelos.Resultado) {
 
 	verificarDirectorioGraficas()
 
-	var ordenados []modelos.Resultado
+	var resultados2 []modelos.Resultado
+	var resultados4 []modelos.Resultado
+	var resultados8 []modelos.Resultado
+	var resultados16 []modelos.Resultado
+	var resultados32 []modelos.Resultado
+	var resultados64 []modelos.Resultado
+	var resultados128 []modelos.Resultado
+	var resultados256 []modelos.Resultado
+	var resultados512 []modelos.Resultado
+	var resultados1024 []modelos.Resultado
+	var resultados2048 []modelos.Resultado
+	var resultados4096 []modelos.Resultado
 
-	copy(ordenados, resultados)
+	pagina := components.NewPage()
+
+	for i := range resultados {
+		switch resultados[i].N {
+		case 2:
+			resultados2 = append(resultados2, resultados[i])
+		case 4:
+			resultados4 = append(resultados4, resultados[i])
+		case 8:
+			resultados8 = append(resultados8, resultados[i])
+		case 16:
+			resultados16 = append(resultados16, resultados[i])
+		case 32:
+			resultados32 = append(resultados32, resultados[i])
+		case 64:
+			resultados64 = append(resultados64, resultados[i])
+		case 128:
+			resultados128 = append(resultados128, resultados[i])
+		case 256:
+			resultados256 = append(resultados256, resultados[i])
+		case 512:
+			resultados512 = append(resultados512, resultados[i])
+		case 1024:
+			resultados1024 = append(resultados1024, resultados[i])
+		case 2048:
+			resultados2048 = append(resultados2048, resultados[i])
+		case 4096:
+			resultados4096 = append(resultados4096, resultados[i])
+		}
+	}
+
+	graficaBarras := charts.NewBar()
+
+	graficaBarras.SetGlobalOptions(charts.WithTitleOpts(opts.Title{
+		Title:    "Tiempo de ejecución",
+		Subtitle: "uwu",
+	}))
+
+	pagina.AddCharts(graficaBarras)
 
 	file, err := os.Create("graficas/graficaCreciente.html")
 	VerificarError(err)
 
+	pagina.Render(file)
+
 	defer file.Close()
 
-	fmt.Fprint(file, INICIO_CRECIENTE+FIN_CRECIENTE)
 }
 
 func verificarDirectorioGraficas() {
@@ -142,12 +175,21 @@ func verificarDirectorioGraficas() {
 	}
 }
 
-func OrdenarAscendente(arreglo []modelos.Resultado) func(int, int) bool {
+func OrdenarAscendenteCantidad(arreglo []modelos.Resultado) func(int, int) bool {
 	return func(i, j int) bool {
 		if arreglo[i].N > arreglo[j].N {
 			return arreglo[i].N > arreglo[j].N
 
 		}
 		return arreglo[i].N < arreglo[j].N
+	}
+}
+
+func OrdenarAscendenteTiempo(arreglo []modelos.Resultado) func(int, int) bool {
+	return func(i, j int) bool {
+		if arreglo[i].Duracion > arreglo[j].Duracion {
+			return arreglo[i].Duracion > arreglo[j].Duracion
+		}
+		return arreglo[i].Duracion < arreglo[j].Duracion
 	}
 }

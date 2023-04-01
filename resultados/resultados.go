@@ -92,24 +92,24 @@ func filtrar() {
 }
 
 func ordenar() {
-	sort.Slice(Resultados, utilidades.OrdenarAscendente(Resultados))
+	sort.Slice(Resultados, utilidades.OrdenarAscendenteCantidad(Resultados))
 
-	sort.Slice(resultadosIII_parallel_block, utilidades.OrdenarAscendente(resultadosIII_parallel_block))
-	sort.Slice(resultadosIII_sequential_block, utilidades.OrdenarAscendente(resultadosIII_sequential_block))
-	sort.Slice(resultadosIV_3_sequential_block, utilidades.OrdenarAscendente(resultadosIV_3_sequential_block))
-	sort.Slice(resultadosIV_4_parallel_block, utilidades.OrdenarAscendente(resultadosIV_4_parallel_block))
-	sort.Slice(resultadosNaivKakan, utilidades.OrdenarAscendente(resultadosNaivKakan))
-	sort.Slice(resultadosNaivLoopUnrollingFour, utilidades.OrdenarAscendente(resultadosNaivLoopUnrollingFour))
-	sort.Slice(resultadosNaivLoopUnrollingThree, utilidades.OrdenarAscendente(resultadosNaivLoopUnrollingThree))
-	sort.Slice(resultadosNaivLoopUnrollingTwo, utilidades.OrdenarAscendente(resultadosNaivLoopUnrollingTwo))
-	sort.Slice(resultadosNaivOnArray, utilidades.OrdenarAscendente(resultadosNaivOnArray))
-	sort.Slice(resultadosNaivStandard, utilidades.OrdenarAscendente(resultadosNaivStandard))
-	sort.Slice(resultadosStrassenNaiv, utilidades.OrdenarAscendente(resultadosStrassenNaiv))
-	sort.Slice(resultadosStrassenWinograd, utilidades.OrdenarAscendente(resultadosStrassenWinograd))
-	sort.Slice(resultadosV_3_Sequential_block, utilidades.OrdenarAscendente(resultadosV_3_Sequential_block))
-	sort.Slice(resultadosV_4_parallel_block, utilidades.OrdenarAscendente(resultadosV_4_parallel_block))
-	sort.Slice(resultadosWinogradOriginal, utilidades.OrdenarAscendente(resultadosWinogradOriginal))
-	sort.Slice(resultadosWinogradScaled, utilidades.OrdenarAscendente(resultadosWinogradScaled))
+	sort.Slice(resultadosIII_parallel_block, utilidades.OrdenarAscendenteCantidad(resultadosIII_parallel_block))
+	sort.Slice(resultadosIII_sequential_block, utilidades.OrdenarAscendenteCantidad(resultadosIII_sequential_block))
+	sort.Slice(resultadosIV_3_sequential_block, utilidades.OrdenarAscendenteCantidad(resultadosIV_3_sequential_block))
+	sort.Slice(resultadosIV_4_parallel_block, utilidades.OrdenarAscendenteCantidad(resultadosIV_4_parallel_block))
+	sort.Slice(resultadosNaivKakan, utilidades.OrdenarAscendenteCantidad(resultadosNaivKakan))
+	sort.Slice(resultadosNaivLoopUnrollingFour, utilidades.OrdenarAscendenteCantidad(resultadosNaivLoopUnrollingFour))
+	sort.Slice(resultadosNaivLoopUnrollingThree, utilidades.OrdenarAscendenteCantidad(resultadosNaivLoopUnrollingThree))
+	sort.Slice(resultadosNaivLoopUnrollingTwo, utilidades.OrdenarAscendenteCantidad(resultadosNaivLoopUnrollingTwo))
+	sort.Slice(resultadosNaivOnArray, utilidades.OrdenarAscendenteCantidad(resultadosNaivOnArray))
+	sort.Slice(resultadosNaivStandard, utilidades.OrdenarAscendenteCantidad(resultadosNaivStandard))
+	sort.Slice(resultadosStrassenNaiv, utilidades.OrdenarAscendenteCantidad(resultadosStrassenNaiv))
+	sort.Slice(resultadosStrassenWinograd, utilidades.OrdenarAscendenteCantidad(resultadosStrassenWinograd))
+	sort.Slice(resultadosV_3_Sequential_block, utilidades.OrdenarAscendenteCantidad(resultadosV_3_Sequential_block))
+	sort.Slice(resultadosV_4_parallel_block, utilidades.OrdenarAscendenteCantidad(resultadosV_4_parallel_block))
+	sort.Slice(resultadosWinogradOriginal, utilidades.OrdenarAscendenteCantidad(resultadosWinogradOriginal))
+	sort.Slice(resultadosWinogradScaled, utilidades.OrdenarAscendenteCantidad(resultadosWinogradScaled))
 
 }
 
