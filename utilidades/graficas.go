@@ -5,6 +5,7 @@ import (
 	"generador/modelos"
 	"log"
 	"os"
+	"sort"
 	"strings"
 
 	"github.com/go-echarts/go-echarts/v2/charts"
@@ -105,6 +106,16 @@ func GenerarGraficasPromedio(resultados []modelos.Resultado) {
 
 func GenerarGraficasCreciente(resultados []modelos.Resultado) {
 
+	pagina := components.NewPage()
+
+	pagina.SetLayout(components.PageFlexLayout)
+
+	var resultadosOrdenados []modelos.Resultado
+
+	copy(resultadosOrdenados, resultados)
+
+	sort.Slice(resultadosOrdenados, OrdenarAscendenteTiempo(resultadosOrdenados))
+
 	verificarDirectorioGraficas()
 
 	var resultados2 []modelos.Resultado
@@ -120,7 +131,7 @@ func GenerarGraficasCreciente(resultados []modelos.Resultado) {
 	var resultados2048 []modelos.Resultado
 	var resultados4096 []modelos.Resultado
 
-	pagina := components.NewPage()
+	var ptr *[]modelos.Resultado
 
 	for i := range resultados {
 		switch resultados[i].N {
@@ -151,14 +162,94 @@ func GenerarGraficasCreciente(resultados []modelos.Resultado) {
 		}
 	}
 
-	graficaBarras := charts.NewBar()
+	sort.Slice(resultados2, OrdenarAscendenteTiempo(resultados2))
+	sort.Slice(resultados4, OrdenarAscendenteTiempo(resultados4))
+	sort.Slice(resultados8, OrdenarAscendenteTiempo(resultados8))
+	sort.Slice(resultados16, OrdenarAscendenteTiempo(resultados16))
+	sort.Slice(resultados32, OrdenarAscendenteTiempo(resultados32))
+	sort.Slice(resultados64, OrdenarAscendenteTiempo(resultados64))
+	sort.Slice(resultados128, OrdenarAscendenteTiempo(resultados128))
+	sort.Slice(resultados256, OrdenarAscendenteTiempo(resultados256))
+	sort.Slice(resultados512, OrdenarAscendenteTiempo(resultados512))
+	sort.Slice(resultados1024, OrdenarAscendenteTiempo(resultados1024))
+	sort.Slice(resultados2048, OrdenarAscendenteTiempo(resultados2048))
+	sort.Slice(resultados4096, OrdenarAscendenteTiempo(resultados4096))
 
-	graficaBarras.SetGlobalOptions(charts.WithTitleOpts(opts.Title{
-		Title:    "Tiempo de ejecución",
-		Subtitle: "uwu",
-	}))
+	for i := 2; i <= 4096; i *= 2 {
 
-	pagina.AddCharts(graficaBarras)
+		titulo := fmt.Sprintf("Tiempo de ejecución para matrices de %d x %d", i, i)
+		subtitulo := fmt.Sprintf("Matrices de %d x %d utilizando varios algoritmos de multiplicación", i, i)
+
+		graficaBarras := charts.NewBar()
+
+		graficaBarras.SetGlobalOptions(
+			charts.WithTitleOpts(
+				opts.Title{
+					Title:    titulo,
+					Subtitle: subtitulo,
+				}),
+			charts.WithXAxisOpts(opts.XAxis{
+				AxisLabel: &opts.AxisLabel{
+					Rotate:       50,
+					Show:         true,
+					Margin:       10,
+					ShowMinLabel: true,
+					ShowMaxLabel: true,
+				},
+			}),
+			charts.WithInitializationOpts(opts.Initialization{
+				Width:  "1200px",
+				Height: "800px",
+			}),
+			charts.WithGridOpts(opts.Grid{
+				Top:    "25%",
+				Bottom: "25%",
+			}),
+		)
+
+		switch i {
+		case 2:
+			ptr = &resultados2
+		case 4:
+			ptr = &resultados4
+		case 8:
+			ptr = &resultados8
+		case 16:
+			ptr = &resultados16
+		case 32:
+			ptr = &resultados32
+		case 64:
+			ptr = &resultados64
+		case 128:
+			ptr = &resultados128
+		case 256:
+			ptr = &resultados256
+		case 512:
+			ptr = &resultados512
+		case 1024:
+			ptr = &resultados1024
+		case 2048:
+			ptr = &resultados2048
+		case 4096:
+			ptr = &resultados4096
+
+		}
+
+		x := []string{}
+		series := []opts.BarData{}
+
+		for i := range *ptr {
+			x = append(x, string((*ptr)[i].Algoritmo))
+			series = append(series, opts.BarData{Value: (*ptr)[i].Duracion})
+		}
+
+		graficaBarras.SetXAxis(x)
+
+		graficaBarras.AddSeries("Tiempo de ejecución", series)
+
+		pagina.AddCharts(graficaBarras)
+
+	}
 
 	file, err := os.Create("graficas/graficaCreciente.html")
 	VerificarError(err)
@@ -166,7 +257,6 @@ func GenerarGraficasCreciente(resultados []modelos.Resultado) {
 	pagina.Render(file)
 
 	defer file.Close()
-
 }
 
 func verificarDirectorioGraficas() {
