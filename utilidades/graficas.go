@@ -6,55 +6,11 @@ import (
 	"log"
 	"os"
 	"sort"
-	"strings"
 
 	"github.com/go-echarts/go-echarts/v2/charts"
 	"github.com/go-echarts/go-echarts/v2/components"
 	"github.com/go-echarts/go-echarts/v2/opts"
 )
-
-const INICIO_PROMEDIOS = `
-<html>
-<head>
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<script type="text/javascript">
-  google.charts.load("current", {packages:['corechart']});
-  google.charts.setOnLoadCallback(drawChart);
-  function drawChart() {
-`
-const GRAFICA_PROMEDIOS = `
-var data = google.visualization.arrayToDataTable([
-	["Algoritmo", "Duración", { role: "style" } ],
-	{{ datos }}
-]);
-
-var view = new google.visualization.DataView(data);
-view.setColumns([0, 1,
-				 { calc: "stringify",
-				   sourceColumn: 1,
-				   type: "string",
-				   role: "annotation" },
-				 2]);
-
-var options = {
-  title: "{{ titulo }}",
-  height: 800,
-  bar: {groupWidth: "95%"},
-  legend: { position: "none" },
-  chartArea:{ left:300 },
-};
-var chart = new google.visualization.BarChart(document.getElementById("barchart_values"));
-chart.draw(view, options);
-`
-
-const FIN_PROMEDIOS = `
-  }
-  </script>
-</head>
-<body>
-  <div id="barchart_values"></div>
-</body>
-</html>`
 
 var algoritmosOrdenados = []string{
 	string(modelos.NAIV_STANDARD),
@@ -81,27 +37,69 @@ func GenerarGraficasPromedio(resultados []modelos.Resultado) {
 
 	promedios := make(map[string]float64)
 
+	titulo := "Promedio de tiempos de ejecución de los algoritmos"
+	subtitulo := "Se promedian los tiempos de ejecución de cada algoritmo para cada tamaño de matriz"
+
+	graficaBarras := charts.NewBar()
+
+	graficaBarras.SetGlobalOptions(
+		charts.WithTitleOpts(
+			opts.Title{
+				Title:    titulo,
+				Subtitle: subtitulo,
+				Right:    "40%",
+			}),
+		charts.WithXAxisOpts(opts.XAxis{
+			AxisLabel: &opts.AxisLabel{
+				Rotate:       50,
+				Show:         true,
+				Margin:       10,
+				ShowMinLabel: true,
+				ShowMaxLabel: true,
+			},
+		}),
+		charts.WithInitializationOpts(opts.Initialization{
+			Width:  "1200px",
+			Height: "700px",
+		}),
+		charts.WithGridOpts(opts.Grid{
+			Left:   "20%",
+			Bottom: "15%",
+		}),
+		charts.WithTooltipOpts(opts.Tooltip{Show: true}),
+		charts.WithLegendOpts(opts.Legend{Show: true, Right: "80%"}),
+		charts.WithToolboxOpts(opts.Toolbox{Show: true}),
+		charts.WithLegendOpts(opts.Legend{Show: true, Right: "80%"}),
+	)
+
+	x := []string{}
+	series := []opts.BarData{}
+
 	for _, v := range resultados {
 		promedios[string(v.Algoritmo)] += float64(v.Duracion)
 	}
 
-	var datos string
-
 	for _, aux := range algoritmosOrdenados {
 		tiempo := promedios[aux] / 12
-		datos += fmt.Sprintf("[\"%s\", %.2f, 'color: #76A7FA'],\n", aux, tiempo)
+
+		x = append(x, aux)
+		series = append(series, opts.BarData{Value: tiempo})
+
 	}
 
-	grafica := GRAFICA_PROMEDIOS
-	grafica = strings.Replace(grafica, "{{ titulo }}", "Tiempo promedio de ejecución", -1)
-	grafica = strings.Replace(grafica, "{{ datos }}", datos, -1)
+	graficaBarras.SetXAxis(x)
+
+	graficaBarras.AddSeries("Tiempo de ejecución", series)
 
 	file, err := os.Create("graficas/graficaPromedios.html")
 	VerificarError(err)
 
 	defer file.Close()
 
-	fmt.Fprint(file, INICIO_PROMEDIOS+grafica+FIN_PROMEDIOS)
+	err = graficaBarras.Render(file)
+
+	VerificarError(err)
+
 }
 
 func GenerarGraficasCreciente(resultados []modelos.Resultado) {
