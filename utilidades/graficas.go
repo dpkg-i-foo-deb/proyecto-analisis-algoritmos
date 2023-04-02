@@ -31,24 +31,8 @@ var algoritmosOrdenados = []string{
 	string(modelos.V_4_PARALLEL_BLOCK),
 }
 
-func GenerarGraficasPromedio(resultados []modelos.Resultado) {
-
-	verificarDirectorioGraficas()
-
-	promedios := make(map[string]float64)
-
-	titulo := "Promedio de tiempos de ejecución de los algoritmos"
-	subtitulo := "Se promedian los tiempos de ejecución de cada algoritmo para cada tamaño de matriz"
-
-	graficaBarras := charts.NewBar()
-
-	graficaBarras.SetGlobalOptions(
-		charts.WithTitleOpts(
-			opts.Title{
-				Title:    titulo,
-				Subtitle: subtitulo,
-				Right:    "40%",
-			}),
+var (
+	opciones = []charts.GlobalOpts{
 		charts.WithXAxisOpts(opts.XAxis{
 			AxisLabel: &opts.AxisLabel{
 				Rotate:       50,
@@ -70,7 +54,30 @@ func GenerarGraficasPromedio(resultados []modelos.Resultado) {
 		charts.WithLegendOpts(opts.Legend{Show: true, Right: "80%"}),
 		charts.WithToolboxOpts(opts.Toolbox{Show: true}),
 		charts.WithLegendOpts(opts.Legend{Show: true, Right: "80%"}),
+	}
+)
+
+func GenerarGraficasPromedio(resultados []modelos.Resultado) {
+
+	verificarDirectorioGraficas()
+
+	promedios := make(map[string]float64)
+
+	titulo := "Promedio de tiempos de ejecución de los algoritmos"
+	subtitulo := "Se promedian los tiempos de ejecución de cada algoritmo para cada tamaño de matriz"
+
+	graficaBarras := charts.NewBar()
+
+	graficaBarras.SetGlobalOptions(
+		charts.WithTitleOpts(
+			opts.Title{
+				Title:    titulo,
+				Subtitle: subtitulo,
+				Right:    "40%",
+			}),
 	)
+
+	graficaBarras.SetGlobalOptions(opciones...)
 
 	x := []string{}
 	series := []opts.BarData{}
@@ -90,6 +97,8 @@ func GenerarGraficasPromedio(resultados []modelos.Resultado) {
 	graficaBarras.SetXAxis(x)
 
 	graficaBarras.AddSeries("Tiempo de ejecución", series)
+
+	graficaBarras.XYReversal()
 
 	file, err := os.Create("graficas/graficaPromedios.html")
 	VerificarError(err)
@@ -181,28 +190,9 @@ func GenerarGraficasCreciente(resultados []modelos.Resultado) {
 					Subtitle: subtitulo,
 					Right:    "40%",
 				}),
-			charts.WithXAxisOpts(opts.XAxis{
-				AxisLabel: &opts.AxisLabel{
-					Rotate:       50,
-					Show:         true,
-					Margin:       10,
-					ShowMinLabel: true,
-					ShowMaxLabel: true,
-				},
-			}),
-			charts.WithInitializationOpts(opts.Initialization{
-				Width:  "1200px",
-				Height: "700px",
-			}),
-			charts.WithGridOpts(opts.Grid{
-				Left:   "20%",
-				Bottom: "15%",
-			}),
-			charts.WithTooltipOpts(opts.Tooltip{Show: true}),
-			charts.WithLegendOpts(opts.Legend{Show: true, Right: "80%"}),
-			charts.WithToolboxOpts(opts.Toolbox{Show: true}),
-			charts.WithLegendOpts(opts.Legend{Show: true, Right: "80%"}),
 		)
+
+		graficaBarras.SetGlobalOptions(opciones...)
 
 		switch i {
 		case 2:
