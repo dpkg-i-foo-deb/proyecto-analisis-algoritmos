@@ -3,13 +3,16 @@ package utilidades
 import (
 	"fmt"
 	"generador/modelos"
+	"io/ioutil"
 	"log"
+	"math"
 	"os"
 	"sort"
 
 	"github.com/go-echarts/go-echarts/v2/charts"
 	"github.com/go-echarts/go-echarts/v2/components"
 	"github.com/go-echarts/go-echarts/v2/opts"
+	"github.com/olekukonko/tablewriter"
 )
 
 var algoritmosOrdenados = []string{
@@ -268,4 +271,77 @@ func OrdenarAscendenteTiempo(arreglo []modelos.Resultado) func(int, int) bool {
 	return func(i, j int) bool {
 		return arreglo[i].Duracion > arreglo[j].Duracion
 	}
+}
+
+func GenerarTabla(resultados []modelos.Resultado) {
+	algoritmos := make(map[string][]float64)
+
+	for _, v := range resultados {
+		algoritmo := string(modelos.AlgoritmoMultiplicacion(v.Algoritmo))
+		algoritmos[algoritmo] = append(algoritmos[algoritmo], float64(v.Duracion))
+	}
+
+	tabla := tablewriter.NewWriter(os.Stdout)
+	tabla.SetHeader([]string{"Algoritmo", "Media", "Rango", "Desviación Estándar", "Varianza"})
+	tabla.SetColWidth(50)
+
+	var cadena []byte
+
+	for k, v := range algoritmos {
+		media := calcularMedia(v)
+		rango := calcularRango(v)
+		desviacionEstandar := calcularDesviacionEstandar(v)
+		varianza := calcularVarianza(v)
+
+		tabla.Append([]string{k, fmt.Sprintf("%.2f", media), fmt.Sprintf("%.2f", rango), fmt.Sprintf("%.2f", desviacionEstandar), fmt.Sprintf("%.2f", varianza)})
+		cadena = append(cadena, []byte(k+","+fmt.Sprintf("%.2f", media)+","+fmt.Sprintf("%.2f", rango)+","+fmt.Sprintf("%.2f", desviacionEstandar)+","+fmt.Sprintf("%.2f", varianza)+"\n")...)
+	}
+
+	tabla.Render()
+
+	err := ioutil.WriteFile("graficas/tabla.txt", cadena, 0644)
+	if err != nil {
+		fmt.Println(err)
+	}
+}
+
+func calcularMedia(times []float64) float64 {
+	sum := 0.0
+	for _, time := range times {
+		sum += time
+	}
+	return sum / float64(len(times))
+}
+
+func calcularRango(times []float64) float64 {
+	max := times[0]
+	min := times[0]
+	for _, time := range times {
+		if time > max {
+			max = time
+		}
+		if time < min {
+			min = time
+		}
+	}
+	return max - min
+}
+
+func calcularDesviacionEstandar(times []float64) float64 {
+	mean := calcularMedia(times)
+	sum := 0.0
+	for _, time := range times {
+		sum += math.Pow(time-mean, 2)
+	}
+	variance := sum / float64(len(times)-1)
+	return math.Sqrt(variance)
+}
+
+func calcularVarianza(times []float64) float64 {
+	mean := calcularMedia(times)
+	sum := 0.0
+	for _, time := range times {
+		sum += math.Pow(time-mean, 2)
+	}
+	return sum / float64(len(times)-1)
 }
