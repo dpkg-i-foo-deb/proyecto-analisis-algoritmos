@@ -250,28 +250,6 @@ func GenerarGraficasCreciente(resultados []modelos.Resultado) {
 	defer file.Close()
 }
 
-func verificarDirectorioGraficas() {
-	if os.MkdirAll("graficas", os.ModePerm) != nil {
-		log.Fatal("Error al crear el directorio de salida de gráficas")
-	}
-}
-
-func OrdenarAscendenteCantidad(arreglo []modelos.Resultado) func(int, int) bool {
-	return func(i, j int) bool {
-		if arreglo[i].N > arreglo[j].N {
-			return arreglo[i].N > arreglo[j].N
-
-		}
-		return arreglo[i].N < arreglo[j].N
-	}
-}
-
-func OrdenarAscendenteTiempo(arreglo []modelos.Resultado) func(int, int) bool {
-	return func(i, j int) bool {
-		return arreglo[i].Duracion > arreglo[j].Duracion
-	}
-}
-
 func GenerarTabla(resultados []modelos.Resultado) {
 
 	verificarDirectorioGraficas()
@@ -342,4 +320,26 @@ func calcularVarianza(times []float64) float64 {
 		sum += math.Pow(time-mean, 2)
 	}
 	return sum / float64(len(times)-1)
+}
+
+func verificarDirectorioGraficas() {
+	if os.MkdirAll("graficas", os.ModePerm) != nil {
+		log.Fatal("Error al crear el directorio de salida de gráficas")
+	}
+}
+
+func OrdenarAscendenteCantidad(arreglo []modelos.Resultado) func(int, int) bool {
+	return func(i, j int) bool {
+		if arreglo[i].N > arreglo[j].N {
+			return arreglo[i].N > arreglo[j].N
+
+		}
+		return arreglo[i].N < arreglo[j].N
+	}
+}
+
+func OrdenarAscendenteTiempo(arreglo []modelos.Resultado) func(int, int) bool {
+	return func(i, j int) bool {
+		return arreglo[i].Duracion > arreglo[j].Duracion
+	}
 }
