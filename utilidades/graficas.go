@@ -273,6 +273,13 @@ func OrdenarAscendenteTiempo(arreglo []modelos.Resultado) func(int, int) bool {
 }
 
 func GenerarTabla(resultados []modelos.Resultado) {
+
+	verificarDirectorioGraficas()
+
+	file, err := os.Create("graficas/tabla.txt")
+
+	VerificarError(err)
+
 	algoritmos := make(map[string][]float64)
 
 	for _, v := range resultados {
@@ -280,11 +287,9 @@ func GenerarTabla(resultados []modelos.Resultado) {
 		algoritmos[algoritmo] = append(algoritmos[algoritmo], float64(v.Duracion))
 	}
 
-	tabla := tablewriter.NewWriter(os.Stdout)
+	tabla := tablewriter.NewWriter(file)
 	tabla.SetHeader([]string{"Algoritmo", "Media", "Rango", "Desviación Estándar", "Varianza"})
 	tabla.SetColWidth(50)
-
-	var cadena []byte
 
 	for k, v := range algoritmos {
 		media := calcularMedia(v)
@@ -293,15 +298,9 @@ func GenerarTabla(resultados []modelos.Resultado) {
 		varianza := calcularVarianza(v)
 
 		tabla.Append([]string{k, fmt.Sprintf("%.2f", media), fmt.Sprintf("%.2f", rango), fmt.Sprintf("%.2f", desviacionEstandar), fmt.Sprintf("%.2f", varianza)})
-		cadena = append(cadena, []byte(k+","+fmt.Sprintf("%.2f", media)+","+fmt.Sprintf("%.2f", rango)+","+fmt.Sprintf("%.2f", desviacionEstandar)+","+fmt.Sprintf("%.2f", varianza)+"\n")...)
 	}
 
 	tabla.Render()
-
-	err := os.WriteFile("graficas/tabla.txt", cadena, 0644)
-	if err != nil {
-		fmt.Println(err)
-	}
 }
 
 func calcularMedia(times []float64) float64 {
