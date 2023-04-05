@@ -37,7 +37,7 @@ var (
 	opciones = []charts.GlobalOpts{
 		charts.WithXAxisOpts(opts.XAxis{
 			AxisLabel: &opts.AxisLabel{
-				Rotate:       50,
+				Rotate:       20,
 				Show:         true,
 				Margin:       10,
 				ShowMinLabel: true,
@@ -250,28 +250,6 @@ func GenerarGraficasCreciente(resultados []modelos.Resultado) {
 	defer file.Close()
 }
 
-func verificarDirectorioGraficas() {
-	if os.MkdirAll("graficas", os.ModePerm) != nil {
-		log.Fatal("Error al crear el directorio de salida de gráficas")
-	}
-}
-
-func OrdenarAscendenteCantidad(arreglo []modelos.Resultado) func(int, int) bool {
-	return func(i, j int) bool {
-		if arreglo[i].N > arreglo[j].N {
-			return arreglo[i].N > arreglo[j].N
-
-		}
-		return arreglo[i].N < arreglo[j].N
-	}
-}
-
-func OrdenarAscendenteTiempo(arreglo []modelos.Resultado) func(int, int) bool {
-	return func(i, j int) bool {
-		return arreglo[i].Duracion > arreglo[j].Duracion
-	}
-}
-
 func GenerarTabla(resultados []modelos.Resultado) {
 
 	verificarDirectorioGraficas()
@@ -301,6 +279,55 @@ func GenerarTabla(resultados []modelos.Resultado) {
 	}
 
 	tabla.Render()
+}
+
+func GenerarGraficaPunto(resultados []modelos.Resultado) {
+
+	verificarDirectorioGraficas()
+
+	resultados4096 := []modelos.Resultado{}
+
+	algoritmos := []string{}
+
+	for _, v := range resultados {
+		if v.N == 4096 {
+			resultados4096 = append(resultados4096, v)
+		}
+	}
+
+	for _, v := range resultados4096 {
+		algoritmos = append(algoritmos, string(v.Algoritmo))
+	}
+
+	graficaPunto := charts.NewEffectScatter()
+
+	graficaPunto.SetGlobalOptions(
+		charts.WithTitleOpts(
+			opts.Title{
+				Title:    "Tiempo de ejecución para matrices de 4096 x 4096",
+				Subtitle: "Matrices de 4096 x 4096 utilizando varios algoritmos de multiplicación",
+				Right:    "40%",
+			}),
+	)
+
+	graficaPunto.SetGlobalOptions(opciones...)
+
+	x := make([]opts.EffectScatterData, 0)
+
+	for i := range resultados4096 {
+		x = append(x, opts.EffectScatterData{Value: resultados4096[i].Duracion})
+	}
+
+	graficaPunto.SetXAxis(algoritmos).
+		AddSeries("Tiempo de ejecución", x)
+
+	file, err := os.Create("graficas/graficaPunto.html")
+
+	VerificarError(err)
+
+	graficaPunto.Render(file)
+
+	defer file.Close()
 }
 
 func calcularMedia(times []float64) float64 {
@@ -342,4 +369,26 @@ func calcularVarianza(times []float64) float64 {
 		sum += math.Pow(time-mean, 2)
 	}
 	return sum / float64(len(times)-1)
+}
+
+func verificarDirectorioGraficas() {
+	if os.MkdirAll("graficas", os.ModePerm) != nil {
+		log.Fatal("Error al crear el directorio de salida de gráficas")
+	}
+}
+
+func OrdenarAscendenteCantidad(arreglo []modelos.Resultado) func(int, int) bool {
+	return func(i, j int) bool {
+		if arreglo[i].N > arreglo[j].N {
+			return arreglo[i].N > arreglo[j].N
+
+		}
+		return arreglo[i].N < arreglo[j].N
+	}
+}
+
+func OrdenarAscendenteTiempo(arreglo []modelos.Resultado) func(int, int) bool {
+	return func(i, j int) bool {
+		return arreglo[i].Duracion > arreglo[j].Duracion
+	}
 }
