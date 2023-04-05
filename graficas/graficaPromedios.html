@@ -1,54 +1,31 @@
 
+<!DOCTYPE html>
 <html>
 <head>
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<script type="text/javascript">
-  google.charts.load("current", {packages:['corechart']});
-  google.charts.setOnLoadCallback(drawChart);
-  function drawChart() {
-
-var data = google.visualization.arrayToDataTable([
-	["Algoritmo", "Duración", { role: "style" } ],
-	["Naiv Standard", 244316974543.92, 'color: #76A7FA'],
-["Naiv on array", 254684683245.33, 'color: #76A7FA'],
-["NaivKahan", 241150430632.00, 'color: #76A7FA'],
-["Naiv Loop Unrolling Two", 264983297071.25, 'color: #76A7FA'],
-["Naiv Loop Unrolling Three", 313158561068.33, 'color: #76A7FA'],
-["Naiv Loop Unrolling Four", 260799004874.00, 'color: #76A7FA'],
-["Winograd Original", 0.00, 'color: #76A7FA'],
-["Winograd Scaled", 0.00, 'color: #76A7FA'],
-["Strassen Naiv", 8001702612.83, 'color: #76A7FA'],
-["Strassen Winograd", 0.00, 'color: #76A7FA'],
-["III Sequential Block - Bloque Caché", 30271251801.33, 'color: #76A7FA'],
-["III Parallel Block - Bloque Caché", 8142490604.83, 'color: #76A7FA'],
-["IV 3 Sequential Block - Bloque = 2", 23184662988.58, 'color: #76A7FA'],
-["IV 4 Parallel Block - Bloque = 2", 434783523366.25, 'color: #76A7FA'],
-["V 3 Sequential Block - Bloque = Matriz", 0.00, 'color: #76A7FA'],
-["V 4 Pararell Block - Bloque = Doble Matriz", 0.00, 'color: #76A7FA'],
-
-]);
-
-var view = new google.visualization.DataView(data);
-view.setColumns([0, 1,
-				 { calc: "stringify",
-				   sourceColumn: 1,
-				   type: "string",
-				   role: "annotation" },
-				 2]);
-
-var options = {
-  title: "Tiempo promedio de ejecución",
-  height: 800,
-  bar: {groupWidth: "95%"},
-  legend: { position: "none" },
-};
-var chart = new google.visualization.BarChart(document.getElementById("barchart_values"));
-chart.draw(view, options);
-
-  }
-  </script>
+    <meta charset="utf-8">
+    <title>Awesome go-echarts</title>
+    <script src="https://go-echarts.github.io/go-echarts-assets/assets/echarts.min.js"></script>
 </head>
+
 <body>
-  <div id="barchart_values"></div>
+<div class="container">
+    <div class="item" id="SMQJNBSSPeFX" style="width:1200px;height:700px;"></div>
+</div>
+
+<script type="text/javascript">
+    "use strict";
+    let goecharts_SMQJNBSSPeFX = echarts.init(document.getElementById('SMQJNBSSPeFX'), "white");
+    let option_SMQJNBSSPeFX = {"color":["#5470c6","#91cc75","#fac858","#ee6666","#73c0de","#3ba272","#fc8452","#9a60b4","#ea7ccc"],"dataset":{"source":null},"grid":[{"left":"20%","bottom":"15%"}],"legend":{"show":true,"type":"","right":"80%"},"series":[{"name":"Tiempo de ejecución","type":"bar","smooth":false,"connectNulls":false,"showSymbol":false,"waveAnimation":false,"renderLabelForZeroData":false,"selectedMode":false,"animation":false,"data":[{"value":137490102384.25},{"value":140487516836},{"value":143895354854.5},{"value":131771306138.16667},{"value":130956777823.75},{"value":136769485556.41667},{"value":152915296354.08334},{"value":92527302597.41667},{"value":7072471233.416667},{"value":7053703023.333333},{"value":26798852607.083332},{"value":8469833812.416667},{"value":19683415115.5},{"value":288770340439},{"value":237069086530.83334},{"value":160173276093.66666}]}],"title":{"text":"Promedio de tiempos de ejecución de los algoritmos","subtext":"Se promedian los tiempos de ejecución de cada algoritmo para cada tamaño de matriz","right":"40%"},"toolbox":{"show":true},"tooltip":{"show":true},"xAxis":[{"axisLabel":{"show":true,"rotate":50,"margin":10,"showMinLabel":true,"showMaxLabel":true}}],"yAxis":[{"data":["Naiv Standard","Naiv on array","NaivKahan","Naiv Loop Unrolling Two","Naiv Loop Unrolling Three","Naiv Loop Unrolling Four","Winograd Original","Winograd Scaled","Strassen Naiv","Strassen Winograd","III Sequential Block - Bloque Caché","III Parallel Block - Bloque Caché","IV 3 Sequential Block - Bloque = 2","IV 4 Parallel Block - Bloque = 2","V 3 Sequential Block - Bloque = Matriz","V 4 Pararell Block - Bloque = Doble Matriz"]}]}
+;
+	let action_SMQJNBSSPeFX = {"areas":{},"type":""}
+;
+    goecharts_SMQJNBSSPeFX.setOption(option_SMQJNBSSPeFX);
+ 	goecharts_SMQJNBSSPeFX.dispatchAction(action_SMQJNBSSPeFX);
+</script>
+
+<style>
+    .container {margin-top:30px; display: flex;justify-content: center;align-items: center;}
+    .item {margin: auto;}
+</style>
 </body>
 </html>
