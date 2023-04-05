@@ -1,0 +1,31 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Awesome go-echarts</title>
+    <script src="https://go-echarts.github.io/go-echarts-assets/assets/echarts.min.js"></script>
+</head>
+
+<body>
+<div class="container">
+    <div class="item" id="WqnBYqMgzDgv" style="width:1200px;height:700px;"></div>
+</div>
+
+<script type="text/javascript">
+    "use strict";
+    let goecharts_WqnBYqMgzDgv = echarts.init(document.getElementById('WqnBYqMgzDgv'), "white");
+    let option_WqnBYqMgzDgv = {"color":["#5470c6","#91cc75","#fac858","#ee6666","#73c0de","#3ba272","#fc8452","#9a60b4","#ea7ccc"],"dataset":{"source":null},"grid":[{"left":"20%","bottom":"15%"}],"legend":{"show":true,"type":"","right":"80%"},"series":[{"name":"Tiempo de ejecución","type":"effectScatter","smooth":false,"connectNulls":false,"showSymbol":false,"waveAnimation":false,"renderLabelForZeroData":false,"selectedMode":false,"animation":false,"data":[{"value":1548477115379},{"value":1537593775932},{"value":1612828865666},{"value":1471030974647},{"value":1479925330818},{"value":1543665708339},{"value":1725281728561},{"value":976871872828},{"value":72780184504},{"value":72687408548},{"value":285155472974},{"value":90745627368},{"value":206864610180},{"value":3036987637294},{"value":2587866449319},{"value":1753160948399}]}],"title":{"text":"Tiempo de ejecución para matrices de 4096 x 4096","subtext":"Matrices de 4096 x 4096 utilizando varios algoritmos de multiplicación","right":"40%"},"toolbox":{"show":true},"tooltip":{"show":true},"xAxis":[{"data":["Naiv Standard","Naiv on array","NaivKahan","Naiv Loop Unrolling Three","Naiv Loop Unrolling Two","Naiv Loop Unrolling Four","Winograd Original","Winograd Scaled","Strassen Naiv","Strassen Winograd","III Sequential Block - Bloque Caché","III Parallel Block - Bloque Caché","IV 3 Sequential Block - Bloque = 2","IV 4 Parallel Block - Bloque = 2","V 3 Sequential Block - Bloque = Matriz","V 4 Pararell Block - Bloque = Doble Matriz"],"axisLabel":{"show":true,"rotate":20,"margin":10,"showMinLabel":true,"showMaxLabel":true}}],"yAxis":[{}]}
+;
+	let action_WqnBYqMgzDgv = {"areas":{},"type":""}
+;
+    goecharts_WqnBYqMgzDgv.setOption(option_WqnBYqMgzDgv);
+ 	goecharts_WqnBYqMgzDgv.dispatchAction(action_WqnBYqMgzDgv);
+</script>
+
+<style>
+    .container {margin-top:30px; display: flex;justify-content: center;align-items: center;}
+    .item {margin: auto;}
+</style>
+</body>
+</html>

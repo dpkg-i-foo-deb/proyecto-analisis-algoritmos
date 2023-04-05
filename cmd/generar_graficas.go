@@ -22,12 +22,17 @@ func generarGraficas(cmd *cobra.Command, args []string) {
 	log.Println("Leyendo el archivo de resultados...")
 	resultados := utilidades.LeerResultados()
 
-	log.Println("Generando gráfica...")
+	log.Println("Generando gráficas...")
+
 	utilidades.GenerarGraficasPromedio(resultados)
 	log.Println("Gráfica generada en graficas/graficaPromedios.html")
+
 	utilidades.GenerarGraficasCreciente(resultados)
 	log.Println("Gráfica generada en graficas/graficaCreciente.html")
+
 	utilidades.GenerarTabla(resultados)
 	log.Println("Tabla generada, datos guardados en graficas/tabla.txt")
 
+	utilidades.GenerarGraficaPunto(resultados)
+	log.Println("Gráfica generada en graficas/graficaPunto.html")
 }
