@@ -3,7 +3,6 @@ package utilidades
 import (
 	"fmt"
 	"generador/modelos"
-	"io/ioutil"
 	"log"
 	"math"
 	"os"
@@ -299,7 +298,7 @@ func GenerarTabla(resultados []modelos.Resultado) {
 
 	tabla.Render()
 
-	err := ioutil.WriteFile("graficas/tabla.txt", cadena, 0644)
+	err := os.WriteFile("graficas/tabla.txt", cadena, 0644)
 	if err != nil {
 		fmt.Println(err)
 	}
