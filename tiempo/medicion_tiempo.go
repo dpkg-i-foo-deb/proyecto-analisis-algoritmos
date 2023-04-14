@@ -3,7 +3,7 @@ package tiempo
 import (
 	"fmt"
 	"generador/pkg/modelos"
-	"generador/resultados"
+	"generador/pkg/resultados"
 	"strconv"
 	"time"
 )
