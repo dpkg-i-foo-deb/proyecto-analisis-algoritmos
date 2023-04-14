@@ -59,7 +59,7 @@ var (
 	}
 )
 
-func GenerarGraficasPromedio(resultados []modelos.Resultado) {
+func GenerarGraficasPromedio(resultados []modelos.ResultadoAlgoritmoMultiplicacion) {
 
 	verificarDirectorioGraficas()
 
@@ -113,7 +113,7 @@ func GenerarGraficasPromedio(resultados []modelos.Resultado) {
 
 }
 
-func GenerarGraficasCreciente(resultados []modelos.Resultado) {
+func GenerarGraficasCreciente(resultados []modelos.ResultadoAlgoritmoMultiplicacion) {
 
 	pagina := components.NewPage()
 
@@ -121,20 +121,20 @@ func GenerarGraficasCreciente(resultados []modelos.Resultado) {
 
 	verificarDirectorioGraficas()
 
-	var resultados2 []modelos.Resultado
-	var resultados4 []modelos.Resultado
-	var resultados8 []modelos.Resultado
-	var resultados16 []modelos.Resultado
-	var resultados32 []modelos.Resultado
-	var resultados64 []modelos.Resultado
-	var resultados128 []modelos.Resultado
-	var resultados256 []modelos.Resultado
-	var resultados512 []modelos.Resultado
-	var resultados1024 []modelos.Resultado
-	var resultados2048 []modelos.Resultado
-	var resultados4096 []modelos.Resultado
+	var resultados2 []modelos.ResultadoAlgoritmoMultiplicacion
+	var resultados4 []modelos.ResultadoAlgoritmoMultiplicacion
+	var resultados8 []modelos.ResultadoAlgoritmoMultiplicacion
+	var resultados16 []modelos.ResultadoAlgoritmoMultiplicacion
+	var resultados32 []modelos.ResultadoAlgoritmoMultiplicacion
+	var resultados64 []modelos.ResultadoAlgoritmoMultiplicacion
+	var resultados128 []modelos.ResultadoAlgoritmoMultiplicacion
+	var resultados256 []modelos.ResultadoAlgoritmoMultiplicacion
+	var resultados512 []modelos.ResultadoAlgoritmoMultiplicacion
+	var resultados1024 []modelos.ResultadoAlgoritmoMultiplicacion
+	var resultados2048 []modelos.ResultadoAlgoritmoMultiplicacion
+	var resultados4096 []modelos.ResultadoAlgoritmoMultiplicacion
 
-	var ptr *[]modelos.Resultado
+	var ptr *[]modelos.ResultadoAlgoritmoMultiplicacion
 
 	for i := range resultados {
 		switch resultados[i].N {
@@ -250,7 +250,7 @@ func GenerarGraficasCreciente(resultados []modelos.Resultado) {
 	defer file.Close()
 }
 
-func GenerarTabla(resultados []modelos.Resultado) {
+func GenerarTabla(resultados []modelos.ResultadoAlgoritmoMultiplicacion) {
 
 	verificarDirectorioGraficas()
 
@@ -281,11 +281,11 @@ func GenerarTabla(resultados []modelos.Resultado) {
 	tabla.Render()
 }
 
-func GenerarGraficaPunto(resultados []modelos.Resultado) {
+func GenerarGraficaPunto(resultados []modelos.ResultadoAlgoritmoMultiplicacion) {
 
 	verificarDirectorioGraficas()
 
-	resultados4096 := []modelos.Resultado{}
+	resultados4096 := []modelos.ResultadoAlgoritmoMultiplicacion{}
 
 	algoritmos := []string{}
 
@@ -377,7 +377,7 @@ func verificarDirectorioGraficas() {
 	}
 }
 
-func OrdenarAscendenteCantidad(arreglo []modelos.Resultado) func(int, int) bool {
+func OrdenarAscendenteCantidad(arreglo []modelos.ResultadoAlgoritmoMultiplicacion) func(int, int) bool {
 	return func(i, j int) bool {
 		if arreglo[i].N > arreglo[j].N {
 			return arreglo[i].N > arreglo[j].N
@@ -387,7 +387,7 @@ func OrdenarAscendenteCantidad(arreglo []modelos.Resultado) func(int, int) bool 
 	}
 }
 
-func OrdenarAscendenteTiempo(arreglo []modelos.Resultado) func(int, int) bool {
+func OrdenarAscendenteTiempo(arreglo []modelos.ResultadoAlgoritmoMultiplicacion) func(int, int) bool {
 	return func(i, j int) bool {
 		return arreglo[i].Duracion > arreglo[j].Duracion
 	}

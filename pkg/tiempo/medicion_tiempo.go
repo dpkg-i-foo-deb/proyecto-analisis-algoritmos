@@ -11,7 +11,7 @@ import (
 func MedirTiempo(algoritmo modelos.AlgoritmoMultiplicacion, n int) func() time.Duration {
 	inicio := time.Now()
 	return func() time.Duration {
-		resultado := modelos.Resultado{
+		resultado := modelos.ResultadoAlgoritmoMultiplicacion{
 			Titulo:         string(algoritmo) + " " + strconv.FormatInt(int64(n), 10) + " Elementos",
 			Algoritmo:      algoritmo,
 			N:              n,

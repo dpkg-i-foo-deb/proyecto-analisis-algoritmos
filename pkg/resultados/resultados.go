@@ -8,43 +8,43 @@ import (
 	"strconv"
 )
 
-var Resultados []modelos.Resultado
+var Resultados []modelos.ResultadoAlgoritmoMultiplicacion
 
-var resultadosIII_parallel_block []modelos.Resultado
-var resultadosIII_sequential_block []modelos.Resultado
-var resultadosIV_3_sequential_block []modelos.Resultado
-var resultadosIV_4_parallel_block []modelos.Resultado
-var resultadosNaivKakan []modelos.Resultado
-var resultadosNaivLoopUnrollingFour []modelos.Resultado
-var resultadosNaivLoopUnrollingThree []modelos.Resultado
-var resultadosNaivLoopUnrollingTwo []modelos.Resultado
-var resultadosNaivOnArray []modelos.Resultado
-var resultadosNaivStandard []modelos.Resultado
-var resultadosStrassenNaiv []modelos.Resultado
-var resultadosStrassenWinograd []modelos.Resultado
-var resultadosV_3_Sequential_block []modelos.Resultado
-var resultadosV_4_parallel_block []modelos.Resultado
-var resultadosWinogradOriginal []modelos.Resultado
-var resultadosWinogradScaled []modelos.Resultado
+var resultadosIII_parallel_block []modelos.ResultadoAlgoritmoMultiplicacion
+var resultadosIII_sequential_block []modelos.ResultadoAlgoritmoMultiplicacion
+var resultadosIV_3_sequential_block []modelos.ResultadoAlgoritmoMultiplicacion
+var resultadosIV_4_parallel_block []modelos.ResultadoAlgoritmoMultiplicacion
+var resultadosNaivKakan []modelos.ResultadoAlgoritmoMultiplicacion
+var resultadosNaivLoopUnrollingFour []modelos.ResultadoAlgoritmoMultiplicacion
+var resultadosNaivLoopUnrollingThree []modelos.ResultadoAlgoritmoMultiplicacion
+var resultadosNaivLoopUnrollingTwo []modelos.ResultadoAlgoritmoMultiplicacion
+var resultadosNaivOnArray []modelos.ResultadoAlgoritmoMultiplicacion
+var resultadosNaivStandard []modelos.ResultadoAlgoritmoMultiplicacion
+var resultadosStrassenNaiv []modelos.ResultadoAlgoritmoMultiplicacion
+var resultadosStrassenWinograd []modelos.ResultadoAlgoritmoMultiplicacion
+var resultadosV_3_Sequential_block []modelos.ResultadoAlgoritmoMultiplicacion
+var resultadosV_4_parallel_block []modelos.ResultadoAlgoritmoMultiplicacion
+var resultadosWinogradOriginal []modelos.ResultadoAlgoritmoMultiplicacion
+var resultadosWinogradScaled []modelos.ResultadoAlgoritmoMultiplicacion
 
 func Consolidar() {
 
-	resultadosIII_parallel_block = []modelos.Resultado{}
-	resultadosIII_sequential_block = []modelos.Resultado{}
-	resultadosIV_3_sequential_block = []modelos.Resultado{}
-	resultadosIV_4_parallel_block = []modelos.Resultado{}
-	resultadosNaivKakan = []modelos.Resultado{}
-	resultadosNaivLoopUnrollingFour = []modelos.Resultado{}
-	resultadosNaivLoopUnrollingThree = []modelos.Resultado{}
-	resultadosNaivLoopUnrollingTwo = []modelos.Resultado{}
-	resultadosNaivOnArray = []modelos.Resultado{}
-	resultadosNaivStandard = []modelos.Resultado{}
-	resultadosStrassenNaiv = []modelos.Resultado{}
-	resultadosStrassenWinograd = []modelos.Resultado{}
-	resultadosV_3_Sequential_block = []modelos.Resultado{}
-	resultadosV_4_parallel_block = []modelos.Resultado{}
-	resultadosWinogradOriginal = []modelos.Resultado{}
-	resultadosWinogradScaled = []modelos.Resultado{}
+	resultadosIII_parallel_block = []modelos.ResultadoAlgoritmoMultiplicacion{}
+	resultadosIII_sequential_block = []modelos.ResultadoAlgoritmoMultiplicacion{}
+	resultadosIV_3_sequential_block = []modelos.ResultadoAlgoritmoMultiplicacion{}
+	resultadosIV_4_parallel_block = []modelos.ResultadoAlgoritmoMultiplicacion{}
+	resultadosNaivKakan = []modelos.ResultadoAlgoritmoMultiplicacion{}
+	resultadosNaivLoopUnrollingFour = []modelos.ResultadoAlgoritmoMultiplicacion{}
+	resultadosNaivLoopUnrollingThree = []modelos.ResultadoAlgoritmoMultiplicacion{}
+	resultadosNaivLoopUnrollingTwo = []modelos.ResultadoAlgoritmoMultiplicacion{}
+	resultadosNaivOnArray = []modelos.ResultadoAlgoritmoMultiplicacion{}
+	resultadosNaivStandard = []modelos.ResultadoAlgoritmoMultiplicacion{}
+	resultadosStrassenNaiv = []modelos.ResultadoAlgoritmoMultiplicacion{}
+	resultadosStrassenWinograd = []modelos.ResultadoAlgoritmoMultiplicacion{}
+	resultadosV_3_Sequential_block = []modelos.ResultadoAlgoritmoMultiplicacion{}
+	resultadosV_4_parallel_block = []modelos.ResultadoAlgoritmoMultiplicacion{}
+	resultadosWinogradOriginal = []modelos.ResultadoAlgoritmoMultiplicacion{}
+	resultadosWinogradScaled = []modelos.ResultadoAlgoritmoMultiplicacion{}
 
 	filtrar()
 	ordenar()
@@ -114,7 +114,7 @@ func ordenar() {
 }
 
 func reconstruir() {
-	Resultados = []modelos.Resultado{}
+	Resultados = []modelos.ResultadoAlgoritmoMultiplicacion{}
 
 	Resultados = append(Resultados, resultadosNaivStandard...)
 	Resultados = append(Resultados, resultadosNaivOnArray...)
