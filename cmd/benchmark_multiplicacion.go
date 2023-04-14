@@ -3,8 +3,8 @@ package cmd
 import (
 	"generador/benchmark"
 	"generador/pkg/modelos"
+	"generador/pkg/utilidades"
 	"generador/resultados"
-	"generador/utilidades"
 	"log"
 
 	"github.com/spf13/cobra"

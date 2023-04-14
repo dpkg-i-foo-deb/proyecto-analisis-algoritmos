@@ -1,7 +1,7 @@
 package cmd
 
 import (
-	"generador/utilidades"
+	"generador/pkg/utilidades"
 
 	"github.com/spf13/cobra"
 )

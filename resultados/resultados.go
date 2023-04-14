@@ -3,7 +3,7 @@ package resultados
 import (
 	"encoding/json"
 	"generador/pkg/modelos"
-	"generador/utilidades"
+	"generador/pkg/utilidades"
 	"sort"
 	"strconv"
 )

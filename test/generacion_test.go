@@ -1,7 +1,7 @@
 package test
 
 import (
-	"generador/utilidades"
+	"generador/pkg/utilidades"
 	"math"
 	"os"
 	"strconv"
