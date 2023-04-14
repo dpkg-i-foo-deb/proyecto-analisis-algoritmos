@@ -3,7 +3,7 @@ package benchmark
 import (
 	"generador/algoritmos"
 	"generador/pkg/modelos"
-	"generador/tiempo"
+	"generador/pkg/tiempo"
 )
 
 func BmarkV_3_Sequential_Block(matricesA []modelos.Matriz, matricesB []modelos.Matriz) {
