@@ -1,7 +1,7 @@
 package test
 
 import (
-	"generador/pkg/algoritmos"
+	"generador/pkg/algoritmos/multiplicacion_matrices"
 	"reflect"
 	"testing"
 )
@@ -22,7 +22,7 @@ func TestSumarMatrices(t *testing.T) {
 		{2, 2},
 	}
 
-	resultado := algoritmos.SumarMatrices(a, b)
+	resultado := multiplicacion_matrices.SumarMatrices(a, b)
 
 	if !reflect.DeepEqual(resultado, esperado) {
 		t.Error("Sumar matrices ha fallado")

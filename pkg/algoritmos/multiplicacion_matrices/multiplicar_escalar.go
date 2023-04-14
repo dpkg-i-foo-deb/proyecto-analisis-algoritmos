@@ -1,4 +1,4 @@
-package algoritmos
+package multiplicacion_matrices
 
 func MultiplicarEscalar(A [][]int, Result [][]int, alpha int) {
 	N := len(A)

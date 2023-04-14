@@ -1,7 +1,7 @@
 package benchmark
 
 import (
-	"generador/pkg/algoritmos"
+	"generador/pkg/algoritmos/multiplicacion_matrices"
 	"generador/pkg/modelos"
 	"generador/pkg/tiempo"
 )
@@ -15,5 +15,5 @@ func BmarkStrassenWinograd(matricesA []modelos.Matriz, matricesB []modelos.Matri
 func strassenWinograd(matrizA modelos.Matriz, matrizB modelos.Matriz) {
 	defer tiempo.MedirTiempo(modelos.STRASSEN_WINOGRAD, len(matrizA.Datos))()
 
-	algoritmos.StrassenWinograd(matrizA.Datos, matrizB.Datos)
+	multiplicacion_matrices.StrassenWinograd(matrizA.Datos, matrizB.Datos)
 }

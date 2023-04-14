@@ -1,7 +1,7 @@
 package test
 
 import (
-	"generador/pkg/algoritmos"
+	"generador/pkg/algoritmos/multiplicacion_matrices"
 	"reflect"
 	"testing"
 )
@@ -24,7 +24,7 @@ func TestNaivLoopUnrollingTwo(t *testing.T) {
 		{139, 154},
 	}
 
-	resultado := algoritmos.NaivLoopUnrollingTwo(a, b)
+	resultado := multiplicacion_matrices.NaivLoopUnrollingTwo(a, b)
 
 	if !reflect.DeepEqual(resultado, esperado) {
 		t.Error("NaivLoopUnrollingTwo ha fallado")

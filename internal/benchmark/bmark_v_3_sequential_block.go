@@ -1,7 +1,7 @@
 package benchmark
 
 import (
-	"generador/pkg/algoritmos"
+	"generador/pkg/algoritmos/multiplicacion_matrices"
 	"generador/pkg/modelos"
 	"generador/pkg/tiempo"
 )
@@ -15,6 +15,6 @@ func BmarkV_3_Sequential_Block(matricesA []modelos.Matriz, matricesB []modelos.M
 func v_3_Sequential_Block(matrizA modelos.Matriz, matrizB modelos.Matriz) {
 	defer tiempo.MedirTiempo(modelos.V_3_SEQUENTIAL_BLOCK, len(matrizA.Datos))()
 
-	algoritmos.V_3_SequentialBlock(matrizA.Datos, matrizB.Datos)
+	multiplicacion_matrices.V_3_SequentialBlock(matrizA.Datos, matrizB.Datos)
 
 }

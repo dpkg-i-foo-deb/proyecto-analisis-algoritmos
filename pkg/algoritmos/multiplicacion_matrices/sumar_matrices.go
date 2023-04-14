@@ -1,4 +1,4 @@
-package algoritmos
+package multiplicacion_matrices
 
 func SumarMatrices(a [][]int, b [][]int) [][]int {
 

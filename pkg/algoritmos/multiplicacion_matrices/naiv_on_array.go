@@ -1,4 +1,4 @@
-package algoritmos
+package multiplicacion_matrices
 
 func NaivOnArray(a [][]int, b [][]int) [][]int {
 	resultado := make([][]int, 0)

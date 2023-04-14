@@ -1,7 +1,7 @@
 package benchmark
 
 import (
-	"generador/pkg/algoritmos"
+	"generador/pkg/algoritmos/multiplicacion_matrices"
 	"generador/pkg/modelos"
 	"generador/pkg/tiempo"
 )
@@ -17,5 +17,5 @@ func strassenNaiv(matrizA modelos.Matriz, matrizB modelos.Matriz) {
 	defer tiempo.MedirTiempo(modelos.STRASSEN_NAIV, len(matrizA.Datos))()
 	//defer wg.Done()
 
-	algoritmos.StrassenNaiv(matrizA.Datos, matrizB.Datos)
+	multiplicacion_matrices.StrassenNaiv(matrizA.Datos, matrizB.Datos)
 }

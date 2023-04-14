@@ -2,7 +2,7 @@ package test
 
 import (
 	"fmt"
-	"generador/pkg/algoritmos"
+	"generador/pkg/algoritmos/multiplicacion_matrices"
 	"reflect"
 	"testing"
 )
@@ -24,7 +24,7 @@ func TestNaivLoopUnrollingFour(t *testing.T) {
 		{139, 154},
 	}
 
-	resultado := algoritmos.NaivLoopUnrollingFour(a, b)
+	resultado := multiplicacion_matrices.NaivLoopUnrollingFour(a, b)
 
 	fmt.Println(resultado)
 

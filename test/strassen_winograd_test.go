@@ -2,7 +2,7 @@ package test
 
 import (
 	"fmt"
-	"generador/pkg/algoritmos"
+	"generador/pkg/algoritmos/multiplicacion_matrices"
 	"reflect"
 	"testing"
 )
@@ -31,7 +31,7 @@ func TestStrassenWinograd(t *testing.T) {
 		{1354, 1412, 1470, 1528},
 	}
 
-	resultado := algoritmos.StrassenWinograd(a, b)
+	resultado := multiplicacion_matrices.StrassenWinograd(a, b)
 
 	fmt.Println(resultado)
 

@@ -1,4 +1,4 @@
-package algoritmos
+package multiplicacion_matrices
 
 func WinogradOriginal(A [][]int, B [][]int) [][]int {
 	N := len(B[0])

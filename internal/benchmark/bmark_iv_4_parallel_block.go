@@ -1,7 +1,7 @@
 package benchmark
 
 import (
-	"generador/pkg/algoritmos"
+	"generador/pkg/algoritmos/multiplicacion_matrices"
 	"generador/pkg/modelos"
 	"generador/pkg/tiempo"
 )
@@ -14,5 +14,5 @@ func Bmark_iv_4_parallel_block(matricesA []modelos.Matriz, matricesB []modelos.M
 
 func iv_4_parallel_block(matrizA modelos.Matriz, matrizB modelos.Matriz) {
 	defer tiempo.MedirTiempo(modelos.IV_4_PARALLEL_BLOCK, len(matrizA.Datos))()
-	algoritmos.IV_4_Pararell_Block(matrizA.Datos, matrizB.Datos)
+	multiplicacion_matrices.IV_4_Pararell_Block(matrizA.Datos, matrizB.Datos)
 }

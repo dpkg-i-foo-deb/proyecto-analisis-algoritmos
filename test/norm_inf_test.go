@@ -1,7 +1,7 @@
 package test
 
 import (
-	"generador/pkg/algoritmos"
+	"generador/pkg/algoritmos/multiplicacion_matrices"
 	"testing"
 )
 
@@ -15,7 +15,7 @@ func TestNormInf(t *testing.T) {
 
 	esperado := 24
 
-	result := algoritmos.NormInf(A)
+	result := multiplicacion_matrices.NormInf(A)
 
 	if result != esperado {
 		t.Error("NormInf ha fallado")

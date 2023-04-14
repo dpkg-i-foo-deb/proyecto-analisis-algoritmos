@@ -1,7 +1,7 @@
 package test
 
 import (
-	"generador/pkg/algoritmos"
+	"generador/pkg/algoritmos/multiplicacion_matrices"
 	"reflect"
 	"testing"
 )
@@ -22,7 +22,7 @@ func TestV_4_ParallelBlock(t *testing.T) {
 		{105, 114},
 	}
 
-	resultado := algoritmos.V_4_ParallelBlock(a, b)
+	resultado := multiplicacion_matrices.V_4_ParallelBlock(a, b)
 
 	if !reflect.DeepEqual(resultado, esperado) {
 		t.Errorf("ParallelBlock ha fallado")

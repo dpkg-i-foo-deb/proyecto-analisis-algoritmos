@@ -1,7 +1,7 @@
 package test
 
 import (
-	"generador/pkg/algoritmos"
+	"generador/pkg/algoritmos/multiplicacion_matrices"
 	"testing"
 )
 
@@ -12,7 +12,7 @@ func TestObtenerMinimo(t *testing.T) {
 
 	esperado := 1
 
-	resultado := algoritmos.ObtenerMinimo(x, y)
+	resultado := multiplicacion_matrices.ObtenerMinimo(x, y)
 
 	if resultado != esperado {
 		t.Error("Obtener mínimo ha fallado")

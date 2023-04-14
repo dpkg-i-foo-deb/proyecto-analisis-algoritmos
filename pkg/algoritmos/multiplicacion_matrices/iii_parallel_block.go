@@ -1,4 +1,4 @@
-package algoritmos
+package multiplicacion_matrices
 
 import (
 	"math"

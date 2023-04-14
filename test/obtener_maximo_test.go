@@ -1,7 +1,7 @@
 package test
 
 import (
-	"generador/pkg/algoritmos"
+	"generador/pkg/algoritmos/multiplicacion_matrices"
 	"testing"
 )
 
@@ -12,7 +12,7 @@ func TestObtenerMaximo(t *testing.T) {
 
 	esperado := 2
 
-	resultado := algoritmos.ObtenerMaximo(a, b)
+	resultado := multiplicacion_matrices.ObtenerMaximo(a, b)
 
 	if resultado != esperado {
 		t.Error("Obtener máximo ha fallado")

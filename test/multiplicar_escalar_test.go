@@ -1,7 +1,7 @@
 package test
 
 import (
-	"generador/pkg/algoritmos"
+	"generador/pkg/algoritmos/multiplicacion_matrices"
 	"reflect"
 	"testing"
 )
@@ -20,7 +20,7 @@ func TestMultiplicarEscalar(t *testing.T) {
 	}
 	alpha := 2
 
-	algoritmos.MultiplicarEscalar(A, Resultado, alpha)
+	multiplicacion_matrices.MultiplicarEscalar(A, Resultado, alpha)
 
 	expected := [][]int{{2, 4}, {6, 8}}
 	if !reflect.DeepEqual(Resultado, expected) {

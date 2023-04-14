@@ -1,4 +1,4 @@
-package algoritmos
+package multiplicacion_matrices
 
 func NaivKahan(a [][]int, b [][]int) [][]int {
 	resultado := make([][]int, 0)

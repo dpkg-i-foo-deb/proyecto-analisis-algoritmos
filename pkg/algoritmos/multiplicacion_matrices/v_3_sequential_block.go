@@ -1,9 +1,8 @@
-package algoritmos
+package multiplicacion_matrices
 
-// Este algoritmo utiliza un tamaño de bloque fijo, siempre es 2
-func IV_3_SequentialBlock(A [][]int, B [][]int) [][]int {
+func V_3_SequentialBlock(A [][]int, B [][]int) [][]int {
 	size := len(A)
-	bsize := 2
+	bsize := len(A)
 	C := make([][]int, size)
 	for i := range C {
 		C[i] = make([]int, size)
@@ -14,7 +13,7 @@ func IV_3_SequentialBlock(A [][]int, B [][]int) [][]int {
 				for i := i1; i < ObtenerMinimo(i1+bsize, size); i++ {
 					for j := j1; j < ObtenerMinimo(j1+bsize, size); j++ {
 						for k := k1; k < ObtenerMinimo(k1+bsize, size); k++ {
-							C[i][k] += A[i][j] * B[j][k]
+							C[k][i] += A[k][j] * B[j][i]
 						}
 					}
 				}

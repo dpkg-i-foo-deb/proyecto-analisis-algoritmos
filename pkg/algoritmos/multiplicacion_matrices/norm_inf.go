@@ -1,4 +1,4 @@
-package algoritmos
+package multiplicacion_matrices
 
 func NormInf(A [][]int) int {
 	N := len(A)

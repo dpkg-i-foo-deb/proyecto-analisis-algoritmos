@@ -1,7 +1,7 @@
 package test
 
 import (
-	"generador/pkg/algoritmos"
+	"generador/pkg/algoritmos/multiplicacion_matrices"
 	"reflect"
 	"testing"
 )
@@ -23,7 +23,7 @@ func TestV_3_SequentialBlock(t *testing.T) {
 		{43, 50},
 	}
 
-	resultado := algoritmos.V_3_SequentialBlock(A, B)
+	resultado := multiplicacion_matrices.V_3_SequentialBlock(A, B)
 
 	if !reflect.DeepEqual(resultado, esperado) {
 		t.Error("V.3 Sequential Block ha fallado")

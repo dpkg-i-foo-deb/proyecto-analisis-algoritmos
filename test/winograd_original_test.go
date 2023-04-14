@@ -1,7 +1,7 @@
 package test
 
 import (
-	"generador/pkg/algoritmos"
+	"generador/pkg/algoritmos/multiplicacion_matrices"
 	"reflect"
 	"testing"
 )
@@ -25,7 +25,7 @@ func TestWinogradOriginal(t *testing.T) {
 		{83, 84, 43},
 	}
 
-	resultado := algoritmos.WinogradOriginal(a, b)
+	resultado := multiplicacion_matrices.WinogradOriginal(a, b)
 
 	if !reflect.DeepEqual(resultado, esperado) {
 		t.Error("WinogradOriginal ha fallado")

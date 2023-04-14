@@ -1,7 +1,7 @@
 package test
 
 import (
-	"generador/pkg/algoritmos"
+	"generador/pkg/algoritmos/multiplicacion_matrices"
 	"reflect"
 	"testing"
 )
@@ -22,7 +22,7 @@ func TestStrassenNaiv(t *testing.T) {
 		{43, 50},
 	}
 
-	resultado := algoritmos.StrassenNaiv(a, b)
+	resultado := multiplicacion_matrices.StrassenNaiv(a, b)
 
 	if !reflect.DeepEqual(resultado, esperado) {
 		t.Error("StrassenNaiv ha fallado")

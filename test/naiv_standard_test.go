@@ -1,7 +1,7 @@
 package test
 
 import (
-	"generador/pkg/algoritmos"
+	"generador/pkg/algoritmos/multiplicacion_matrices"
 	"reflect"
 	"testing"
 )
@@ -23,7 +23,7 @@ func TestNaivStandard(t *testing.T) {
 		{139, 154},
 	}
 
-	resultado := algoritmos.NaivStandard(a, b)
+	resultado := multiplicacion_matrices.NaivStandard(a, b)
 
 	if !reflect.DeepEqual(resultado, esperado) {
 		t.Error("NaivStandard ha fallado")

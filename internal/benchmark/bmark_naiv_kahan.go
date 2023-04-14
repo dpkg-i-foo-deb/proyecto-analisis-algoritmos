@@ -1,7 +1,7 @@
 package benchmark
 
 import (
-	"generador/pkg/algoritmos"
+	"generador/pkg/algoritmos/multiplicacion_matrices"
 	"generador/pkg/modelos"
 	"generador/pkg/tiempo"
 )
@@ -15,5 +15,5 @@ func BmarkNaivKahan(matricesA []modelos.Matriz, matricesB []modelos.Matriz) {
 func naivKahan(matrizA modelos.Matriz, matrizB modelos.Matriz) {
 	defer tiempo.MedirTiempo(modelos.NAIV_KAHAN, len(matrizA.Datos))()
 
-	algoritmos.NaivKahan(matrizA.Datos, matrizB.Datos)
+	multiplicacion_matrices.NaivKahan(matrizA.Datos, matrizB.Datos)
 }

@@ -1,4 +1,4 @@
-package algoritmos
+package multiplicacion_matrices
 
 func NaivStandard(a [][]int, b [][]int) [][]int {
 

@@ -1,4 +1,4 @@
-package algoritmos
+package multiplicacion_matrices
 
 // This function returns the total number of divisors for an integer
 // Based on https://codereview.stackexchange.com/questions/120642/getting-all-divisors-from-an-integer

@@ -1,7 +1,7 @@
 package test
 
 import (
-	"generador/pkg/algoritmos"
+	"generador/pkg/algoritmos/multiplicacion_matrices"
 	"reflect"
 	"testing"
 )
@@ -23,7 +23,7 @@ func TestNaivKahan(t *testing.T) {
 		{139, 154},
 	}
 
-	resultado := algoritmos.NaivKahan(a, b)
+	resultado := multiplicacion_matrices.NaivKahan(a, b)
 
 	if !reflect.DeepEqual(resultado, esperado) {
 		t.Error("NaivKahan ha fallado")

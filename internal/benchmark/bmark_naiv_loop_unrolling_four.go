@@ -1,7 +1,7 @@
 package benchmark
 
 import (
-	"generador/pkg/algoritmos"
+	"generador/pkg/algoritmos/multiplicacion_matrices"
 	"generador/pkg/modelos"
 	"generador/pkg/tiempo"
 )
@@ -15,5 +15,5 @@ func BmarkNaivLoopUnrollingFour(matricesA []modelos.Matriz, matricesB []modelos.
 func naivLoopUnrollingFour(matrizA modelos.Matriz, matrizB modelos.Matriz) {
 	defer tiempo.MedirTiempo(modelos.NAIV_LOOP_UNROLLING_FOUR, len(matrizA.Datos))()
 
-	algoritmos.NaivLoopUnrollingFour(matrizA.Datos, matrizB.Datos)
+	multiplicacion_matrices.NaivLoopUnrollingFour(matrizA.Datos, matrizB.Datos)
 }

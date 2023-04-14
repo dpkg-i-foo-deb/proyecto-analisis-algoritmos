@@ -1,4 +1,4 @@
-package algoritmos
+package multiplicacion_matrices
 
 func NaivLoopUnrollingThree(a [][]int, b [][]int) [][]int {
 
