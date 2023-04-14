@@ -1,7 +1,7 @@
 package test
 
 import (
-	"generador/pkg/multiplicacion_matrices"
+	"generador/pkg/algoritmos/multiplicacion_matrices"
 	"reflect"
 	"testing"
 )
