@@ -1,30 +1,34 @@
 package utilidades
 
 import (
+	"fmt"
 	"log"
 	"strconv"
 )
 
-func FormatearEnteroASlice(n int64) []int {
-
-	if n < 0 {
-		log.Fatal("El número debe ser mayor a cero")
-	}
+func FormatearEnteroASlice(n string) []int {
 
 	resultado := make([]int, 0)
 
-	numByte := []byte(strconv.FormatInt(n, 10))
+	numByte := []byte(n)
 
 	for _, valor := range numByte {
-		resultado = append(resultado, int(valor))
+
+		num, err := strconv.Atoi(string(valor))
+
+		VerificarError(err)
+
+		resultado = append(resultado, num)
 	}
 
 	return resultado
 }
 
-func FormatearSliceAEntero(n []int) int64 {
+func FormatearSliceAEntero(n []int) string {
 
-	var resultado int64 = 0
+	var resultado = ""
+
+	n = removerCeros(n)
 
 	for _, valor := range n {
 
@@ -32,8 +36,22 @@ func FormatearSliceAEntero(n []int) int64 {
 			log.Fatal("El slice contiene datos inválidos")
 		}
 
-		resultado *= 10 + int64(valor)
+		resultado += fmt.Sprintf("%d", valor)
 	}
 
 	return resultado
+}
+
+func removerCeros(n []int) []int {
+
+	tope := 0
+
+	for i := 0; i < len(n); i++ {
+		if n[i] != 0 {
+			tope = i
+			i = len(n) - 1
+		}
+	}
+
+	return n[tope:]
 }
