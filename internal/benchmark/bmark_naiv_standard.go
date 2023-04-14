@@ -13,7 +13,7 @@ func BmarkNaivStandard(matricesA []modelos.Matriz, matricesB []modelos.Matriz) {
 }
 
 func naivStandard(matrizA modelos.Matriz, matrizB modelos.Matriz) {
-	defer tiempo.MedirTiempo(modelos.NAIV_STANDARD, len(matrizA.Datos))()
+	defer tiempo.CronometrarMultiplicacionMatrices(modelos.NAIV_STANDARD, len(matrizA.Datos))()
 
 	multiplicacion_matrices.NaivStandard(matrizA.Datos, matrizB.Datos)
 }

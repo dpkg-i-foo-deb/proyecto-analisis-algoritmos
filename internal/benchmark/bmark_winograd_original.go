@@ -13,7 +13,7 @@ func BmarkWinogradOriginal(matricesA []modelos.Matriz, matricesB []modelos.Matri
 }
 
 func winogradOriginal(matrizA modelos.Matriz, matrizB modelos.Matriz) {
-	defer tiempo.MedirTiempo(modelos.WINOGRAD_ORIGINAL, len(matrizA.Datos))()
+	defer tiempo.CronometrarMultiplicacionMatrices(modelos.WINOGRAD_ORIGINAL, len(matrizA.Datos))()
 
 	multiplicacion_matrices.WinogradOriginal(matrizA.Datos, matrizB.Datos)
 }

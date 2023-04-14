@@ -8,7 +8,7 @@ import (
 	"strconv"
 )
 
-var Resultados []modelos.ResultadoAlgoritmoMultiplicacion
+var ResultadosMultiplicacionMatrices []modelos.ResultadoAlgoritmoMultiplicacion
 
 var resultadosIII_parallel_block []modelos.ResultadoAlgoritmoMultiplicacion
 var resultadosIII_sequential_block []modelos.ResultadoAlgoritmoMultiplicacion
@@ -27,7 +27,7 @@ var resultadosV_4_parallel_block []modelos.ResultadoAlgoritmoMultiplicacion
 var resultadosWinogradOriginal []modelos.ResultadoAlgoritmoMultiplicacion
 var resultadosWinogradScaled []modelos.ResultadoAlgoritmoMultiplicacion
 
-func Consolidar() {
+func ConsolidarMultiplicacionMatrices() {
 
 	resultadosIII_parallel_block = []modelos.ResultadoAlgoritmoMultiplicacion{}
 	resultadosIII_sequential_block = []modelos.ResultadoAlgoritmoMultiplicacion{}
@@ -46,53 +46,53 @@ func Consolidar() {
 	resultadosWinogradOriginal = []modelos.ResultadoAlgoritmoMultiplicacion{}
 	resultadosWinogradScaled = []modelos.ResultadoAlgoritmoMultiplicacion{}
 
-	filtrar()
-	ordenar()
+	filtrarMultiplicacionMatrices()
+	ordenarMultiplicacionMatrices()
 	reconstruir()
 }
 
-func filtrar() {
-	for i := range Resultados {
-		switch Resultados[i].Algoritmo {
+func filtrarMultiplicacionMatrices() {
+	for i := range ResultadosMultiplicacionMatrices {
+		switch ResultadosMultiplicacionMatrices[i].Algoritmo {
 		case modelos.III_PARALLEL_BLOCK:
-			resultadosIII_parallel_block = append(resultadosIII_parallel_block, Resultados[i])
+			resultadosIII_parallel_block = append(resultadosIII_parallel_block, ResultadosMultiplicacionMatrices[i])
 		case modelos.III_SEQUENTIAL_BLOCK:
-			resultadosIII_sequential_block = append(resultadosIII_sequential_block, Resultados[i])
+			resultadosIII_sequential_block = append(resultadosIII_sequential_block, ResultadosMultiplicacionMatrices[i])
 		case modelos.IV_3_SEQUENTIAL_BLOCK:
-			resultadosIV_3_sequential_block = append(resultadosIV_3_sequential_block, Resultados[i])
+			resultadosIV_3_sequential_block = append(resultadosIV_3_sequential_block, ResultadosMultiplicacionMatrices[i])
 		case modelos.IV_4_PARALLEL_BLOCK:
-			resultadosIV_4_parallel_block = append(resultadosIV_4_parallel_block, Resultados[i])
+			resultadosIV_4_parallel_block = append(resultadosIV_4_parallel_block, ResultadosMultiplicacionMatrices[i])
 		case modelos.NAIV_KAHAN:
-			resultadosNaivKakan = append(resultadosNaivKakan, Resultados[i])
+			resultadosNaivKakan = append(resultadosNaivKakan, ResultadosMultiplicacionMatrices[i])
 		case modelos.NAIV_LOOP_UNROLLING_FOUR:
-			resultadosNaivLoopUnrollingFour = append(resultadosNaivLoopUnrollingFour, Resultados[i])
+			resultadosNaivLoopUnrollingFour = append(resultadosNaivLoopUnrollingFour, ResultadosMultiplicacionMatrices[i])
 		case modelos.NAIV_LOOP_UNROLLING_THREE:
-			resultadosNaivLoopUnrollingThree = append(resultadosNaivLoopUnrollingThree, Resultados[i])
+			resultadosNaivLoopUnrollingThree = append(resultadosNaivLoopUnrollingThree, ResultadosMultiplicacionMatrices[i])
 		case modelos.NAIV_LOOP_UNROLLING_TWO:
-			resultadosNaivLoopUnrollingTwo = append(resultadosNaivLoopUnrollingTwo, Resultados[i])
+			resultadosNaivLoopUnrollingTwo = append(resultadosNaivLoopUnrollingTwo, ResultadosMultiplicacionMatrices[i])
 		case modelos.NAIV_ON_ARRAY:
-			resultadosNaivOnArray = append(resultadosNaivOnArray, Resultados[i])
+			resultadosNaivOnArray = append(resultadosNaivOnArray, ResultadosMultiplicacionMatrices[i])
 		case modelos.NAIV_STANDARD:
-			resultadosNaivStandard = append(resultadosNaivStandard, Resultados[i])
+			resultadosNaivStandard = append(resultadosNaivStandard, ResultadosMultiplicacionMatrices[i])
 		case modelos.STRASSEN_NAIV:
-			resultadosStrassenNaiv = append(resultadosStrassenNaiv, Resultados[i])
+			resultadosStrassenNaiv = append(resultadosStrassenNaiv, ResultadosMultiplicacionMatrices[i])
 		case modelos.STRASSEN_WINOGRAD:
-			resultadosStrassenWinograd = append(resultadosStrassenWinograd, Resultados[i])
+			resultadosStrassenWinograd = append(resultadosStrassenWinograd, ResultadosMultiplicacionMatrices[i])
 		case modelos.V_3_SEQUENTIAL_BLOCK:
-			resultadosV_3_Sequential_block = append(resultadosV_3_Sequential_block, Resultados[i])
+			resultadosV_3_Sequential_block = append(resultadosV_3_Sequential_block, ResultadosMultiplicacionMatrices[i])
 		case modelos.V_4_PARALLEL_BLOCK:
-			resultadosV_4_parallel_block = append(resultadosV_4_parallel_block, Resultados[i])
+			resultadosV_4_parallel_block = append(resultadosV_4_parallel_block, ResultadosMultiplicacionMatrices[i])
 		case modelos.WINOGRAD_ORIGINAL:
-			resultadosWinogradOriginal = append(resultadosWinogradOriginal, Resultados[i])
+			resultadosWinogradOriginal = append(resultadosWinogradOriginal, ResultadosMultiplicacionMatrices[i])
 		case modelos.WINOGRAD_SCALED:
-			resultadosWinogradScaled = append(resultadosWinogradScaled, Resultados[i])
+			resultadosWinogradScaled = append(resultadosWinogradScaled, ResultadosMultiplicacionMatrices[i])
 
 		}
 	}
 }
 
-func ordenar() {
-	sort.Slice(Resultados, utilidades.OrdenarAscendenteCantidad(Resultados))
+func ordenarMultiplicacionMatrices() {
+	sort.Slice(ResultadosMultiplicacionMatrices, utilidades.OrdenarAscendenteCantidad(ResultadosMultiplicacionMatrices))
 
 	sort.Slice(resultadosIII_parallel_block, utilidades.OrdenarAscendenteCantidad(resultadosIII_parallel_block))
 	sort.Slice(resultadosIII_sequential_block, utilidades.OrdenarAscendenteCantidad(resultadosIII_sequential_block))
@@ -114,39 +114,39 @@ func ordenar() {
 }
 
 func reconstruir() {
-	Resultados = []modelos.ResultadoAlgoritmoMultiplicacion{}
+	ResultadosMultiplicacionMatrices = []modelos.ResultadoAlgoritmoMultiplicacion{}
 
-	Resultados = append(Resultados, resultadosNaivStandard...)
-	Resultados = append(Resultados, resultadosNaivOnArray...)
-	Resultados = append(Resultados, resultadosNaivKakan...)
-	Resultados = append(Resultados, resultadosNaivLoopUnrollingThree...)
-	Resultados = append(Resultados, resultadosNaivLoopUnrollingTwo...)
-	Resultados = append(Resultados, resultadosNaivLoopUnrollingFour...)
-	Resultados = append(Resultados, resultadosWinogradOriginal...)
-	Resultados = append(Resultados, resultadosWinogradScaled...)
-	Resultados = append(Resultados, resultadosStrassenNaiv...)
-	Resultados = append(Resultados, resultadosStrassenWinograd...)
-	Resultados = append(Resultados, resultadosIII_sequential_block...)
-	Resultados = append(Resultados, resultadosIII_parallel_block...)
-	Resultados = append(Resultados, resultadosIV_3_sequential_block...)
-	Resultados = append(Resultados, resultadosIV_4_parallel_block...)
-	Resultados = append(Resultados, resultadosV_3_Sequential_block...)
-	Resultados = append(Resultados, resultadosV_4_parallel_block...)
+	ResultadosMultiplicacionMatrices = append(ResultadosMultiplicacionMatrices, resultadosNaivStandard...)
+	ResultadosMultiplicacionMatrices = append(ResultadosMultiplicacionMatrices, resultadosNaivOnArray...)
+	ResultadosMultiplicacionMatrices = append(ResultadosMultiplicacionMatrices, resultadosNaivKakan...)
+	ResultadosMultiplicacionMatrices = append(ResultadosMultiplicacionMatrices, resultadosNaivLoopUnrollingThree...)
+	ResultadosMultiplicacionMatrices = append(ResultadosMultiplicacionMatrices, resultadosNaivLoopUnrollingTwo...)
+	ResultadosMultiplicacionMatrices = append(ResultadosMultiplicacionMatrices, resultadosNaivLoopUnrollingFour...)
+	ResultadosMultiplicacionMatrices = append(ResultadosMultiplicacionMatrices, resultadosWinogradOriginal...)
+	ResultadosMultiplicacionMatrices = append(ResultadosMultiplicacionMatrices, resultadosWinogradScaled...)
+	ResultadosMultiplicacionMatrices = append(ResultadosMultiplicacionMatrices, resultadosStrassenNaiv...)
+	ResultadosMultiplicacionMatrices = append(ResultadosMultiplicacionMatrices, resultadosStrassenWinograd...)
+	ResultadosMultiplicacionMatrices = append(ResultadosMultiplicacionMatrices, resultadosIII_sequential_block...)
+	ResultadosMultiplicacionMatrices = append(ResultadosMultiplicacionMatrices, resultadosIII_parallel_block...)
+	ResultadosMultiplicacionMatrices = append(ResultadosMultiplicacionMatrices, resultadosIV_3_sequential_block...)
+	ResultadosMultiplicacionMatrices = append(ResultadosMultiplicacionMatrices, resultadosIV_4_parallel_block...)
+	ResultadosMultiplicacionMatrices = append(ResultadosMultiplicacionMatrices, resultadosV_3_Sequential_block...)
+	ResultadosMultiplicacionMatrices = append(ResultadosMultiplicacionMatrices, resultadosV_4_parallel_block...)
 
 }
 
-func EscribirResultadoTXT() {
+func EscribirResultadoMultiplicacionMatricesTXT() {
 	cadena := ""
 
-	for i := range Resultados {
-		cadena += Resultados[i].Titulo + " " + strconv.FormatInt(Resultados[i].Duracion, 10) + "\n"
+	for i := range ResultadosMultiplicacionMatrices {
+		cadena += ResultadosMultiplicacionMatrices[i].Titulo + " " + strconv.FormatInt(ResultadosMultiplicacionMatrices[i].Duracion, 10) + "\n"
 	}
 
 	utilidades.EscribirArchivo("resultados.txt", []byte(cadena))
 }
 
-func EscribirResultadoJSON() {
-	cadena, err := json.Marshal(Resultados)
+func EscribirResultadoMultiplicacionMatricesJSON() {
+	cadena, err := json.Marshal(ResultadosMultiplicacionMatrices)
 
 	utilidades.VerificarError(err)
 

@@ -13,6 +13,6 @@ func Bmark_iv_4_parallel_block(matricesA []modelos.Matriz, matricesB []modelos.M
 }
 
 func iv_4_parallel_block(matrizA modelos.Matriz, matrizB modelos.Matriz) {
-	defer tiempo.MedirTiempo(modelos.IV_4_PARALLEL_BLOCK, len(matrizA.Datos))()
+	defer tiempo.CronometrarMultiplicacionMatrices(modelos.IV_4_PARALLEL_BLOCK, len(matrizA.Datos))()
 	multiplicacion_matrices.IV_4_Pararell_Block(matrizA.Datos, matrizB.Datos)
 }

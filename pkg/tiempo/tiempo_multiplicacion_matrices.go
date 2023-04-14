@@ -8,7 +8,7 @@ import (
 	"time"
 )
 
-func MedirTiempo(algoritmo modelos.AlgoritmoMultiplicacion, n int) func() time.Duration {
+func CronometrarMultiplicacionMatrices(algoritmo modelos.AlgoritmoMultiplicacion, n int) func() time.Duration {
 	inicio := time.Now()
 	return func() time.Duration {
 		resultado := modelos.ResultadoAlgoritmoMultiplicacion{
@@ -19,7 +19,7 @@ func MedirTiempo(algoritmo modelos.AlgoritmoMultiplicacion, n int) func() time.D
 			DuracionHumano: time.Since(inicio),
 		}
 
-		resultados.Resultados = append(resultados.Resultados, resultado)
+		resultados.ResultadosMultiplicacionMatrices = append(resultados.ResultadosMultiplicacionMatrices, resultado)
 
 		fmt.Printf("%s %d x %d Tiempo %v\n", algoritmo, n, n, time.Since(inicio))
 

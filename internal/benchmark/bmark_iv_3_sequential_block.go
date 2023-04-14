@@ -13,7 +13,7 @@ func Bmark_iv_3_sequential_block(matricesA []modelos.Matriz, matricesB []modelos
 }
 
 func iv_3_sequential_block(matrizA modelos.Matriz, matrizB modelos.Matriz) {
-	defer tiempo.MedirTiempo(modelos.IV_3_SEQUENTIAL_BLOCK, len(matrizA.Datos))()
+	defer tiempo.CronometrarMultiplicacionMatrices(modelos.IV_3_SEQUENTIAL_BLOCK, len(matrizA.Datos))()
 
 	multiplicacion_matrices.IV_3_SequentialBlock(matrizA.Datos, matrizB.Datos)
 }

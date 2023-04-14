@@ -13,7 +13,7 @@ func BmarkNaivLoopUnrollingTwo(matricesA []modelos.Matriz, matricesB []modelos.M
 }
 
 func naivLoopUnrollingTwo(matrizA modelos.Matriz, matrizB modelos.Matriz) {
-	defer tiempo.MedirTiempo(modelos.NAIV_LOOP_UNROLLING_TWO, len(matrizA.Datos))()
+	defer tiempo.CronometrarMultiplicacionMatrices(modelos.NAIV_LOOP_UNROLLING_TWO, len(matrizA.Datos))()
 
 	multiplicacion_matrices.NaivLoopUnrollingTwo(matrizA.Datos, matrizB.Datos)
 }

@@ -13,7 +13,7 @@ func BmarkNaivKahan(matricesA []modelos.Matriz, matricesB []modelos.Matriz) {
 }
 
 func naivKahan(matrizA modelos.Matriz, matrizB modelos.Matriz) {
-	defer tiempo.MedirTiempo(modelos.NAIV_KAHAN, len(matrizA.Datos))()
+	defer tiempo.CronometrarMultiplicacionMatrices(modelos.NAIV_KAHAN, len(matrizA.Datos))()
 
 	multiplicacion_matrices.NaivKahan(matrizA.Datos, matrizB.Datos)
 }

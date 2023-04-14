@@ -14,7 +14,7 @@ func BmarkStrassenNaiv(matricesA []modelos.Matriz, matricesB []modelos.Matriz) {
 }
 
 func strassenNaiv(matrizA modelos.Matriz, matrizB modelos.Matriz) {
-	defer tiempo.MedirTiempo(modelos.STRASSEN_NAIV, len(matrizA.Datos))()
+	defer tiempo.CronometrarMultiplicacionMatrices(modelos.STRASSEN_NAIV, len(matrizA.Datos))()
 	//defer wg.Done()
 
 	multiplicacion_matrices.StrassenNaiv(matrizA.Datos, matrizB.Datos)

@@ -13,7 +13,7 @@ func BmarkStrassenWinograd(matricesA []modelos.Matriz, matricesB []modelos.Matri
 }
 
 func strassenWinograd(matrizA modelos.Matriz, matrizB modelos.Matriz) {
-	defer tiempo.MedirTiempo(modelos.STRASSEN_WINOGRAD, len(matrizA.Datos))()
+	defer tiempo.CronometrarMultiplicacionMatrices(modelos.STRASSEN_WINOGRAD, len(matrizA.Datos))()
 
 	multiplicacion_matrices.StrassenWinograd(matrizA.Datos, matrizB.Datos)
 }

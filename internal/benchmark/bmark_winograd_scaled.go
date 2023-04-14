@@ -13,7 +13,7 @@ func BmarkWinogradScaled(matricesA []modelos.Matriz, matricesB []modelos.Matriz)
 }
 
 func winogradScaled(matrizA modelos.Matriz, matrizB modelos.Matriz) {
-	defer tiempo.MedirTiempo(modelos.WINOGRAD_SCALED, len(matrizA.Datos))()
+	defer tiempo.CronometrarMultiplicacionMatrices(modelos.WINOGRAD_SCALED, len(matrizA.Datos))()
 
 	multiplicacion_matrices.WinogradScaled(matrizA.Datos, matrizB.Datos)
 }
