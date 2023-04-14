@@ -14,7 +14,7 @@ import (
 	"github.com/olekukonko/tablewriter"
 )
 
-var algoritmosOrdenados = []string{
+var algoritmosMultiplicacionMatricesOrdenados = []string{
 	string(modelos.NAIV_STANDARD),
 	string(modelos.NAIV_ON_ARRAY),
 	string(modelos.NAIV_KAHAN),
@@ -59,7 +59,7 @@ var (
 	}
 )
 
-func GenerarGraficasPromedio(resultados []modelos.ResultadoAlgoritmoMultiplicacion) {
+func GenerarGraficasPromedioMultiplicacionMatrices(resultados []modelos.ResultadoAlgoritmoMultiplicacion) {
 
 	verificarDirectorioGraficas()
 
@@ -88,7 +88,7 @@ func GenerarGraficasPromedio(resultados []modelos.ResultadoAlgoritmoMultiplicaci
 		promedios[string(v.Algoritmo)] += float64(v.Duracion)
 	}
 
-	for _, aux := range algoritmosOrdenados {
+	for _, aux := range algoritmosMultiplicacionMatricesOrdenados {
 		tiempo := promedios[aux] / 12
 
 		x = append(x, aux)
@@ -113,7 +113,7 @@ func GenerarGraficasPromedio(resultados []modelos.ResultadoAlgoritmoMultiplicaci
 
 }
 
-func GenerarGraficasCreciente(resultados []modelos.ResultadoAlgoritmoMultiplicacion) {
+func GenerarGraficasCrecienteMultiplicacionMatrices(resultados []modelos.ResultadoAlgoritmoMultiplicacion) {
 
 	pagina := components.NewPage()
 
@@ -165,18 +165,18 @@ func GenerarGraficasCreciente(resultados []modelos.ResultadoAlgoritmoMultiplicac
 		}
 	}
 
-	sort.Slice(resultados2, OrdenarAscendenteTiempo(resultados2))
-	sort.Slice(resultados4, OrdenarAscendenteTiempo(resultados4))
-	sort.Slice(resultados8, OrdenarAscendenteTiempo(resultados8))
-	sort.Slice(resultados16, OrdenarAscendenteTiempo(resultados16))
-	sort.Slice(resultados32, OrdenarAscendenteTiempo(resultados32))
-	sort.Slice(resultados64, OrdenarAscendenteTiempo(resultados64))
-	sort.Slice(resultados128, OrdenarAscendenteTiempo(resultados128))
-	sort.Slice(resultados256, OrdenarAscendenteTiempo(resultados256))
-	sort.Slice(resultados512, OrdenarAscendenteTiempo(resultados512))
-	sort.Slice(resultados1024, OrdenarAscendenteTiempo(resultados1024))
-	sort.Slice(resultados2048, OrdenarAscendenteTiempo(resultados2048))
-	sort.Slice(resultados4096, OrdenarAscendenteTiempo(resultados4096))
+	sort.Slice(resultados2, OrdenarAscendenteTiempoMultiplicacionMatrices(resultados2))
+	sort.Slice(resultados4, OrdenarAscendenteTiempoMultiplicacionMatrices(resultados4))
+	sort.Slice(resultados8, OrdenarAscendenteTiempoMultiplicacionMatrices(resultados8))
+	sort.Slice(resultados16, OrdenarAscendenteTiempoMultiplicacionMatrices(resultados16))
+	sort.Slice(resultados32, OrdenarAscendenteTiempoMultiplicacionMatrices(resultados32))
+	sort.Slice(resultados64, OrdenarAscendenteTiempoMultiplicacionMatrices(resultados64))
+	sort.Slice(resultados128, OrdenarAscendenteTiempoMultiplicacionMatrices(resultados128))
+	sort.Slice(resultados256, OrdenarAscendenteTiempoMultiplicacionMatrices(resultados256))
+	sort.Slice(resultados512, OrdenarAscendenteTiempoMultiplicacionMatrices(resultados512))
+	sort.Slice(resultados1024, OrdenarAscendenteTiempoMultiplicacionMatrices(resultados1024))
+	sort.Slice(resultados2048, OrdenarAscendenteTiempoMultiplicacionMatrices(resultados2048))
+	sort.Slice(resultados4096, OrdenarAscendenteTiempoMultiplicacionMatrices(resultados4096))
 
 	for i := 2; i <= 4096; i *= 2 {
 
@@ -250,7 +250,7 @@ func GenerarGraficasCreciente(resultados []modelos.ResultadoAlgoritmoMultiplicac
 	defer file.Close()
 }
 
-func GenerarTabla(resultados []modelos.ResultadoAlgoritmoMultiplicacion) {
+func GenerarTablaMultiplicacionMatrices(resultados []modelos.ResultadoAlgoritmoMultiplicacion) {
 
 	verificarDirectorioGraficas()
 
@@ -281,7 +281,7 @@ func GenerarTabla(resultados []modelos.ResultadoAlgoritmoMultiplicacion) {
 	tabla.Render()
 }
 
-func GenerarGraficaPunto(resultados []modelos.ResultadoAlgoritmoMultiplicacion) {
+func GenerarGraficaPuntoMultiplicacionMatrices(resultados []modelos.ResultadoAlgoritmoMultiplicacion) {
 
 	verificarDirectorioGraficas()
 
@@ -377,7 +377,7 @@ func verificarDirectorioGraficas() {
 	}
 }
 
-func OrdenarAscendenteCantidad(arreglo []modelos.ResultadoAlgoritmoMultiplicacion) func(int, int) bool {
+func OrdenarAscendenteCantidadMultiplicacionMatrices(arreglo []modelos.ResultadoAlgoritmoMultiplicacion) func(int, int) bool {
 	return func(i, j int) bool {
 		if arreglo[i].N > arreglo[j].N {
 			return arreglo[i].N > arreglo[j].N
@@ -387,7 +387,7 @@ func OrdenarAscendenteCantidad(arreglo []modelos.ResultadoAlgoritmoMultiplicacio
 	}
 }
 
-func OrdenarAscendenteTiempo(arreglo []modelos.ResultadoAlgoritmoMultiplicacion) func(int, int) bool {
+func OrdenarAscendenteTiempoMultiplicacionMatrices(arreglo []modelos.ResultadoAlgoritmoMultiplicacion) func(int, int) bool {
 	return func(i, j int) bool {
 		return arreglo[i].Duracion > arreglo[j].Duracion
 	}
