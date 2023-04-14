@@ -8,13 +8,13 @@ import (
 
 func TestMultiplicacionAmericanaIterativa(t *testing.T) {
 
-	n1 := utilidades.FormatearEnteroASlice("419236001010095628945783")
+	n1 := utilidades.FormatearCadenaASlice("419236001010095628945783")
 
-	n2 := utilidades.FormatearEnteroASlice("545656784340959960400090")
+	n2 := utilidades.FormatearCadenaASlice("545656784340959960400090")
 
 	esperado := "228758968191132222725707559027530174033598320470"
 
-	resultado := utilidades.FormatearSliceAEntero(multiplicacion_numeros_grandes.
+	resultado := utilidades.FormatearSliceACadena(multiplicacion_numeros_grandes.
 		MultiplicacionAmericanaIterativa(n1, n2))
 
 	if resultado != esperado {

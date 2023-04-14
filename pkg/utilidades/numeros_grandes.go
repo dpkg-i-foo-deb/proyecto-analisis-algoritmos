@@ -6,7 +6,7 @@ import (
 	"strconv"
 )
 
-func FormatearEnteroASlice(n string) []int {
+func FormatearCadenaASlice(n string) []int {
 
 	resultado := make([]int, 0)
 
@@ -24,7 +24,7 @@ func FormatearEnteroASlice(n string) []int {
 	return resultado
 }
 
-func FormatearSliceAEntero(n []int) string {
+func FormatearSliceACadena(n []int) string {
 
 	var resultado = ""
 
