@@ -2,7 +2,7 @@ package test
 
 import (
 	"fmt"
-	"generador/algoritmos"
+	"generador/pkg/algoritmos"
 	"reflect"
 	"testing"
 )

@@ -1,7 +1,7 @@
 package test
 
 import (
-	"generador/algoritmos"
+	"generador/pkg/algoritmos"
 	"reflect"
 	"testing"
 )
