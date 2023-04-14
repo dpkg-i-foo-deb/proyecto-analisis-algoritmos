@@ -1,7 +1,7 @@
 package cmd
 
 import (
-	"generador/benchmark"
+	"generador/internal/benchmark"
 	"generador/pkg/modelos"
 	"generador/pkg/resultados"
 	"generador/pkg/utilidades"
