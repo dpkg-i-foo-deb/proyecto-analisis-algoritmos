@@ -2,7 +2,7 @@ package utilidades
 
 import (
 	"fmt"
-	"generador/modelos"
+	"generador/pkg/modelos"
 	"log"
 	"math"
 	"os"

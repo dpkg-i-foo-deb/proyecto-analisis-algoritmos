@@ -2,7 +2,7 @@ package utilidades
 
 import (
 	"encoding/json"
-	"generador/modelos"
+	"generador/pkg/modelos"
 	"math/rand"
 	"os"
 )

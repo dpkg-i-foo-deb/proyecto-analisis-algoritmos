@@ -1,7 +1,7 @@
 package utilidades
 
 import (
-	"generador/modelos"
+	"generador/pkg/modelos"
 	"math"
 	"os"
 	"strconv"

@@ -2,7 +2,7 @@ package benchmark
 
 import (
 	"generador/algoritmos"
-	"generador/modelos"
+	"generador/pkg/modelos"
 	"generador/tiempo"
 )
 
