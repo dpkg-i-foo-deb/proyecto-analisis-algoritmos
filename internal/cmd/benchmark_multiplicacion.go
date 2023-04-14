@@ -1,7 +1,7 @@
 package cmd
 
 import (
-	"generador/internal/benchmark"
+	"generador/internal/benchmark/bmark_multiplicacion_matrices"
 	"generador/pkg/modelos"
 	"generador/pkg/resultados"
 	"generador/pkg/utilidades"
@@ -22,22 +22,22 @@ var benchmarkCmd = &cobra.Command{
 func init() {
 	rootCmd.AddCommand(benchmarkCmd)
 
-	benchmarks = append(benchmarks, benchmark.Bmark_iii_parallel_block)
-	benchmarks = append(benchmarks, benchmark.Bmark_iii_sequential_block)
-	benchmarks = append(benchmarks, benchmark.Bmark_iv_3_sequential_block)
-	benchmarks = append(benchmarks, benchmark.Bmark_iv_4_parallel_block)
-	benchmarks = append(benchmarks, benchmark.BmarkNaivKahan)
-	benchmarks = append(benchmarks, benchmark.BmarkNaivLoopUnrollingFour)
-	benchmarks = append(benchmarks, benchmark.BmarkNaivLoopUnrollingThree)
-	benchmarks = append(benchmarks, benchmark.BmarkNaivLoopUnrollingTwo)
-	benchmarks = append(benchmarks, benchmark.BmarkNaivOnArray)
-	benchmarks = append(benchmarks, benchmark.BmarkNaivStandard)
-	benchmarks = append(benchmarks, benchmark.BmarkStrassenNaiv)
-	benchmarks = append(benchmarks, benchmark.BmarkStrassenWinograd)
-	benchmarks = append(benchmarks, benchmark.BmarkV_3_Sequential_Block)
-	benchmarks = append(benchmarks, benchmark.Bmark_V_4_parallel_block)
-	benchmarks = append(benchmarks, benchmark.BmarkWinogradOriginal)
-	benchmarks = append(benchmarks, benchmark.BmarkWinogradScaled)
+	benchmarks = append(benchmarks, bmark_multiplicacion_matrices.Bmark_iii_parallel_block)
+	benchmarks = append(benchmarks, bmark_multiplicacion_matrices.Bmark_iii_sequential_block)
+	benchmarks = append(benchmarks, bmark_multiplicacion_matrices.Bmark_iv_3_sequential_block)
+	benchmarks = append(benchmarks, bmark_multiplicacion_matrices.Bmark_iv_4_parallel_block)
+	benchmarks = append(benchmarks, bmark_multiplicacion_matrices.BmarkNaivKahan)
+	benchmarks = append(benchmarks, bmark_multiplicacion_matrices.BmarkNaivLoopUnrollingFour)
+	benchmarks = append(benchmarks, bmark_multiplicacion_matrices.BmarkNaivLoopUnrollingThree)
+	benchmarks = append(benchmarks, bmark_multiplicacion_matrices.BmarkNaivLoopUnrollingTwo)
+	benchmarks = append(benchmarks, bmark_multiplicacion_matrices.BmarkNaivOnArray)
+	benchmarks = append(benchmarks, bmark_multiplicacion_matrices.BmarkNaivStandard)
+	benchmarks = append(benchmarks, bmark_multiplicacion_matrices.BmarkStrassenNaiv)
+	benchmarks = append(benchmarks, bmark_multiplicacion_matrices.BmarkStrassenWinograd)
+	benchmarks = append(benchmarks, bmark_multiplicacion_matrices.BmarkV_3_Sequential_Block)
+	benchmarks = append(benchmarks, bmark_multiplicacion_matrices.Bmark_V_4_parallel_block)
+	benchmarks = append(benchmarks, bmark_multiplicacion_matrices.BmarkWinogradOriginal)
+	benchmarks = append(benchmarks, bmark_multiplicacion_matrices.BmarkWinogradScaled)
 }
 
 func benchmark_multiplicacion(cmd *cobra.Command, args []string) {

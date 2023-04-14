@@ -1,4 +1,4 @@
-package benchmark
+package bmark_multiplicacion_matrices
 
 import (
 	"generador/pkg/algoritmos/multiplicacion_matrices"
