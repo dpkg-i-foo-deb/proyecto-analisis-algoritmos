@@ -1,6 +1,6 @@
 package main
 
-import "generador/cmd"
+import "generador/internal/cmd"
 
 func main() {
 	cmd.Execute()
