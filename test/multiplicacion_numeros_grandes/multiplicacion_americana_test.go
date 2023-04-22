@@ -12,12 +12,14 @@ func TestMultiplicacionAmericanaIterativa(t *testing.T) {
 
 	n2 := utilidades.FormatearCadenaASlice("545656784340959960400090")
 
+	resultado := make([]int, len(n1)+len(n2)*2)
+
 	esperado := "228758968191132222725707559027530174033598320470"
 
-	resultado := utilidades.FormatearSliceACadena(multiplicacion_numeros_grandes.
-		MultiplicacionAmericanaIterativa(n1, n2))
+	resultadoCadena := utilidades.FormatearSliceACadena(multiplicacion_numeros_grandes.
+		MultiplicacionAmericanaIterativa(n1, n2, resultado))
 
-	if resultado != esperado {
+	if resultadoCadena != esperado {
 		t.Error("La multiplicación americana iterativa ha fallado")
 	}
 
