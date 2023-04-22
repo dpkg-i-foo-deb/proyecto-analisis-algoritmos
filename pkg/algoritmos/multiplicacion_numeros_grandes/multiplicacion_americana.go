@@ -1,7 +1,6 @@
 package multiplicacion_numeros_grandes
 
-func MultiplicacionAmericanaIterativa(num1 []int, num2 []int) []int {
-	resultado := make([]int, len(num1)+len(num2)*2)
+func MultiplicacionAmericanaIterativa(num1 []int, num2 []int, resultado []int) []int {
 
 	for i := len(num2) - 1; i >= 0; i-- {
 
