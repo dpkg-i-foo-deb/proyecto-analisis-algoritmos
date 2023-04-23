@@ -4,6 +4,7 @@ import (
 	"generador/pkg/algoritmos/multiplicacion_numeros_grandes"
 	"generador/pkg/utilidades"
 	"testing"
+	"reflect"
 )
 
 func TestMultiplicacionAmericanaIterativa(t *testing.T) {
@@ -23,4 +24,20 @@ func TestMultiplicacionAmericanaIterativa(t *testing.T) {
 		t.Error("La multiplicación americana iterativa ha fallado")
 	}
 
+}
+
+func TestRussianMultiplication(t *testing.T) {
+	a := []int{10, 15}
+
+	b := []int{20, 25}
+	
+	result := make([]int, len(a))
+	
+	expected := []int{200, 375}
+
+	multiplicacion_numeros_grandes.RussianMultiplication(a, b, result)
+
+	if !reflect.DeepEqual(result, expected) {
+		t.Errorf("Expected %v but got %v", expected, result)
+	}
 }
