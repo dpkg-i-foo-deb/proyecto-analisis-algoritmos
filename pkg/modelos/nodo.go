@@ -1,6 +1,6 @@
 package modelos
 
 type Nodo struct {
-	Valor     interface{}
+	Valor     int
 	Siguiente *Nodo
 }

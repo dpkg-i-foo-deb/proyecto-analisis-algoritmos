@@ -40,7 +40,7 @@ func (l *ListaSimple) EliminarLista() {
 	l.Cantidad = 0
 }
 
-func (l *ListaSimple) InsertarFinal(valor interface{}) {
+func (l *ListaSimple) InsertarFinal(valor int) {
 	nuevo := &Nodo{Valor: valor, Siguiente: nil}
 
 	if l.EstaVacia() {
@@ -56,7 +56,7 @@ func (l *ListaSimple) InsertarFinal(valor interface{}) {
 	l.Cantidad++
 }
 
-func (l *ListaSimple) InsertarFinalRecursivo(nodo *Nodo, valor interface{}, posicion int) {
+func (l *ListaSimple) InsertarFinalRecursivo(nodo *Nodo, valor int, posicion int) {
 	if nodo == nil && l.Cantidad == posicion {
 		nuevo := &Nodo{Valor: valor, Siguiente: nil}
 		l.Ultimo.Siguiente = nuevo
@@ -68,7 +68,7 @@ func (l *ListaSimple) InsertarFinalRecursivo(nodo *Nodo, valor interface{}, posi
 	l.InsertarFinalRecursivo(nodo.Siguiente, valor, posicion+1)
 }
 
-func (l *ListaSimple) InsertarInicio(valor interface{}) {
+func (l *ListaSimple) InsertarInicio(valor int) {
 
 	nuevo := &Nodo{Valor: valor, Siguiente: nil}
 
@@ -87,7 +87,7 @@ func (l *ListaSimple) InsertarInicio(valor interface{}) {
 
 }
 
-func (l *ListaSimple) InsertarPosicion(valor interface{}, posicion int) {
+func (l *ListaSimple) InsertarPosicion(valor int, posicion int) {
 	nuevo := &Nodo{Valor: valor, Siguiente: nil}
 
 	i := 0
@@ -104,7 +104,7 @@ func (l *ListaSimple) InsertarPosicion(valor interface{}, posicion int) {
 	l.Cantidad++
 }
 
-func (l *ListaSimple) InsertarPosicionRecursivo(nodo *Nodo, valor interface{}, posicion int, i int) {
+func (l *ListaSimple) InsertarPosicionRecursivo(nodo *Nodo, valor int, posicion int, i int) {
 	if i == posicion {
 		nuevo := &Nodo{Valor: valor, Siguiente: nil}
 		nuevo.Siguiente = nodo.Siguiente
@@ -116,7 +116,7 @@ func (l *ListaSimple) InsertarPosicionRecursivo(nodo *Nodo, valor interface{}, p
 	l.InsertarPosicionRecursivo(nodo.Siguiente, valor, posicion, i+1)
 }
 
-func (l *ListaSimple) GetValor(posicion int) interface{} {
+func (l *ListaSimple) GetValor(posicion int) int {
 	i := 0
 	aux := l.Cabecera
 
@@ -126,6 +126,18 @@ func (l *ListaSimple) GetValor(posicion int) interface{} {
 	}
 
 	return aux.Valor
+}
+
+func (l *ListaSimple) GetNodo(posicion int) *Nodo {
+	i := 0
+	aux := l.Cabecera
+
+	for i != posicion {
+		aux = aux.Siguiente
+		i++
+	}
+
+	return aux
 }
 
 func (l *ListaSimple) EliminarPosicion(posicion int) {
