@@ -69,7 +69,7 @@ func removerCerosLista(l *modelos.ListaSimple) *modelos.ListaSimple {
 	}
 
 	for i := 0; i < tope; i++ {
-		l.EliminarPosicion(i)
+		l.EliminarInicio()
 	}
 
 	return l
