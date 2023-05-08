@@ -152,6 +152,11 @@ func (l *ListaSimple) GetNodo(posicion int) *Nodo {
 	return aux
 }
 
+func (l *ListaSimple) EliminarInicio() {
+	l.Cabecera = l.Cabecera.Siguiente
+	l.Cantidad--
+}
+
 func (l *ListaSimple) EliminarPosicion(posicion int) {
 	i := 0
 	aux := l.Cabecera
