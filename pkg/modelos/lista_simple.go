@@ -128,6 +128,18 @@ func (l *ListaSimple) GetValor(posicion int) int {
 	return aux.Valor
 }
 
+func (l *ListaSimple) SetPosicion(posicion int, valor int) {
+	i := 0
+	aux := l.Cabecera
+
+	for i != posicion {
+		aux = aux.Siguiente
+		i++
+	}
+
+	aux.Valor = valor
+}
+
 func (l *ListaSimple) GetNodo(posicion int) *Nodo {
 	i := 0
 	aux := l.Cabecera

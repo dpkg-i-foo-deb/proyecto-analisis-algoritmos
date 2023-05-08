@@ -2,6 +2,7 @@ package utilidades
 
 import (
 	"fmt"
+	"generador/pkg/modelos"
 	"log"
 	"strconv"
 )
@@ -28,7 +29,7 @@ func FormatearSliceACadena(n []int) string {
 
 	var resultado = ""
 
-	n = removerCeros(n)
+	n = removerCerosSlice(n)
 
 	for _, valor := range n {
 
@@ -42,7 +43,7 @@ func FormatearSliceACadena(n []int) string {
 	return resultado
 }
 
-func removerCeros(n []int) []int {
+func removerCerosSlice(n []int) []int {
 
 	tope := 0
 
@@ -54,4 +55,58 @@ func removerCeros(n []int) []int {
 	}
 
 	return n[tope:]
+}
+
+func removerCerosLista(l *modelos.ListaSimple) *modelos.ListaSimple {
+
+	tope := 0
+
+	for i := 0; i < l.GetCantidadNodos(); i++ {
+		if l.GetNodo(i).Valor != 0 {
+			tope = i
+			i = l.GetCantidadNodos() - 1
+		}
+	}
+
+	for i := 0; i < tope; i++ {
+		l.EliminarPosicion(i)
+	}
+
+	return l
+}
+
+func FormatearCadenaALista(n string) *modelos.ListaSimple {
+	l := modelos.Lista(len(n))
+
+	numByte := []byte(n)
+
+	for i, valor := range numByte {
+
+		num, err := strconv.Atoi(string(valor))
+
+		VerificarError(err)
+
+		l.SetPosicion(i, num)
+	}
+
+	return l
+}
+
+func FormatearListaACadena(l *modelos.ListaSimple) string {
+
+	var resultado = ""
+
+	l = removerCerosLista(l)
+
+	for i := 0; i < l.GetCantidadNodos(); i++ {
+
+		if l.GetNodo(i).Valor < 0 || l.GetNodo(i).Valor > 9 {
+			log.Fatal("La lista contiene datos inválidos")
+		}
+
+		resultado += fmt.Sprintf("%d", l.GetNodo(i).Valor)
+	}
+
+	return resultado
+
 }
