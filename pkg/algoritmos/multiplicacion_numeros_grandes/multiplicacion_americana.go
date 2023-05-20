@@ -24,6 +24,27 @@ func MultiplicacionAmericanaIterativa(num1 []int, num2 []int, resultado []int) [
 	return resultado
 }
 
+func MultiplicacionAmericanaRecursiva(num1 []int, num2 []int, resultado []int, i int, j int, k int) []int {
+
+	if i == -1 {
+		return resultado
+	}
+
+	resultado[k] += num1[j] * num2[i]
+
+	if resultado[k] > 9 {
+		resultado[k-1] += resultado[k] / 10
+		resultado[k] %= 10
+	}
+
+	if j == 0 {
+		return MultiplicacionAmericanaRecursiva(num1, num2, resultado, i-1, len(num1)-1, len(resultado)-(len(num2)-(i-1)))
+	}
+
+	return MultiplicacionAmericanaRecursiva(num1, num2, resultado, i, j-1, k-1)
+
+}
+
 func MultiplicacionAmericanaIterativaEstructuras(num1, num2, resultado *modelos.ListaSimple) *modelos.ListaSimple {
 
 	for i := num2.GetCantidadNodos() - 1; i >= 0; i-- {

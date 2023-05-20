@@ -26,6 +26,23 @@ func TestMultiplicacionAmericanaIterativa(t *testing.T) {
 
 }
 
+func TestMultiplicacionAmericanaRecursiva(t *testing.T) {
+	n1 := utilidades.FormatearCadenaASlice("419236001010095628945783")
+
+	n2 := utilidades.FormatearCadenaASlice("545656784340959960400090")
+
+	resultado := make([]int, len(n1)+len(n2)*2)
+
+	esperado := "228758968191132222725707559027530174033598320470"
+
+	resultadoCadena := utilidades.FormatearSliceACadena(
+		multiplicacion_numeros_grandes.MultiplicacionAmericanaRecursiva(n1, n2, resultado, len(n2)-1, len(n1)-1, len(resultado)-1))
+
+	if resultadoCadena != esperado {
+		t.Error("La multiplicación americana iterativa ha fallado")
+	}
+}
+
 func TestMultiplicacionAmericanaIterativaEstructuras(t *testing.T) {
 	n1 := utilidades.FormatearCadenaALista("419236001010095628945783")
 
