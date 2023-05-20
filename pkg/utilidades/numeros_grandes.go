@@ -29,7 +29,7 @@ func FormatearSliceACadena(n []int) string {
 
 	var resultado = ""
 
-	n = removerCerosSlice(n)
+	n = RemoverCerosSlice(n)
 
 	for _, valor := range n {
 
@@ -43,7 +43,7 @@ func FormatearSliceACadena(n []int) string {
 	return resultado
 }
 
-func removerCerosSlice(n []int) []int {
+func RemoverCerosSlice(n []int) []int {
 
 	tope := 0
 
@@ -57,7 +57,7 @@ func removerCerosSlice(n []int) []int {
 	return n[tope:]
 }
 
-func removerCerosLista(l *modelos.ListaSimple) *modelos.ListaSimple {
+func RemoverCerosLista(l *modelos.ListaSimple) *modelos.ListaSimple {
 
 	tope := 0
 
@@ -96,7 +96,7 @@ func FormatearListaACadena(l *modelos.ListaSimple) string {
 
 	var resultado = ""
 
-	l = removerCerosLista(l)
+	l = RemoverCerosLista(l)
 
 	for i := 0; i < l.GetCantidadNodos(); i++ {
 
