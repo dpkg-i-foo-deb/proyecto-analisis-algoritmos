@@ -20,7 +20,7 @@ func TestMultiplicacionRusaIterativa(t *testing.T) {
 		MultiplicacionRusaIterativa(n1, n2, resultado))
 
 	if resultadoCadena != esperado {
-		t.Error("La multiplicación Rusa iterativa ha fallado")
+		t.Error("La multiplicación rusa iterativa ha fallado")
 	}
 
 }
@@ -40,7 +40,7 @@ func TestMultiplicacionRusaRecursiva(t *testing.T) {
 	resultadoCadena := utilidades.FormatearSliceACadena(resultado)
 
 	if resultadoCadena != esperado {
-		t.Error("La multiplicación inglesa recursiva ha fallado")
+		t.Error("La multiplicación rusa recursiva ha fallado")
 	}
 
 }

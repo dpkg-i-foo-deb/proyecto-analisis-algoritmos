@@ -40,7 +40,7 @@ func TestMultiplicacionHinduRecursiva(t *testing.T) {
 	resultadoCadena := utilidades.FormatearSliceACadena(resultado)
 
 	if resultadoCadena != esperado {
-		t.Error("La multiplicación inglesa recursiva ha fallado")
+		t.Error("La multiplicación hindu recursiva ha fallado")
 	}
 
 }
