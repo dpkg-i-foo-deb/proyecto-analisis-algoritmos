@@ -36,18 +36,25 @@ Entrada: Dos números enteros positivos
 Salida: El producto de los dos números
 MultiplicacionEgipciaRecursiva es la función que implementa el algoritmo de multiplicación egipcia recursiva
 */
+
 func MultiplicacionEgipciaRecursiva(n1, n2 []int, resultado []int) []int {
-	// a := arrayToInt(n1)
-	// b := arrayToInt(n2)
-	// result := 0
-	// if b == 0 {
-	//     return intToSlice(result)
-	// }
+	a := arrayToInt(n1)
+	b := arrayToInt(n2)
+	result := 0
+	return intToSlice(multiplicarRecursivamente(a, b, result))
+}
 
-	// if b%2 != 0 {
-	//     return a + MultiplicacionEgipciaRecursiva(a<<1, b>>1)
-	// }
+func multiplicarRecursivamente(a int, b int, result int) int {
+	if b == 0 {
+		return result
+	}
 
-	// return MultiplicacionEgipciaRecursiva(a<<1, b>>1)
-	return nil
+	if b%2 != 0 {
+		result += a
+	}
+
+	a = a << 1
+	b = b >> 1
+
+	return multiplicarRecursivamente(a, b, result)
 }

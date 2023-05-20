@@ -20,7 +20,7 @@ func TestMultiplicacionHinduIterativa(t *testing.T) {
 		MultiplicacionHinduIterativa(n1, n2, resultado))
 
 	if resultadoCadena != esperado {
-		t.Error("La multiplicación Hindu iterativa ha fallado")
+		t.Error("La multiplicación hindu iterativa ha fallado")
 	}
 
 }
