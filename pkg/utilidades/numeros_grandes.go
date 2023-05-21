@@ -126,6 +126,9 @@ func IgualarLongitud(num1, num2 []int, n int) ([]int, []int) {
 }
 
 func SumarArreglos(num1, num2 []int) []int {
+	long := Max(len(num1), len(num2))
+	num1, num2 = IgualarLongitud(num1, num2, long)
+
 	res := make([]int, 0)
 
 	for i := range num1 {
@@ -143,6 +146,9 @@ func SumarArreglos(num1, num2 []int) []int {
 }
 
 func RestarArreglos(num1 []int, num2 []int) []int {
+	long := Max(len(num1), len(num2))
+	num1, num2 = IgualarLongitud(num1, num2, long)
+
 	res := make([]int, 0)
 
 	carry := 0
