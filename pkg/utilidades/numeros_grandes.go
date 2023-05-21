@@ -124,7 +124,7 @@ func RemoverCerosSlice(n []int) []int {
 
 	return n[tope:]
 }
-//generado con IA
+//generado con AI 
 // intToSlice toma un número entero y lo convierte en un slice de dígitos.
 func IntToSlice(num int) []int {
 	var digitos []int
