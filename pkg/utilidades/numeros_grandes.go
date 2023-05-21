@@ -1,11 +1,42 @@
 package utilidades
 
 import (
+	"encoding/json"
 	"fmt"
 	"generador/pkg/modelos"
 	"log"
+	"math/rand"
+	"os"
 	"strconv"
 )
+
+func generarNumeroGrande(cantidad int) modelos.NumeroGrande {
+	datos := make([]int, cantidad)
+
+	for i := 0; i < cantidad; i++ {
+		datos[i] = rand.Intn(10)
+	}
+
+	numero := modelos.NumeroGrande{Datos: datos}
+
+	return numero
+}
+
+func escribirNumero(num modelos.NumeroGrande, archivo *os.File) {
+	encoder := json.NewEncoder(archivo)
+
+	encoder.Encode(num)
+}
+
+func leerNumero(archivo *os.File) modelos.NumeroGrande {
+	decoder := json.NewDecoder(archivo)
+
+	numero := modelos.NumeroGrande{}
+
+	decoder.Decode(&numero)
+
+	return numero
+}
 
 func FormatearCadenaASlice(n string) []int {
 
@@ -29,7 +60,7 @@ func FormatearSliceACadena(n []int) string {
 
 	var resultado = ""
 
-	n = removerCerosSlice(n)
+	n = RemoverCerosSlice(n)
 
 	for _, valor := range n {
 
@@ -43,7 +74,7 @@ func FormatearSliceACadena(n []int) string {
 	return resultado
 }
 
-func removerCerosSlice(n []int) []int {
+func RemoverCerosSlice(n []int) []int {
 
 	tope := 0
 
@@ -57,7 +88,7 @@ func removerCerosSlice(n []int) []int {
 	return n[tope:]
 }
 
-func removerCerosLista(l *modelos.ListaSimple) *modelos.ListaSimple {
+func RemoverCerosLista(l *modelos.ListaSimple) *modelos.ListaSimple {
 
 	tope := 0
 
@@ -96,7 +127,7 @@ func FormatearListaACadena(l *modelos.ListaSimple) string {
 
 	var resultado = ""
 
-	l = removerCerosLista(l)
+	l = RemoverCerosLista(l)
 
 	for i := 0; i < l.GetCantidadNodos(); i++ {
 
