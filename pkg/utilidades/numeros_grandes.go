@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"generador/pkg/modelos"
 	"log"
-	"math"
 	"strconv"
 )
 
@@ -130,10 +129,10 @@ func SumarArreglos(num1, num2 []int) []int {
 	res := make([]int, 0)
 
 	for i := range num1 {
-		res = append(res, num1[i] + num2[i])
+		res = append(res, num1[i]+num2[i])
 	}
 
-	for i := len(res)-1; i > 0; i-- {
+	for i := len(res) - 1; i > 0; i-- {
 		if res[i] > 9 {
 			res[i-1] += res[i] / 10
 			res[i] %= 10
