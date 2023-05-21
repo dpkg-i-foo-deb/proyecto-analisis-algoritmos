@@ -17,10 +17,10 @@ func TestMultiplicacionDivideVenceras1(t *testing.T) {
 	esperado := "228758968191132222725707559027530174033598320470"
 
 	resultadoCadena := utilidades.FormatearSliceACadena(multiplicacion_numeros_grandes.
-		MultiplicacionAmericanaIterativa(n1, n2, resultado))
+		MultiplicacionDivideVenceras1(n1, n2, resultado))
 
 	if resultadoCadena != esperado {
-		t.Error("La multiplicación americana iterativa ha fallado")
+		t.Error("La multiplicación divide y vencerás 1 ha fallado")
 	}
 
 }
