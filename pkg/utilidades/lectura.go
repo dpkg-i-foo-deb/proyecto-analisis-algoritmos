@@ -14,7 +14,7 @@ func LeerMatrices() ([]modelos.Matriz, []modelos.Matriz) {
 	var matricesA []modelos.Matriz
 	var matricesB []modelos.Matriz
 
-	for i := 1; i <= CASOS_PRUEBA; i++ {
+	for i := 1; i <= CASOS_PRUEBA_MATRICES; i++ {
 		cantidad := int64(math.Pow(2.0, float64(i)))
 
 		archivo, err := os.Open(("matriz_" + strconv.FormatInt(cantidad, 10) + "x" + strconv.FormatInt(cantidad, 10) + "_a" + ".json"))
@@ -24,7 +24,7 @@ func LeerMatrices() ([]modelos.Matriz, []modelos.Matriz) {
 		archivosA = append(archivosA, *archivo)
 	}
 
-	for i := 1; i <= CASOS_PRUEBA; i++ {
+	for i := 1; i <= CASOS_PRUEBA_MATRICES; i++ {
 		cantidad := int64(math.Pow(2.0, float64(i)))
 
 		archivo, err := os.Open(("matriz_" + strconv.FormatInt(cantidad, 10) + "x" + strconv.FormatInt(cantidad, 10) + "_b" + ".json"))

@@ -1,11 +1,32 @@
 package utilidades
 
 import (
+	"encoding/json"
 	"fmt"
 	"generador/pkg/modelos"
 	"log"
+	"math/rand"
+	"os"
 	"strconv"
 )
+
+func generarNumeroGrande(cantidad int) modelos.NumeroGrande {
+	datos := make([]int, cantidad)
+
+	for i := 0; i < cantidad; i++ {
+		datos[i] = rand.Intn(10)
+	}
+
+	numero := modelos.NumeroGrande{Datos: datos}
+
+	return numero
+}
+
+func escribirNumero(num modelos.NumeroGrande, archivo *os.File) {
+	encoder := json.NewEncoder(archivo)
+
+	encoder.Encode(num)
+}
 
 func FormatearCadenaASlice(n string) []int {
 
