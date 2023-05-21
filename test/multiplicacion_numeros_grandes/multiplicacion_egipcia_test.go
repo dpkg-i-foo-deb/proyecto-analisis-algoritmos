@@ -8,13 +8,13 @@ import (
 
 func TestMultiplicacionEgipciaIterativa(t *testing.T) {
 
-	n1 := utilidades.FormatearCadenaASlice("12908")
+	n1 := utilidades.FormatearCadenaASlice("419236001010095628945783")
 
-	n2 := utilidades.FormatearCadenaASlice("34798")
+	n2 := utilidades.FormatearCadenaASlice("545656784340959960400090")
 
 	resultado := make([]int, len(n1)+len(n2))
 
-	esperado := "449172584"
+	esperado := "228758968191132222725707559027530174033598320470"
 
 	resultadoCadena := utilidades.FormatearSliceACadena(multiplicacion_numeros_grandes.
 		MultiplicacionEgipciaIterativa(n1, n2, resultado))
@@ -27,13 +27,13 @@ func TestMultiplicacionEgipciaIterativa(t *testing.T) {
 
 func TestMultiplicacionEgipciaRecursiva(t *testing.T) {
 
-	n1 := utilidades.FormatearCadenaASlice("12908")
+	n1 := utilidades.FormatearCadenaASlice("419236001010095628945783")
 
-	n2 := utilidades.FormatearCadenaASlice("34798")
+	n2 := utilidades.FormatearCadenaASlice("545656784340959960400090")
 
 	resultado := make([]int, len(n1)+len(n2))
 
-	esperado := "449172584"
+	esperado := "228758968191132222725707559027530174033598320470"
 
 	resultado = multiplicacion_numeros_grandes.MultiplicacionEgipciaRecursiva(n1, n2, resultado)
 

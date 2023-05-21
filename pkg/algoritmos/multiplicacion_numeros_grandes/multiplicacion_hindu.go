@@ -38,11 +38,6 @@ func MultiplicacionHinduIterativa(n1, n2 []int, resultado []int) []int {
 		}
 	}
 
-	// Eliminamos cualquier cero que pueda haber al principio del slice resultado
-	if resultado[0] == 0 {
-		resultado = resultado[1:]
-	}
-
 	return resultado
 }
 
@@ -75,10 +70,6 @@ func LlevarAcarreos(resultado []int, i int) []int {
 			resultado[i] %= 10
 		}
 		return LlevarAcarreos(resultado, i-1)
-	}
-
-	if resultado[0] == 0 {
-		resultado = resultado[1:]
 	}
 
 	return resultado

@@ -1,5 +1,9 @@
 package multiplicacion_numeros_grandes
 
+import (
+	"generador/pkg/utilidades"
+)
+
 /*
  * Integrantes:
  *  Stiven Herrera Sierra.
@@ -19,19 +23,15 @@ package multiplicacion_numeros_grandes
  */
 
 func MultiplicacionRusaIterativa(n1, n2 []int, resultados []int) []int {
-	// Convertir los slices de dígitos en números enteros.
-	a := arrayToInt(n1)
-	b := arrayToInt(n2)
-	resultado := 0
-	for a >= 1 {
-		if a%2 != 0 {
-			resultado += b
+	resultado := make([]int, len(n1)+len(n2))
+	for utilidades.SliceGreaterOrEqualOne(n1) {
+		if utilidades.SliceIsOdd(n1) {
+			Sumar(resultado, n2)
 		}
-		a /= 2
-		b *= 2
+		n1 = DividirEstatico(n1, 2)
+		n2 = MultiplicarPorDos(n2)
 	}
-	// Convertir el resultado de nuevo en un slice de dígitos y devolverlo.
-	return intToSlice(resultado)
+	return resultado
 }
 
 /*
@@ -44,53 +44,49 @@ func MultiplicacionRusaIterativa(n1, n2 []int, resultados []int) []int {
  * 		MultiplicacionRusaRecurs toma dos números enteros representados como slices de dígitos y devuelve su producto como un slice de dígitos.
  */
 
-func MultiplicacionRusaRecursiva(n1, n2 []int, resultados []int) []int {
-	// Convertir los slices de dígitos en números enteros.
-	a := arrayToInt(n1)
-	b := arrayToInt(n2)
-	// Calcular el resultado utilizando el algoritmo de multiplicación rusa recursiva.
-	resultado := multiplicacionRusaRecursivaHelper(a, b)
-	// Convertir el resultado de nuevo en un slice de dígitos y devolverlo.
-	return intToSlice(resultado)
+func MultiplicacionRusaRecursiva(n1, n2, resultado []int) []int {
+	if !utilidades.SliceGreaterOrEqualOne(n1) {
+		return resultado
+	}
+	if utilidades.SliceIsOdd(n1) {
+		Sumar(resultado, n2)
+	}
+	n1 = DividirEstatico(n1, 2)
+	n2 = MultiplicarPorDos(n2)
+	return MultiplicacionRusaRecursiva(n1, n2, resultado)
 }
 
-// multiplicacionRusaRecursivaHelper es una función auxiliar que implementa el algoritmo de multiplicación rusa recursiva.
-func multiplicacionRusaRecursivaHelper(a, b int) int {
-	if a < 1 {
-		return 0
+func MultiplicarPorDos(n2 []int) []int {
+	carry := 0
+	for i := len(n2) - 1; i >= 0; i-- {
+		n2[i] = n2[i]*2 + carry
+		carry = n2[i] / 10
+		n2[i] %= 10
 	}
-	// Calcular el resultado parcial para esta iteración.
-	partialResult := 0
-	if a%2 != 0 {
-		partialResult = b
+	if carry > 0 {
+		n2 = append([]int{carry}, n2...)
 	}
-	// Llamada recurs con a dividido por dos y b multiplicado por dos.
-	return partialResult + multiplicacionRusaRecursivaHelper(a/2, b*2)
+	return n2
 }
 
-// arrayToInt toma un slice de dígitos y lo convierte en un número entero.
-func arrayToInt(arr []int) int {
-	num := 0
-	// Iterar a través de los dígitos del slice y multiplicar por 10 y sumar el valor de cada dígito.
-	for _, v := range arr {
-		num = num*10 + v
-	}
-	// Devolver el número entero resultante.
-	return num
-}
+func Sumar(arr1, arr2 []int) {
+	for i, j := len(arr1), len(arr2); i > 0 || j > 0; {
+		if i > 0 && j > 0 {
+			arr1[i-1] += arr2[j-1]
+		} else if j > 0 {
+			arr1 = append([]int{arr2[j-1]}, arr1...)
+		}
 
-// intToSlice toma un número entero y lo convierte en un slice de dígitos.
-func intToSlice(num int) []int {
-	var digitos []int
-	// Dividir el número por 10 y tomar el resto en cada iteración para obtener los dígitos del número.
-	for num > 0 {
-		digitos = append(digitos, num%10)
-		num /= 10
+		if i > 0 && arr1[i-1] > 9 {
+			if i > 1 {
+				arr1[i-2] += arr1[i-1] / 10
+			} else {
+				arr1 = append([]int{arr1[i-1] / 10}, arr1...)
+			}
+			arr1[i-1] %= 10
+		}
+
+		i--
+		j--
 	}
-	// Invertir el orden de los dígitos en el slice para que estén en el orden correcto.
-	for i, j := 0, len(digitos)-1; i < j; i, j = i+1, j-1 {
-		digitos[i], digitos[j] = digitos[j], digitos[i]
-	}
-	// Devolver el slice de dígitos resultante.
-	return digitos
 }

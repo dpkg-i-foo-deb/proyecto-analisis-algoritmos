@@ -110,3 +110,61 @@ func FormatearListaACadena(l *modelos.ListaSimple) string {
 	return resultado
 
 }
+
+func RemoverCerosSlice(n []int) []int {
+
+	tope := 0
+
+	for i := 0; i < len(n); i++ {
+		if n[i] != 0 {
+			tope = i
+			i = len(n) - 1
+		}
+	}
+
+	return n[tope:]
+}
+//generado con IA
+// intToSlice toma un número entero y lo convierte en un slice de dígitos.
+func IntToSlice(num int) []int {
+	var digitos []int
+	// Dividir el número por 10 y tomar el resto en cada iteración para obtener los dígitos del número.
+	for num > 0 {
+		digitos = append(digitos, num%10)
+		num /= 10
+	}
+	// Invertir el orden de los dígitos en el slice para que estén en el orden correcto.
+	for i, j := 0, len(digitos)-1; i < j; i, j = i+1, j-1 {
+		digitos[i], digitos[j] = digitos[j], digitos[i]
+	}
+	// Devolver el slice de dígitos resultante.
+	return digitos
+}
+
+func SliceIsOdd(n []int) bool {
+	// Si el slice está vacío, el número representado es 0
+	if len(n) == 0 {
+		return false
+	}
+	// Si el último dígito del número es impar, el número es impar
+	if n[len(n)-1]%2 != 0 {
+		return true
+	}
+	// Si el último dígito del número es par, el número es par
+	return false
+}
+
+func SliceGreaterOrEqualOne(n []int) bool {
+	// Si el slice está vacío, el número representado es 0
+	if len(n) == 0 {
+		return false
+	}
+	// Si el slice tiene al menos un elemento distinto de 0, el número representado es mayor o igual a 1
+	for _, digit := range n {
+		if digit != 0 {
+			return true
+		}
+	}
+	// Si todos los elementos del slice son 0, el número representado es 0
+	return false
+}

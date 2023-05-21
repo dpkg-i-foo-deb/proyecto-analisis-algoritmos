@@ -1,5 +1,7 @@
 package multiplicacion_numeros_grandes
 
+import "generador/pkg/utilidades"
+
 /*
  * Integrantes:
  *  Stiven Herrera Sierra.
@@ -14,20 +16,17 @@ package multiplicacion_numeros_grandes
 	MultiplicacionEgipciaIterativa es la función que implementa el algoritmo de multiplicación egipcia recursiva
 */
 func MultiplicacionEgipciaIterativa(n1, n2 []int, resultado []int) []int {
-	// Convertir los slices de dígitos en números enteros.
-	a := arrayToInt(n1)
-	b := arrayToInt(n2)
-	result := 0
 
-	for b > 0 {
-		if b%2 != 0 {
-			result += a
+	for utilidades.SliceGreaterOrEqualOne(n2) {
+		if utilidades.SliceIsOdd(n2) {
+			Sumar(resultado, n1)
 		}
-		a = a << 1
-		b = b >> 1
+
+		n1 = MultiplicarPorDos(n1)
+		n2 = DividirEstatico(n2, 2)
 	}
 	// Convertir el resultado de nuevo en un slice de dígitos y devolverlo.
-	return intToSlice(result)
+	return resultado
 }
 
 /*
@@ -37,24 +36,14 @@ Salida: El producto de los dos números
 MultiplicacionEgipciaRecursiva es la función que implementa el algoritmo de multiplicación egipcia recursiva
 */
 
-func MultiplicacionEgipciaRecursiva(n1, n2 []int, resultado []int) []int {
-	a := arrayToInt(n1)
-	b := arrayToInt(n2)
-	result := 0
-	return intToSlice(multiplicarRecursivamente(a, b, result))
-}
-
-func multiplicarRecursivamente(a int, b int, result int) int {
-	if b == 0 {
-		return result
+func MultiplicacionEgipciaRecursiva(n1, n2, resultado []int) []int {
+	if !utilidades.SliceGreaterOrEqualOne(n2) {
+		return resultado
 	}
-
-	if b%2 != 0 {
-		result += a
+	if utilidades.SliceIsOdd(n2) {
+		Sumar(resultado, n1)
 	}
-
-	a = a << 1
-	b = b >> 1
-
-	return multiplicarRecursivamente(a, b, result)
+	n1 = MultiplicarPorDos(n1)
+	n2 = DividirEstatico(n2, 2)
+	return MultiplicacionEgipciaRecursiva(n1, n2, resultado)
 }
