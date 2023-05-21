@@ -28,6 +28,16 @@ func escribirNumero(num modelos.NumeroGrande, archivo *os.File) {
 	encoder.Encode(num)
 }
 
+func leerNumero(archivo *os.File) modelos.NumeroGrande {
+	decoder := json.NewDecoder(archivo)
+
+	numero := modelos.NumeroGrande{}
+
+	decoder.Decode(&numero)
+
+	return numero
+}
+
 func FormatearCadenaASlice(n string) []int {
 
 	resultado := make([]int, 0)

@@ -45,6 +45,43 @@ func LeerMatrices() ([]modelos.Matriz, []modelos.Matriz) {
 	return matricesA, matricesB
 }
 
+func LeerNumeros() ([]modelos.NumeroGrande, []modelos.NumeroGrande) {
+	var archivosA []os.File
+	var archivosB []os.File
+	var numerosA []modelos.NumeroGrande
+	var numerosB []modelos.NumeroGrande
+
+	n := 20
+
+	for i := 0; i < CASOS_PRUEBA_NUMEROS; i++ {
+		cantidad := int((math.Pow(2.0, float64(n))))
+
+		archivo, err := os.Open("numero_" + strconv.FormatInt(10, cantidad) + "_a" + ".json")
+
+		VerificarError(err)
+
+		archivosA = append(archivosA, *archivo)
+
+		archivo2, err := os.Open("numero_" + strconv.FormatInt(10, cantidad) + "_b" + ".json")
+
+		VerificarError(err)
+
+		archivosB = append(archivosB, *archivo2)
+
+		n++
+	}
+
+	for i := range archivosA {
+		numerosA = append(numerosA, leerNumero(&archivosA[i]))
+	}
+
+	for i := range archivosB {
+		numerosB = append(numerosB, leerNumero(&archivosB[i]))
+	}
+
+	return numerosA, numerosB
+}
+
 func LeerResultados() []modelos.ResultadoAlgoritmoMultiplicacion {
 	archivo, err := os.Open("resultados.json")
 
