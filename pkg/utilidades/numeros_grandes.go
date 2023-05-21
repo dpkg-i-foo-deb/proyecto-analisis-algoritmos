@@ -142,20 +142,7 @@ func FormatearListaACadena(l *modelos.ListaSimple) string {
 
 }
 
-func RemoverCerosSlice(n []int) []int {
-
-	tope := 0
-
-	for i := 0; i < len(n); i++ {
-		if n[i] != 0 {
-			tope = i
-			i = len(n) - 1
-		}
-	}
-
-	return n[tope:]
-}
-//generado con AI 
+// generado con AI
 // intToSlice toma un número entero y lo convierte en un slice de dígitos.
 func IntToSlice(num int) []int {
 	var digitos []int
