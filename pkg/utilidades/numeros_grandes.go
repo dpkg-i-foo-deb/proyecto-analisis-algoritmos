@@ -143,25 +143,28 @@ func SumarArreglos(num1, num2 []int) []int {
 	return res
 }
 
-func RestarArreglos(num1, num2 []int) []int {
+func RestarArreglos(num1 []int, num2 []int) []int {
 	res := make([]int, 0)
 
+	carry := 0
 	for i := len(num1) - 1; i >= 0; i-- {
-		if num1[i] < num2[i] {
-			for j := i - 1; j >= 0; j-- {
-				if num1[j] > 0 {
-					num1[j] -= 1
-					for k := j + 1; k > i; k++ {
-						num1[k] += 9
-					}
-					num1[i] += 10
-					j = -1
-				}
-			}
+		resta := num1[i] - num2[i] - carry
+
+		if resta < 0 {
+			carry = 1
+			resta += 10
+		} else {
+			carry = 0
 		}
 
-		res = append([]int{num1[i] - num2[i]}, res...)
+		res = append([]int{resta}, res...)
 	}
 
-	return res
+	// Eliminar los ceros a la izquierda del resultado, si los hay
+	inicioCeros := 0
+	for inicioCeros < len(num1)-1 && res[inicioCeros] == 0 {
+		inicioCeros++
+	}
+
+	return res[inicioCeros:]
 }
