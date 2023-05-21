@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"generador/pkg/modelos"
 	"log"
+	"math"
 	"strconv"
 )
 
@@ -109,4 +110,58 @@ func FormatearListaACadena(l *modelos.ListaSimple) string {
 
 	return resultado
 
+}
+
+func IgualarLongitud(num1, num2 []int, n int) ([]int, []int) {
+	if n == len(num1) && n == len(num2) {
+		return num1, num2
+	}
+
+	long1 := n - len(num1)
+	long2 := n - len(num2)
+
+	n1 := append(make([]int, long1), num1...)
+	n2 := append(make([]int, long2), num2...)
+
+	return n1, n2
+}
+
+func SumarArreglos(num1, num2 []int) []int {
+	res := make([]int, 0)
+
+	for i := range num1 {
+		res = append(res, num1[i] + num2[i])
+	}
+
+	for i := len(res)-1; i > 0; i-- {
+		if res[i] > 9 {
+			res[i-1] += res[i] / 10
+			res[i] %= 10
+		}
+	}
+
+	return res
+}
+
+func RestarArreglos(num1, num2 []int) []int {
+	res := make([]int, 0)
+
+	for i := len(num1) - 1; i >= 0; i-- {
+		if num1[i] < num2[i] {
+			for j := i - 1; j >= 0; j-- {
+				if num1[j] > 0 {
+					num1[j] -= 1
+					for k := j + 1; k > i; k++ {
+						num1[k] += 9
+					}
+					num1[i] += 10
+					j = -1
+				}
+			}
+		}
+
+		res = append([]int{num1[i] - num2[i]}, res...)
+	}
+
+	return res
 }
