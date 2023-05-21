@@ -14,7 +14,7 @@ import (
  */
 
 /*
- * Multiplicación de Karatsuba iterativa usando estructuras estáticas.
+ * Multiplicación de Karatsuba recursiva usando estructuras estáticas.
  *
  * Parámetros:
  *  num1: Arreglo de enteros con los dígitos del multiplicando.
