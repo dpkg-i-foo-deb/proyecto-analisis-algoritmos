@@ -18,7 +18,7 @@ func americanaRecursivoEstatico(a, b modelos.NumeroGrande) {
 
 	defer tiempo.CronometrarMultiplicacionGrandes(modelos.AMERICANA_RECURSIVA_ESTATICO, len(a.Datos))()
 
-	multiplicacion_numeros_grandes.MultiplicacionAmericanaRecursiva(a.Datos, b.Datos, r, len(b.Datos)-1, len(a.Datos)-1, len(r))
+	multiplicacion_numeros_grandes.MultiplicacionAmericanaRecursiva(a.Datos, b.Datos, r, len(b.Datos)-1, len(a.Datos)-1, len(r)-1)
 }
 
 func BmarkAmericanaRecursivoDinamico(numerosA, numerosB []modelos.NumeroGrande) {

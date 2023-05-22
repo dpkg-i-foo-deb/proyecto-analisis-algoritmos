@@ -45,7 +45,7 @@ func GenerarMatrices() {
 func GenerarNumeros() {
 	rand.Seed(time.Now().UnixNano())
 
-	n := 8
+	n := 3
 
 	for i := 0; i < CASOS_PRUEBA_NUMEROS; i++ {
 		cantidad := int((math.Pow(2.0, float64(n))))
@@ -61,7 +61,7 @@ func GenerarNumeros() {
 		n++
 	}
 
-	n = 8
+	n = 3
 
 	for i := 0; i < CASOS_PRUEBA_NUMEROS; i++ {
 		cantidad := int((math.Pow(2.0, float64(n))))
