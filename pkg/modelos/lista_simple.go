@@ -27,6 +27,16 @@ func Lista(cantidadNodos int) *ListaSimple {
 	return l
 }
 
+func ListaDesdeSlice(datos []int) *ListaSimple {
+	l := &ListaSimple{Cabecera: nil, Cantidad: 0, Ultimo: nil}
+
+	for _, valor := range datos {
+		l.InsertarFinal(valor)
+	}
+
+	return l
+}
+
 func (l *ListaSimple) EstaVacia() bool {
 	return l.Cantidad == 0
 }

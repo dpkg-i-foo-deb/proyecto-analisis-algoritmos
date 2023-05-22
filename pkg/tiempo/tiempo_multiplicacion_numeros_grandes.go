@@ -8,10 +8,11 @@ import (
 	"time"
 )
 
-func CronometrarMultiplicacionMatrices(algoritmo modelos.AlgoritmoMultiplicacionMatrices, n int) func() time.Duration {
+func CronometrarMultiplicacionGrandes(algoritmo modelos.AlgoritmoMultiplicacionNumerosGrandes, n int) func() time.Duration {
 	inicio := time.Now()
+
 	return func() time.Duration {
-		resultado := modelos.ResultadoMultiplicacionMatrices{
+		resultado := modelos.ResultadoMultiplicacionNumerosGrandes{
 			Titulo:         string(algoritmo) + " " + strconv.FormatInt(int64(n), 10) + " Elementos",
 			Algoritmo:      algoritmo,
 			N:              n,
@@ -19,9 +20,9 @@ func CronometrarMultiplicacionMatrices(algoritmo modelos.AlgoritmoMultiplicacion
 			DuracionHumano: time.Since(inicio),
 		}
 
-		resultados.ResultadosMultiplicacionMatrices = append(resultados.ResultadosMultiplicacionMatrices, resultado)
+		resultados.ResultadosMultiplicacionNumerosGrandes = append(resultados.ResultadosMultiplicacionNumerosGrandes, resultado)
 
-		fmt.Printf("%s %d x %d Tiempo %v\n", algoritmo, n, n, time.Since(inicio))
+		fmt.Printf("%s %d Tiempo %v\n", algoritmo, n, time.Since(inicio))
 
 		return time.Since(inicio)
 	}

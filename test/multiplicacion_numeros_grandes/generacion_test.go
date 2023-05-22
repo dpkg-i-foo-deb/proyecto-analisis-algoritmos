@@ -27,7 +27,7 @@ func TestGeneracionNumeros(t *testing.T) {
 }
 
 func eliminarNumeros() {
-	n := 18
+	n := 8
 
 	for i := 0; i < CASOS_PRUEBA_NUMEROS; i++ {
 		cantidad := int((math.Pow(2.0, float64(n))))
