@@ -51,7 +51,7 @@ func LeerNumeros() ([]modelos.NumeroGrande, []modelos.NumeroGrande) {
 	var numerosA []modelos.NumeroGrande
 	var numerosB []modelos.NumeroGrande
 
-	n := 8
+	n := 3
 
 	for i := 0; i < CASOS_PRUEBA_NUMEROS; i++ {
 		cantidad := int((math.Pow(2.0, float64(n))))
