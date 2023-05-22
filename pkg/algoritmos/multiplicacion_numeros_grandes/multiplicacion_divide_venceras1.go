@@ -59,21 +59,29 @@ func MultiplicacionDivideVenceras1(num1 []int, num2 []int, resultado []int) []in
 
 	//Auxiliares
 
-	// Se multiplica la mitad izquierda del multiplicando por la mitad derecha del multiplicador
+	// Se multiplica la mitad izquierda del multiplicando por la mitad izquierda del multiplicador
 
-	res1 := MultiplicacionKaratsubaRecursiva(num1Izda, num2Izda)
+	res1 := make([]int, len(num1Izda)+len(num2Izda))
+
+	res1 = MultiplicacionInglesaIterativa(num1Izda, num2Izda, res1)
 
 	//Se multiplica la mitad izquierda del multiplicando por la mitad derecha del multiplicador
 
-	res2 := MultiplicacionKaratsubaRecursiva(num1Izda, num2Dcha)
+	res2 := make([]int, len(num1Izda)+len(num2Dcha))
+
+	res2 = MultiplicacionInglesaIterativa(num1Izda, num2Dcha, res2)
 
 	//Se multiplica la mitad derecha del multiplicando por la mitad izquierda del multiplicador
 
-	res3 := MultiplicacionKaratsubaRecursiva(num1Dcha, num2Izda)
+	res3 := make([]int, len(num1Dcha)+len(num2Izda))
+
+	res3 = MultiplicacionInglesaIterativa(num1Dcha, num2Izda, res3)
 
 	//Se multiplica la mitad derecha del multiplicando por la mitad derecha del multiplicador
 
-	res4 := MultiplicacionKaratsubaRecursiva(num1Dcha, num2Dcha)
+	res4 := make([]int, len(num1Dcha)+len(num2Dcha))
+
+	res4 = MultiplicacionInglesaIterativa(num1Dcha, num2Dcha, res4)
 
 	res1 = utilidades.RemoverCerosSlice(res1)
 	res2 = utilidades.RemoverCerosSlice(res2)

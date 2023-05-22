@@ -157,20 +157,41 @@ func IgualarLongitud(num1, num2 []int, n int) ([]int, []int) {
 }
 
 func SumarArreglos(num1, num2 []int) []int {
-	long := Max(len(num1), len(num2))
-	num1, num2 = IgualarLongitud(num1, num2, long)
+	len1 := len(num1)
+	len2 := len(num2)
 
-	res := make([]int, 0)
-
-	for i := range num1 {
-		res = append(res, num1[i]+num2[i])
+	// Determine the longer length
+	long := len1
+	if len2 > long {
+		long = len2
 	}
 
-	for i := len(res) - 1; i > 0; i-- {
-		if res[i] > 9 {
-			res[i-1] += res[i] / 10
-			res[i] %= 10
+	// Create the result array with the initial capacity
+	res := make([]int, long+1) // Increase capacity by 1 to accommodate carry
+
+	carry := 0
+	for i := 0; i < long; i++ {
+		// Get the digits from num1 and num2, or 0 if index is out of range
+		digit1 := 0
+		if i < len1 {
+			digit1 = num1[len1-1-i]
 		}
+
+		digit2 := 0
+		if i < len2 {
+			digit2 = num2[len2-1-i]
+		}
+
+		sum := digit1 + digit2 + carry
+		res[long-i] = sum % 10
+		carry = sum / 10
+	}
+
+	res[0] = carry // Store the final carry, if any
+
+	// Trim leading zeros
+	if res[0] == 0 {
+		res = res[1:]
 	}
 
 	return res
@@ -180,10 +201,10 @@ func RestarArreglos(num1 []int, num2 []int) []int {
 	long := Max(len(num1), len(num2))
 	num1, num2 = IgualarLongitud(num1, num2, long)
 
-	res := make([]int, 0)
+	res := make([]int, long)
 
 	carry := 0
-	for i := len(num1) - 1; i >= 0; i-- {
+	for i := long - 1; i >= 0; i-- {
 		resta := num1[i] - num2[i] - carry
 
 		if resta < 0 {
@@ -193,45 +214,25 @@ func RestarArreglos(num1 []int, num2 []int) []int {
 			carry = 0
 		}
 
-		res = append([]int{resta}, res...)
+		res[i] = resta
 	}
 
-	// Eliminar los ceros a la izquierda del resultado, si los hay
-	inicioCeros := 0
-	for inicioCeros < len(num1)-1 && res[inicioCeros] == 0 {
-		inicioCeros++
+	// Trim leading zeros
+	startIndex := 0
+	for startIndex < len(res)-1 && res[startIndex] == 0 {
+		startIndex++
 	}
 
-	return res[inicioCeros:]
+	return res[startIndex:]
 
 }
 
 func SliceIsOdd(n []int) bool {
-	// Si el slice está vacío, el número representado es 0
 	if len(n) == 0 {
 		return false
 	}
-	// Si el último dígito del número es impar, el número es impar
-	if n[len(n)-1]%2 != 0 {
-		return true
-	}
-	// Si el último dígito del número es par, el número es par
-	return false
-}
 
-func SliceGreaterOrEqualOne(n []int) bool {
-	// Si el slice está vacío, el número representado es 0
-	if len(n) == 0 {
-		return false
-	}
-	// Si el slice tiene al menos un elemento distinto de 0, el número representado es mayor o igual a 1
-	for _, digit := range n {
-		if digit != 0 {
-			return true
-		}
-	}
-	// Si todos los elementos del slice son 0, el número representado es 0
-	return false
+	return n[len(n)-1]%2 != 0
 }
 
 func leerResultadoGrandes(file *os.File) []modelos.ResultadoMultiplicacionNumerosGrandes {
