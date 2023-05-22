@@ -17,13 +17,23 @@ import "generador/pkg/utilidades"
 */
 func MultiplicacionEgipciaIterativa(n1, n2 []int, resultado []int) []int {
 
-	for utilidades.SliceGreaterOrEqualOne(n2) {
+	seguir := true
+
+	for seguir {
 		if utilidades.SliceIsOdd(n2) {
-			Sumar(resultado, n1)
+
+			resultado = utilidades.SumarArreglos(resultado, n1)
 		}
 
 		n1 = MultiplicarPorDos(n1)
 		n2 = DividirEstatico(n2, 2)
+
+		if len(n2) == 1 {
+			if n2[0] == 0 {
+				seguir = false
+			}
+		}
+
 	}
 	// Convertir el resultado de nuevo en un slice de dígitos y devolverlo.
 	return resultado
@@ -37,11 +47,15 @@ MultiplicacionEgipciaRecursiva es la función que implementa el algoritmo de mul
 */
 
 func MultiplicacionEgipciaRecursiva(n1, n2, resultado []int) []int {
-	if !utilidades.SliceGreaterOrEqualOne(n2) {
-		return resultado
+	if len(n2) == 1 {
+
+		if n2[0] == 0 {
+			return resultado
+		}
+
 	}
 	if utilidades.SliceIsOdd(n2) {
-		Sumar(resultado, n1)
+		resultado = utilidades.SumarArreglos(resultado, n1)
 	}
 	n1 = MultiplicarPorDos(n1)
 	n2 = DividirEstatico(n2, 2)

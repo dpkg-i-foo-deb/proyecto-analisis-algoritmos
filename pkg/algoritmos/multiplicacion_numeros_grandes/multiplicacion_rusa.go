@@ -22,14 +22,30 @@ import (
  * 		MultiplicacionRusaiterativa toma dos números enteros representados como slices de dígitos y devuelve su producto como un slice de dígitos.
  */
 
-func MultiplicacionRusaIterativa(n1, n2 []int, resultados []int) []int {
-	resultado := make([]int, len(n1)+len(n2))
-	for utilidades.SliceGreaterOrEqualOne(n1) {
+func MultiplicacionRusaIterativa(n1, n2 []int, resultado []int) []int {
+
+	seguir := true
+
+	for seguir {
 		if utilidades.SliceIsOdd(n1) {
-			Sumar(resultado, n2)
+			resultado = utilidades.SumarArreglos(resultado, n2)
 		}
 		n1 = DividirEstatico(n1, 2)
-		n2 = MultiplicarPorDos(n2)
+
+		tmp := make([]int, (len(n2)+1)*2)
+
+		tmp = MultiplicacionAmericanaIterativa(n2, []int{2}, tmp)
+
+		tmp = utilidades.RemoverCerosSlice(tmp)
+
+		//n2 = MultiplicarPorDos(n2)
+		n2 = tmp
+
+		if len(n1) == 1 {
+			if n1[0] == 0 {
+				seguir = false
+			}
+		}
 	}
 	return resultado
 }
@@ -45,11 +61,16 @@ func MultiplicacionRusaIterativa(n1, n2 []int, resultados []int) []int {
  */
 
 func MultiplicacionRusaRecursiva(n1, n2, resultado []int) []int {
-	if !utilidades.SliceGreaterOrEqualOne(n1) {
-		return resultado
+
+	if len(n1) == 1 {
+
+		if n1[0] == 0 {
+			return resultado
+		}
+
 	}
 	if utilidades.SliceIsOdd(n1) {
-		Sumar(resultado, n2)
+		resultado = utilidades.SumarArreglos(resultado, n2)
 	}
 	n1 = DividirEstatico(n1, 2)
 	n2 = MultiplicarPorDos(n2)
