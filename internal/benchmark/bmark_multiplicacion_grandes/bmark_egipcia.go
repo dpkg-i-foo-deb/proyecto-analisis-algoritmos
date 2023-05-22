@@ -22,7 +22,9 @@ func multiplicarEgipciaIterativo(a, b modelos.NumeroGrande) {
 }
 
 func BmarkEgipciaRecursivo(numerosA, numerosB []modelos.NumeroGrande) {
-
+	for i := range numerosA {
+		multiplicarEgipciaRecursivo(numerosA[i], numerosB[i])
+	}
 }
 
 func multiplicarEgipciaRecursivo(a, b modelos.NumeroGrande) {
