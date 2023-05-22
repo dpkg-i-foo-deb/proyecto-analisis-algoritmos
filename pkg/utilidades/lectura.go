@@ -82,7 +82,7 @@ func LeerNumeros() ([]modelos.NumeroGrande, []modelos.NumeroGrande) {
 	return numerosA, numerosB
 }
 
-func LeerResultados() []modelos.ResultadoMultiplicacionNumerosGrandes {
+func LeerResultados() []modelos.ResultadoMultiplicacionMatrices {
 	archivo, err := os.Open("resultados.json")
 
 	VerificarError(err)

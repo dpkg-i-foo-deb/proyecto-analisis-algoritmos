@@ -59,7 +59,7 @@ var (
 	}
 )
 
-func GenerarGraficasPromedioMultiplicacionMatrices(resultados []modelos.ResultadoMultiplicacionNumerosGrandes) {
+func GenerarGraficasPromedioMultiplicacionMatrices(resultados []modelos.ResultadoMultiplicacionMatrices) {
 
 	verificarDirectorioGraficas()
 
@@ -113,7 +113,7 @@ func GenerarGraficasPromedioMultiplicacionMatrices(resultados []modelos.Resultad
 
 }
 
-func GenerarGraficasCrecienteMultiplicacionMatrices(resultados []modelos.ResultadoMultiplicacionNumerosGrandes) {
+func GenerarGraficasCrecienteMultiplicacionMatrices(resultados []modelos.ResultadoMultiplicacionMatrices) {
 
 	pagina := components.NewPage()
 
@@ -121,20 +121,20 @@ func GenerarGraficasCrecienteMultiplicacionMatrices(resultados []modelos.Resulta
 
 	verificarDirectorioGraficas()
 
-	var resultados2 []modelos.ResultadoMultiplicacionNumerosGrandes
-	var resultados4 []modelos.ResultadoMultiplicacionNumerosGrandes
-	var resultados8 []modelos.ResultadoMultiplicacionNumerosGrandes
-	var resultados16 []modelos.ResultadoMultiplicacionNumerosGrandes
-	var resultados32 []modelos.ResultadoMultiplicacionNumerosGrandes
-	var resultados64 []modelos.ResultadoMultiplicacionNumerosGrandes
-	var resultados128 []modelos.ResultadoMultiplicacionNumerosGrandes
-	var resultados256 []modelos.ResultadoMultiplicacionNumerosGrandes
-	var resultados512 []modelos.ResultadoMultiplicacionNumerosGrandes
-	var resultados1024 []modelos.ResultadoMultiplicacionNumerosGrandes
-	var resultados2048 []modelos.ResultadoMultiplicacionNumerosGrandes
-	var resultados4096 []modelos.ResultadoMultiplicacionNumerosGrandes
+	var resultados2 []modelos.ResultadoMultiplicacionMatrices
+	var resultados4 []modelos.ResultadoMultiplicacionMatrices
+	var resultados8 []modelos.ResultadoMultiplicacionMatrices
+	var resultados16 []modelos.ResultadoMultiplicacionMatrices
+	var resultados32 []modelos.ResultadoMultiplicacionMatrices
+	var resultados64 []modelos.ResultadoMultiplicacionMatrices
+	var resultados128 []modelos.ResultadoMultiplicacionMatrices
+	var resultados256 []modelos.ResultadoMultiplicacionMatrices
+	var resultados512 []modelos.ResultadoMultiplicacionMatrices
+	var resultados1024 []modelos.ResultadoMultiplicacionMatrices
+	var resultados2048 []modelos.ResultadoMultiplicacionMatrices
+	var resultados4096 []modelos.ResultadoMultiplicacionMatrices
 
-	var ptr *[]modelos.ResultadoMultiplicacionNumerosGrandes
+	var ptr *[]modelos.ResultadoMultiplicacionMatrices
 
 	for i := range resultados {
 		switch resultados[i].N {
@@ -250,7 +250,7 @@ func GenerarGraficasCrecienteMultiplicacionMatrices(resultados []modelos.Resulta
 	defer file.Close()
 }
 
-func GenerarTablaMultiplicacionMatrices(resultados []modelos.ResultadoMultiplicacionNumerosGrandes) {
+func GenerarTablaMultiplicacionMatrices(resultados []modelos.ResultadoMultiplicacionMatrices) {
 
 	verificarDirectorioGraficas()
 
@@ -281,11 +281,11 @@ func GenerarTablaMultiplicacionMatrices(resultados []modelos.ResultadoMultiplica
 	tabla.Render()
 }
 
-func GenerarGraficaPuntoMultiplicacionMatrices(resultados []modelos.ResultadoMultiplicacionNumerosGrandes) {
+func GenerarGraficaPuntoMultiplicacionMatrices(resultados []modelos.ResultadoMultiplicacionMatrices) {
 
 	verificarDirectorioGraficas()
 
-	resultados4096 := []modelos.ResultadoMultiplicacionNumerosGrandes{}
+	resultados4096 := []modelos.ResultadoMultiplicacionMatrices{}
 
 	algoritmos := []string{}
 
@@ -377,7 +377,7 @@ func verificarDirectorioGraficas() {
 	}
 }
 
-func OrdenarAscendenteCantidadMultiplicacionMatrices(arreglo []modelos.ResultadoMultiplicacionNumerosGrandes) func(int, int) bool {
+func OrdenarAscendenteCantidadMultiplicacionMatrices(arreglo []modelos.ResultadoMultiplicacionMatrices) func(int, int) bool {
 	return func(i, j int) bool {
 		if arreglo[i].N > arreglo[j].N {
 			return arreglo[i].N > arreglo[j].N
@@ -387,7 +387,7 @@ func OrdenarAscendenteCantidadMultiplicacionMatrices(arreglo []modelos.Resultado
 	}
 }
 
-func OrdenarAscendenteTiempoMultiplicacionMatrices(arreglo []modelos.ResultadoMultiplicacionNumerosGrandes) func(int, int) bool {
+func OrdenarAscendenteTiempoMultiplicacionMatrices(arreglo []modelos.ResultadoMultiplicacionMatrices) func(int, int) bool {
 	return func(i, j int) bool {
 		return arreglo[i].Duracion > arreglo[j].Duracion
 	}
