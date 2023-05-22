@@ -22,14 +22,27 @@ import (
  * 		MultiplicacionRusaiterativa toma dos números enteros representados como slices de dígitos y devuelve su producto como un slice de dígitos.
  */
 
-func MultiplicacionRusaIterativa(n1, n2 []int, resultados []int) []int {
-	resultado := make([]int, len(n1)+len(n2))
-	for utilidades.SliceGreaterOrEqualOne(n1) {
+func MultiplicacionRusaIterativa(n1, n2 []int, resultado []int) []int {
+
+	seguir := true
+
+	for seguir {
 		if utilidades.SliceIsOdd(n1) {
-			Sumar(resultado, n2)
+			resultado = utilidades.SumarArreglos(resultado, n2)
 		}
 		n1 = DividirEstatico(n1, 2)
-		n2 = MultiplicarPorDos(n2)
+
+		temp := make([]int, len(n2)+1)
+
+		temp = MultiplicacionInglesaIterativa(n2, []int{2}, temp)
+
+		n2 = temp
+
+		if len(n1) == 1 {
+			if n1[0] == 0 {
+				seguir = false
+			}
+		}
 	}
 	return resultado
 }
@@ -45,48 +58,25 @@ func MultiplicacionRusaIterativa(n1, n2 []int, resultados []int) []int {
  */
 
 func MultiplicacionRusaRecursiva(n1, n2, resultado []int) []int {
-	if !utilidades.SliceGreaterOrEqualOne(n1) {
-		return resultado
+
+	if len(n1) == 1 {
+
+		if n1[0] == 0 {
+			return resultado
+		}
+
 	}
 	if utilidades.SliceIsOdd(n1) {
-		Sumar(resultado, n2)
+		resultado = utilidades.SumarArreglos(resultado, n2)
 	}
+
 	n1 = DividirEstatico(n1, 2)
-	n2 = MultiplicarPorDos(n2)
+
+	temp := make([]int, len(n2)+1)
+
+	temp = MultiplicacionInglesaIterativa(n2, []int{2}, temp)
+
+	n2 = temp
+
 	return MultiplicacionRusaRecursiva(n1, n2, resultado)
-}
-
-func MultiplicarPorDos(n2 []int) []int {
-	carry := 0
-	for i := len(n2) - 1; i >= 0; i-- {
-		n2[i] = n2[i]*2 + carry
-		carry = n2[i] / 10
-		n2[i] %= 10
-	}
-	if carry > 0 {
-		n2 = append([]int{carry}, n2...)
-	}
-	return n2
-}
-
-func Sumar(arr1, arr2 []int) {
-	for i, j := len(arr1), len(arr2); i > 0 || j > 0; {
-		if i > 0 && j > 0 {
-			arr1[i-1] += arr2[j-1]
-		} else if j > 0 {
-			arr1 = append([]int{arr2[j-1]}, arr1...)
-		}
-
-		if i > 0 && arr1[i-1] > 9 {
-			if i > 1 {
-				arr1[i-2] += arr1[i-1] / 10
-			} else {
-				arr1 = append([]int{arr1[i-1] / 10}, arr1...)
-			}
-			arr1[i-1] %= 10
-		}
-
-		i--
-		j--
-	}
 }

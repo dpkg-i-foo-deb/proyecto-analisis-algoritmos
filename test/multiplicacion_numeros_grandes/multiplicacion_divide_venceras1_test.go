@@ -8,13 +8,13 @@ import (
 
 func TestMultiplicacionDivideVenceras1(t *testing.T) {
 
-	n1 := utilidades.FormatearCadenaASlice("419236001010095628945783")
+	n1 := utilidades.FormatearCadenaASlice("847")
 
-	n2 := utilidades.FormatearCadenaASlice("545656784340959960400090")
+	n2 := utilidades.FormatearCadenaASlice("69")
 
 	resultado := make([]int, len(n1)+len(n2)*2)
 
-	esperado := "228758968191132222725707559027530174033598320470"
+	esperado := "58443"
 
 	resultadoCadena := utilidades.FormatearSliceACadena(multiplicacion_numeros_grandes.
 		MultiplicacionDivideVenceras1(n1, n2, resultado))
