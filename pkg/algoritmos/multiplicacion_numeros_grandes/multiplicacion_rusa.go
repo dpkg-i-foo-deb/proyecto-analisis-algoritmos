@@ -22,8 +22,7 @@ import (
  * 		MultiplicacionRusaiterativa toma dos números enteros representados como slices de dígitos y devuelve su producto como un slice de dígitos.
  */
 
-func MultiplicacionRusaIterativa(n1, n2 []int, resultados []int) []int {
-	resultado := make([]int, len(n1)+len(n2))
+func MultiplicacionRusaIterativa(n1, n2 []int, resultado []int) []int {
 	for utilidades.SliceGreaterOrEqualOne(n1) {
 		if utilidades.SliceIsOdd(n1) {
 			Sumar(resultado, n2)
