@@ -13,7 +13,7 @@ func TestMultiplicacionInglesaIterativa(t *testing.T) {
 
 	n2 := utilidades.FormatearCadenaASlice("545656784340959960400090")
 
-	resultado := make([]int, (len(n1)+len(n2))*2)
+	resultado := make([]int, len(n1)+len(n2))
 
 	esperado := "228758968191132222725707559027530174033598320470"
 
