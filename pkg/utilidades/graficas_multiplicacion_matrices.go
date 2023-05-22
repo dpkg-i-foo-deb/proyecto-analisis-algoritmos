@@ -261,7 +261,7 @@ func GenerarTablaMultiplicacionMatrices(resultados []modelos.ResultadoAlgoritmoM
 	algoritmos := make(map[string][]float64)
 
 	for _, v := range resultados {
-		algoritmo := string(modelos.AlgoritmoMultiplicacion(v.Algoritmo))
+		algoritmo := string(modelos.AlgoritmoMultiplicacionMatrices(v.Algoritmo))
 		algoritmos[algoritmo] = append(algoritmos[algoritmo], float64(v.Duracion))
 	}
 
