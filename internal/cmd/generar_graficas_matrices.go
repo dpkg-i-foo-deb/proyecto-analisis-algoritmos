@@ -7,20 +7,20 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var generarGraficasCmd = &cobra.Command{
-	Use:   "generar-graficas",
+var generarGraficasMatricesCmd = &cobra.Command{
+	Use:   "generar-graficas-matrices",
 	Short: "Genera el HTML de las gráficas",
 	Long:  "Genera un archivo HTML con las gráficas para representar los tiempos de ejecución obtenidos en el archivo resultados.json",
-	Run:   generarGraficas,
+	Run:   generarGraficasMatrices,
 }
 
 func init() {
-	rootCmd.AddCommand(generarGraficasCmd)
+	rootCmd.AddCommand(generarGraficasMatricesCmd)
 }
 
-func generarGraficas(cmd *cobra.Command, args []string) {
+func generarGraficasMatrices(cmd *cobra.Command, args []string) {
 	log.Println("Leyendo el archivo de resultados...")
-	resultados := utilidades.LeerResultados()
+	resultados := utilidades.LeerResultadosMatrices()
 
 	log.Println("Generando gráficas...")
 
