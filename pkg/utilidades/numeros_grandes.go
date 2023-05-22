@@ -233,3 +233,13 @@ func SliceGreaterOrEqualOne(n []int) bool {
 	// Si todos los elementos del slice son 0, el número representado es 0
 	return false
 }
+
+func leerResultadoGrandes(file *os.File) []modelos.ResultadoMultiplicacionNumerosGrandes {
+	decoder := json.NewDecoder(file)
+
+	resultado := []modelos.ResultadoMultiplicacionNumerosGrandes{}
+
+	decoder.Decode(&resultado)
+
+	return resultado
+}
