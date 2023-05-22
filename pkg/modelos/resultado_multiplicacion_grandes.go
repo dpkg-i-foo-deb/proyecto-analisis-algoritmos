@@ -1,5 +1,7 @@
 package modelos
 
+import "time"
+
 type AlgoritmoMultiplicacionNumerosGrandes string
 
 const (
@@ -18,3 +20,11 @@ const (
 	CADENAS                      AlgoritmoMultiplicacionNumerosGrandes = "Multiplicación Representada con Cadenas"
 	DIVIDE_Y_VENCERAS            AlgoritmoMultiplicacionNumerosGrandes = "Multiplicación Utilizando Descomposiciones"
 )
+
+type ResultadoMultiplicacionNumerosGrandes struct {
+	Titulo         string                                `json:"titulo"`
+	Algoritmo      AlgoritmoMultiplicacionNumerosGrandes `json:"algoritmo"`
+	N              int                                   `json:"n"`
+	Duracion       int64                                 `json:"duracion"`
+	DuracionHumano time.Duration                         `json:"duracion-humano"`
+}
