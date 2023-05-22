@@ -16,7 +16,11 @@ func TestMultiplicacionInglesaIterativa(t *testing.T) {
 	resultado := make([]int, len(n1)+len(n2))
 
 	esperado := "228758968191132222725707559027530174033598320470"
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> develop
 	resultadoCadena := utilidades.FormatearSliceACadena(multiplicacion_numeros_grandes.
 		MultiplicacionInglesaIterativa(n1, n2, resultado))
 

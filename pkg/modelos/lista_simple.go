@@ -2,12 +2,14 @@ package modelos
 
 import (
 	"fmt"
+	"log"
 )
 
 type ListaSimple struct {
 	Cabecera *Nodo
 	Cantidad int
 	Ultimo   *Nodo
+	Mapa     map[int]*Nodo
 }
 
 func Lista(cantidadNodos int) *ListaSimple {
@@ -18,10 +20,23 @@ func Lista(cantidadNodos int) *ListaSimple {
 		Cabecera: primero,
 		Cantidad: 1,
 		Ultimo:   primero,
+		Mapa:     make(map[int]*Nodo),
 	}
+
+	l.Mapa[0] = primero
 
 	for i := 0; i < cantidadNodos-1; i++ {
 		l.InsertarFinal(0)
+	}
+
+	return l
+}
+
+func ListaDesdeSlice(datos []int) *ListaSimple {
+	l := &ListaSimple{Cabecera: nil, Cantidad: 0, Ultimo: nil, Mapa: make(map[int]*Nodo)}
+
+	for _, valor := range datos {
+		l.InsertarFinal(valor)
 	}
 
 	return l
@@ -54,6 +69,8 @@ func (l *ListaSimple) InsertarFinal(valor int) {
 	}
 
 	l.Cantidad++
+
+	l.Mapa[l.Cantidad-1] = nuevo
 }
 
 func (l *ListaSimple) InsertarFinalRecursivo(nodo *Nodo, valor int, posicion int) {
@@ -117,15 +134,14 @@ func (l *ListaSimple) InsertarPosicionRecursivo(nodo *Nodo, valor int, posicion 
 }
 
 func (l *ListaSimple) GetValor(posicion int) int {
-	i := 0
-	aux := l.Cabecera
 
-	for i != posicion {
-		aux = aux.Siguiente
-		i++
+	nodo := l.GetNodo(posicion)
+
+	if nodo == nil {
+		log.Fatal("Se trató de acceder a una posición que no existe")
 	}
 
-	return aux.Valor
+	return nodo.Valor
 }
 
 func (l *ListaSimple) SetPosicion(posicion int, valor int) {
@@ -141,20 +157,23 @@ func (l *ListaSimple) SetPosicion(posicion int, valor int) {
 }
 
 func (l *ListaSimple) GetNodo(posicion int) *Nodo {
-	i := 0
-	aux := l.Cabecera
-
-	for i != posicion {
-		aux = aux.Siguiente
-		i++
+	// Verificar si la posición es válida
+	if posicion < 0 || posicion >= l.Cantidad {
+		return nil
 	}
-
-	return aux
+	// Retornar el nodo del mapa en tiempo constante
+	return l.Mapa[posicion]
 }
 
 func (l *ListaSimple) EliminarInicio() {
 	l.Cabecera = l.Cabecera.Siguiente
 	l.Cantidad--
+
+	delete(l.Mapa, 0) // Eliminar el primer nodo del mapa
+	// Actualizar los índices de los nodos restantes en el mapa
+	for i := 0; i < l.Cantidad; i++ {
+		l.Mapa[i] = l.Mapa[i+1]
+	}
 }
 
 func (l *ListaSimple) EliminarPosicion(posicion int) {
