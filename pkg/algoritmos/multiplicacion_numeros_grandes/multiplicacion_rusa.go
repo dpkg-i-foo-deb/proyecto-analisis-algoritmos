@@ -89,25 +89,3 @@ func MultiplicarPorDos(n2 []int) []int {
 	}
 	return n2
 }
-
-func Sumar(arr1, arr2 []int) {
-	for i, j := len(arr1), len(arr2); i > 0 || j > 0; {
-		if i > 0 && j > 0 {
-			arr1[i-1] += arr2[j-1]
-		} else if j > 0 {
-			arr1 = append([]int{arr2[j-1]}, arr1...)
-		}
-
-		if i > 0 && arr1[i-1] > 9 {
-			if i > 1 {
-				arr1[i-2] += arr1[i-1] / 10
-			} else {
-				arr1 = append([]int{arr1[i-1] / 10}, arr1...)
-			}
-			arr1[i-1] %= 10
-		}
-
-		i--
-		j--
-	}
-}
