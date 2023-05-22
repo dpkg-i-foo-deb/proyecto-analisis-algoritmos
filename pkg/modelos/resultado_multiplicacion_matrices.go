@@ -23,7 +23,7 @@ const (
 	WINOGRAD_SCALED           AlgoritmoMultiplicacionMatrices = "Winograd Scaled"
 )
 
-type ResultadoAlgoritmoMultiplicacion struct {
+type ResultadoMultiplicacionNumerosGrandes struct {
 	Titulo         string                          `json:"titulo"`
 	Algoritmo      AlgoritmoMultiplicacionMatrices `json:"algoritmo"`
 	N              int                             `json:"n"`

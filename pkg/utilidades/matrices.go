@@ -46,10 +46,10 @@ func Max(a, b int) int {
 	return b
 }
 
-func readResult(file *os.File) []modelos.ResultadoAlgoritmoMultiplicacion {
+func readResult(file *os.File) []modelos.ResultadoMultiplicacionNumerosGrandes {
 	decoder := json.NewDecoder(file)
 
-	resultado := []modelos.ResultadoAlgoritmoMultiplicacion{}
+	resultado := []modelos.ResultadoMultiplicacionNumerosGrandes{}
 
 	decoder.Decode(&resultado)
 
