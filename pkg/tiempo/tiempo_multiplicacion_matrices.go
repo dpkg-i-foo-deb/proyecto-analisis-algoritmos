@@ -8,10 +8,10 @@ import (
 	"time"
 )
 
-func CronometrarMultiplicacionMatrices(algoritmo modelos.AlgoritmoMultiplicacion, n int) func() time.Duration {
+func CronometrarMultiplicacionMatrices(algoritmo modelos.AlgoritmoMultiplicacionMatrices, n int) func() time.Duration {
 	inicio := time.Now()
 	return func() time.Duration {
-		resultado := modelos.ResultadoAlgoritmoMultiplicacion{
+		resultado := modelos.ResultadoMultiplicacionMatrices{
 			Titulo:         string(algoritmo) + " " + strconv.FormatInt(int64(n), 10) + " Elementos",
 			Algoritmo:      algoritmo,
 			N:              n,
