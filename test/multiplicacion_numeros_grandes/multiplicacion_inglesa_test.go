@@ -9,13 +9,13 @@ import (
 
 func TestMultiplicacionInglesaIterativa(t *testing.T) {
 
-	n1 := utilidades.FormatearCadenaASlice("12")
+	n1 := utilidades.FormatearCadenaASlice("419236001010095628945783")
 
-	n2 := utilidades.FormatearCadenaASlice("34")
+	n2 := utilidades.FormatearCadenaASlice("545656784340959960400090")
 
-	resultado := make([]int, len(n1)+len(n2))
+	resultado := make([]int, (len(n1)+len(n2))*2)
 
-	esperado := "408"
+	esperado := "228758968191132222725707559027530174033598320470"
 
 	resultadoCadena := utilidades.FormatearSliceACadena(multiplicacion_numeros_grandes.
 		MultiplicacionInglesaIterativa(n1, n2, resultado))

@@ -17,21 +17,31 @@ func MultiplicacionDivideVenceras1(num1 []int, num2 []int, resultado []int) []in
 
 	//Dado el tamaño más grande, que por cierto debe ser par...
 	if esN1 {
-		if (len(num1)+1)%2 != 0 {
+		if (len(num1))%2 != 0 {
 			num1 = append([]int{0}, num1...)
 		}
 	} else {
-		num2 = append([]int{0}, num2...)
+
+		if (len(num2))%2 != 0 {
+			num2 = append([]int{0}, num2...)
+		}
+
 	}
 
 	//Ambos arreglos deben tener la misma dimensión
 
 	if esN1 {
-		for i := 0; i < len(num1)-len(num2); i++ {
+
+		n := len(num2)
+
+		for i := 0; i < len(num1)-n; i++ {
 			num2 = append([]int{0}, num2...)
 		}
 	} else {
-		for i := 0; i < len(num2)-len(num1); i++ {
+
+		n := len(num1)
+
+		for i := 0; i < len(num2)-n; i++ {
 			num1 = append([]int{0}, num1...)
 		}
 	}
@@ -48,26 +58,22 @@ func MultiplicacionDivideVenceras1(num1 []int, num2 []int, resultado []int) []in
 	num2Dcha := num2[mitadNum2:]
 
 	//Auxiliares
-	res1 := make([]int, len(num1Izda)+len(num2Izda))
-	res2 := make([]int, len(num1Izda)+len(num2Dcha))
-	res3 := make([]int, len(num1Dcha)+len(num2Izda))
-	res4 := make([]int, len(num1Dcha)+len(num2Dcha))
 
 	// Se multiplica la mitad izquierda del multiplicando por la mitad derecha del multiplicador
 
-	res1 = MultiplicacionAmericanaIterativa(num1Izda, num2Izda, res1)
+	res1 := MultiplicacionKaratsubaRecursiva(num1Izda, num2Izda)
 
 	//Se multiplica la mitad izquierda del multiplicando por la mitad derecha del multiplicador
 
-	res2 = MultiplicacionAmericanaIterativa(num1Izda, num2Izda, res2)
+	res2 := MultiplicacionKaratsubaRecursiva(num1Izda, num2Dcha)
 
 	//Se multiplica la mitad derecha del multiplicando por la mitad izquierda del multiplicador
 
-	res3 = MultiplicacionAmericanaIterativa(num1Dcha, num2Izda, res3)
+	res3 := MultiplicacionKaratsubaRecursiva(num1Dcha, num2Izda)
 
 	//Se multiplica la mitad derecha del multiplicando por la mitad derecha del multiplicador
 
-	res4 = MultiplicacionAmericanaIterativa(num1Dcha, num2Dcha, res4)
+	res4 := MultiplicacionKaratsubaRecursiva(num1Dcha, num2Dcha)
 
 	res1 = utilidades.RemoverCerosSlice(res1)
 	res2 = utilidades.RemoverCerosSlice(res2)
@@ -80,37 +86,22 @@ func MultiplicacionDivideVenceras1(num1 []int, num2 []int, resultado []int) []in
 		res1 = append(res1, 0)
 	}
 
-	//Desplazar a la izquierda el segundo y tercer resultado la mitas de cifras que tenga el multiplicador
+	//Desplazar a la izquierda el segundo y tercer resultado la mitad de cifras que tenga el multiplicador
 
 	for i := 0; i < len(num2)/2; i++ {
 		res2 = append(res2, 0)
-		res2 = append(res2, 0)
+		res3 = append(res3, 0)
 	}
 
 	//No hay desplazamiento en el cuarto resultado
 
 	//Sumamos los valores
 
-	sumar(resultado, res1)
-	sumar(resultado, res2)
-	sumar(resultado, res3)
-	sumar(resultado, res4)
+	resultado = utilidades.SumarArreglos(resultado, res1)
+	resultado = utilidades.SumarArreglos(resultado, res2)
+	resultado = utilidades.SumarArreglos(resultado, res3)
+	resultado = utilidades.SumarArreglos(resultado, res4)
 
 	return resultado
 
-}
-
-func sumar(arr1, arr2 []int) {
-	for i, j := len(arr1), len(arr2); i > 0 && j >= 0; {
-
-		arr1[i] += arr2[i]
-
-		if arr1[i] > 9 {
-			arr1[i-1] += arr1[i] / 10
-			arr1[i] %= 10
-		}
-
-		i--
-		j--
-	}
 }

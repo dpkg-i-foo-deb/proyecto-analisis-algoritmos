@@ -142,21 +142,68 @@ func FormatearListaACadena(l *modelos.ListaSimple) string {
 
 }
 
-// generado con AI
-// intToSlice toma un número entero y lo convierte en un slice de dígitos.
-func IntToSlice(num int) []int {
-	var digitos []int
-	// Dividir el número por 10 y tomar el resto en cada iteración para obtener los dígitos del número.
-	for num > 0 {
-		digitos = append(digitos, num%10)
-		num /= 10
+func IgualarLongitud(num1, num2 []int, n int) ([]int, []int) {
+	if n == len(num1) && n == len(num2) {
+		return num1, num2
 	}
-	// Invertir el orden de los dígitos en el slice para que estén en el orden correcto.
-	for i, j := 0, len(digitos)-1; i < j; i, j = i+1, j-1 {
-		digitos[i], digitos[j] = digitos[j], digitos[i]
+
+	long1 := n - len(num1)
+	long2 := n - len(num2)
+
+	n1 := append(make([]int, long1), num1...)
+	n2 := append(make([]int, long2), num2...)
+
+	return n1, n2
+}
+
+func SumarArreglos(num1, num2 []int) []int {
+	long := Max(len(num1), len(num2))
+	num1, num2 = IgualarLongitud(num1, num2, long)
+
+	res := make([]int, 0)
+
+	for i := range num1 {
+		res = append(res, num1[i]+num2[i])
 	}
-	// Devolver el slice de dígitos resultante.
-	return digitos
+
+	for i := len(res) - 1; i > 0; i-- {
+		if res[i] > 9 {
+			res[i-1] += res[i] / 10
+			res[i] %= 10
+		}
+	}
+
+	return res
+}
+
+func RestarArreglos(num1 []int, num2 []int) []int {
+	long := Max(len(num1), len(num2))
+	num1, num2 = IgualarLongitud(num1, num2, long)
+
+	res := make([]int, 0)
+
+	carry := 0
+	for i := len(num1) - 1; i >= 0; i-- {
+		resta := num1[i] - num2[i] - carry
+
+		if resta < 0 {
+			carry = 1
+			resta += 10
+		} else {
+			carry = 0
+		}
+
+		res = append([]int{resta}, res...)
+	}
+
+	// Eliminar los ceros a la izquierda del resultado, si los hay
+	inicioCeros := 0
+	for inicioCeros < len(num1)-1 && res[inicioCeros] == 0 {
+		inicioCeros++
+	}
+
+	return res[inicioCeros:]
+
 }
 
 func SliceIsOdd(n []int) bool {
