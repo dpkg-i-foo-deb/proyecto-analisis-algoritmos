@@ -22,6 +22,7 @@ var benchmarkGrandesCmd = &cobra.Command{
 func init() {
 	rootCmd.AddCommand(benchmarkGrandesCmd)
 
+	benchmarkGrandes = append(benchmarkGrandes, bmark_multiplicacion_grandes.BmarkAmericanaIterativaEstatica)
 	benchmarkGrandes = append(benchmarkGrandes, bmark_multiplicacion_grandes.BmarkAmericanaIterativaDinamica)
 	benchmarkGrandes = append(benchmarkGrandes, bmark_multiplicacion_grandes.BmarkAmericanaRecursivoEstatico)
 	benchmarkGrandes = append(benchmarkGrandes, bmark_multiplicacion_grandes.BmarkAmericanaRecursivoDinamico)

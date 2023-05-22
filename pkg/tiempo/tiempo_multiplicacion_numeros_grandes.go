@@ -22,7 +22,7 @@ func CronometrarMultiplicacionGrandes(algoritmo modelos.AlgoritmoMultiplicacionN
 
 		resultados.ResultadosMultiplicacionNumerosGrandes = append(resultados.ResultadosMultiplicacionNumerosGrandes, resultado)
 
-		fmt.Printf("%s %d x %d Tiempo %v\n", algoritmo, n, n, time.Since(inicio))
+		fmt.Printf("%s %d Tiempo %v\n", algoritmo, n, time.Since(inicio))
 
 		return time.Since(inicio)
 	}

@@ -145,7 +145,7 @@ func EscribirResultadoMultiplicacionesGrandesTXT() {
 		cadena += ResultadosMultiplicacionNumerosGrandes[i].Titulo + " " + strconv.FormatInt(ResultadosMultiplicacionNumerosGrandes[i].Duracion, 10) + "\n"
 	}
 
-	utilidades.EscribirArchivo("resultadosMultiplicacionesNumerosGrandes.txt", []byte(cadena))
+	utilidades.EscribirArchivo("resultadosMultiplicacionNumerosGrandes.txt", []byte(cadena))
 }
 
 func EscribirResultadoMultiplicacionesGrandesJSON() {
@@ -153,5 +153,5 @@ func EscribirResultadoMultiplicacionesGrandesJSON() {
 
 	utilidades.VerificarError(err)
 
-	utilidades.EscribirArchivo("resultadosMultiplicacionesNumerosGrandes.json", cadena)
+	utilidades.EscribirArchivo("resultadosMultiplicacionNumerosGrandes.json", cadena)
 }
