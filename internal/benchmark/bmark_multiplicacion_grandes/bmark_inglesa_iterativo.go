@@ -21,7 +21,7 @@ func inglesaIterativaEstatica(a, b modelos.NumeroGrande) {
 
 }
 
-func BmarkinglesaIterativaDinamica(numerosA, numerosB []modelos.NumeroGrande) {
+func BmarkInglesaIterativaDinamica(numerosA, numerosB []modelos.NumeroGrande) {
 	for i := range numerosA {
 		inglesaIterativaDinamica(numerosA[i], numerosB[i])
 	}

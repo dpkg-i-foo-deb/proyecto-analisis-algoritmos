@@ -1,0 +1,157 @@
+package resultados
+
+import (
+	"encoding/json"
+	"generador/pkg/modelos"
+	"generador/pkg/utilidades"
+	"sort"
+	"strconv"
+)
+
+var ResultadosMultiplicacionNumerosGrandes []modelos.ResultadoMultiplicacionNumerosGrandes
+
+var resultadosMultiplicacionAmericanaIterativaEstatico []modelos.ResultadoMultiplicacionNumerosGrandes
+var resultadosMultiplicacionAmericanaIterativaDinamico []modelos.ResultadoMultiplicacionNumerosGrandes
+var resultadosMultiplicacionAmericanaRecursivaEstatico []modelos.ResultadoMultiplicacionNumerosGrandes
+var resultadosMultiplicacionAmericanaRecursivaDinamico []modelos.ResultadoMultiplicacionNumerosGrandes
+var resultadosMultiplicacionInglesaIterativaEstatico []modelos.ResultadoMultiplicacionNumerosGrandes
+var resultadosMultiplicacionInglesaIterativaDinamico []modelos.ResultadoMultiplicacionNumerosGrandes
+var resultadosMultiplicacionInglesaRecursivaEstatico []modelos.ResultadoMultiplicacionNumerosGrandes
+var resultadosMultiplicacionInglesaRecursivaDinamico []modelos.ResultadoMultiplicacionNumerosGrandes
+var resultadosMultiplicacionRusaIterativa []modelos.ResultadoMultiplicacionNumerosGrandes
+var resultadosMultiplicacionRusaRecursiva []modelos.ResultadoMultiplicacionNumerosGrandes
+var resultadosMultiplicacionHinduIterativa []modelos.ResultadoMultiplicacionNumerosGrandes
+var resultadosMultiplicacionHinduRecursiva []modelos.ResultadoMultiplicacionNumerosGrandes
+var resultadosMultiplicacionEgipciaIterativa []modelos.ResultadoMultiplicacionNumerosGrandes
+var resultadosMultiplicacionEgipciaRecursiva []modelos.ResultadoMultiplicacionNumerosGrandes
+var resultadosMultiplicacionKaratsuba []modelos.ResultadoMultiplicacionNumerosGrandes
+var resultadosMultiplicacionCadenas []modelos.ResultadoMultiplicacionNumerosGrandes
+var resultadosMultiplicacionDivideVenceras []modelos.ResultadoMultiplicacionNumerosGrandes
+
+func ConsolidarMultiplicacionNumerosGrandes() {
+
+	resultadosMultiplicacionAmericanaIterativaEstatico = []modelos.ResultadoMultiplicacionNumerosGrandes{}
+	resultadosMultiplicacionAmericanaIterativaDinamico = []modelos.ResultadoMultiplicacionNumerosGrandes{}
+	resultadosMultiplicacionAmericanaRecursivaEstatico = []modelos.ResultadoMultiplicacionNumerosGrandes{}
+	resultadosMultiplicacionAmericanaRecursivaDinamico = []modelos.ResultadoMultiplicacionNumerosGrandes{}
+	resultadosMultiplicacionInglesaIterativaEstatico = []modelos.ResultadoMultiplicacionNumerosGrandes{}
+	resultadosMultiplicacionInglesaIterativaDinamico = []modelos.ResultadoMultiplicacionNumerosGrandes{}
+	resultadosMultiplicacionInglesaRecursivaEstatico = []modelos.ResultadoMultiplicacionNumerosGrandes{}
+	resultadosMultiplicacionInglesaRecursivaDinamico = []modelos.ResultadoMultiplicacionNumerosGrandes{}
+	resultadosMultiplicacionRusaIterativa = []modelos.ResultadoMultiplicacionNumerosGrandes{}
+	resultadosMultiplicacionRusaRecursiva = []modelos.ResultadoMultiplicacionNumerosGrandes{}
+	resultadosMultiplicacionHinduIterativa = []modelos.ResultadoMultiplicacionNumerosGrandes{}
+	resultadosMultiplicacionHinduRecursiva = []modelos.ResultadoMultiplicacionNumerosGrandes{}
+	resultadosMultiplicacionEgipciaIterativa = []modelos.ResultadoMultiplicacionNumerosGrandes{}
+	resultadosMultiplicacionEgipciaRecursiva = []modelos.ResultadoMultiplicacionNumerosGrandes{}
+	resultadosMultiplicacionKaratsuba = []modelos.ResultadoMultiplicacionNumerosGrandes{}
+	resultadosMultiplicacionCadenas = []modelos.ResultadoMultiplicacionNumerosGrandes{}
+	resultadosMultiplicacionDivideVenceras = []modelos.ResultadoMultiplicacionNumerosGrandes{}
+
+	filtrarMultiplicacionNumerosGrandes()
+	ordenarMultiplicacionNumerosGrandes()
+	reconstruirResultadosNumerosGrandes()
+}
+
+func filtrarMultiplicacionNumerosGrandes() {
+	for i := range ResultadosMultiplicacionNumerosGrandes {
+		switch ResultadosMultiplicacionNumerosGrandes[i].Algoritmo {
+		case modelos.AMERICANA_ITERATIVA_ESTATICO:
+			resultadosMultiplicacionAmericanaIterativaEstatico = append(resultadosMultiplicacionAmericanaIterativaEstatico, ResultadosMultiplicacionNumerosGrandes[i])
+		case modelos.AMERICANA_ITERATIVA_DINAMICO:
+			resultadosMultiplicacionAmericanaIterativaDinamico = append(resultadosMultiplicacionAmericanaIterativaDinamico, ResultadosMultiplicacionNumerosGrandes[i])
+		case modelos.AMERICANA_RECURSIVA_ESTATICO:
+			resultadosMultiplicacionAmericanaRecursivaEstatico = append(resultadosMultiplicacionAmericanaRecursivaEstatico, ResultadosMultiplicacionNumerosGrandes[i])
+		case modelos.AMERICANA_RECURSIVA_DINAMICO:
+			resultadosMultiplicacionAmericanaRecursivaDinamico = append(resultadosMultiplicacionAmericanaRecursivaDinamico, ResultadosMultiplicacionNumerosGrandes[i])
+		case modelos.INGLESA_ITERATIVA_ESTATICO:
+			resultadosMultiplicacionInglesaIterativaEstatico = append(resultadosMultiplicacionInglesaIterativaEstatico, ResultadosMultiplicacionNumerosGrandes[i])
+		case modelos.INGLESA_ITERATIVA_DINAMICO:
+			resultadosMultiplicacionInglesaIterativaDinamico = append(resultadosMultiplicacionInglesaIterativaDinamico, ResultadosMultiplicacionNumerosGrandes[i])
+		case modelos.INGLESA_RECURSIVA_ESTATICO:
+			resultadosMultiplicacionInglesaRecursivaEstatico = append(resultadosMultiplicacionInglesaRecursivaEstatico, ResultadosMultiplicacionNumerosGrandes[i])
+		case modelos.INGLESA_RECURSIVA_DINAMICO:
+			resultadosMultiplicacionInglesaRecursivaDinamico = append(resultadosMultiplicacionInglesaRecursivaDinamico, ResultadosMultiplicacionNumerosGrandes[i])
+		case modelos.RUSA_ITERATIVA:
+			resultadosMultiplicacionRusaIterativa = append(resultadosMultiplicacionRusaIterativa, ResultadosMultiplicacionNumerosGrandes[i])
+		case modelos.RUSA_RECURSIVA:
+			resultadosMultiplicacionRusaRecursiva = append(resultadosMultiplicacionRusaRecursiva, ResultadosMultiplicacionNumerosGrandes[i])
+		case modelos.HINDU_ITERATIVA:
+			resultadosMultiplicacionHinduIterativa = append(resultadosMultiplicacionHinduIterativa, ResultadosMultiplicacionNumerosGrandes[i])
+		case modelos.HINDU_RECURSIVA:
+			resultadosMultiplicacionHinduRecursiva = append(resultadosMultiplicacionHinduRecursiva, ResultadosMultiplicacionNumerosGrandes[i])
+		case modelos.EGIPCIA_ITERATIVA:
+			resultadosMultiplicacionEgipciaIterativa = append(resultadosMultiplicacionEgipciaIterativa, ResultadosMultiplicacionNumerosGrandes[i])
+		case modelos.EGIPCIA_RECURSIVA:
+			resultadosMultiplicacionEgipciaRecursiva = append(resultadosMultiplicacionEgipciaRecursiva, ResultadosMultiplicacionNumerosGrandes[i])
+		case modelos.KARATSUBA:
+			resultadosMultiplicacionKaratsuba = append(resultadosMultiplicacionKaratsuba, ResultadosMultiplicacionNumerosGrandes[i])
+		case modelos.CADENAS:
+			resultadosMultiplicacionCadenas = append(resultadosMultiplicacionCadenas, ResultadosMultiplicacionNumerosGrandes[i])
+		case modelos.DIVIDE_Y_VENCERAS:
+			resultadosMultiplicacionDivideVenceras = append(resultadosMultiplicacionDivideVenceras, ResultadosMultiplicacionNumerosGrandes[i])
+		}
+	}
+}
+
+func ordenarMultiplicacionNumerosGrandes() {
+	sort.Slice(ResultadosMultiplicacionNumerosGrandes, utilidades.OrdenarAscendenteCantidadMultiplicacionesNumerosGrandes(ResultadosMultiplicacionNumerosGrandes))
+
+	sort.Slice(resultadosMultiplicacionAmericanaIterativaEstatico, utilidades.OrdenarAscendenteCantidadMultiplicacionesNumerosGrandes(resultadosMultiplicacionAmericanaIterativaEstatico))
+	sort.Slice(resultadosMultiplicacionAmericanaIterativaDinamico, utilidades.OrdenarAscendenteCantidadMultiplicacionesNumerosGrandes(resultadosMultiplicacionAmericanaIterativaDinamico))
+	sort.Slice(resultadosMultiplicacionAmericanaRecursivaEstatico, utilidades.OrdenarAscendenteCantidadMultiplicacionesNumerosGrandes(resultadosMultiplicacionAmericanaRecursivaEstatico))
+	sort.Slice(resultadosMultiplicacionAmericanaRecursivaDinamico, utilidades.OrdenarAscendenteCantidadMultiplicacionesNumerosGrandes(resultadosMultiplicacionAmericanaRecursivaDinamico))
+	sort.Slice(resultadosMultiplicacionInglesaIterativaEstatico, utilidades.OrdenarAscendenteCantidadMultiplicacionesNumerosGrandes(resultadosMultiplicacionInglesaIterativaEstatico))
+	sort.Slice(resultadosMultiplicacionInglesaIterativaDinamico, utilidades.OrdenarAscendenteCantidadMultiplicacionesNumerosGrandes(resultadosMultiplicacionInglesaIterativaDinamico))
+	sort.Slice(resultadosMultiplicacionInglesaRecursivaEstatico, utilidades.OrdenarAscendenteCantidadMultiplicacionesNumerosGrandes(resultadosMultiplicacionInglesaRecursivaEstatico))
+	sort.Slice(resultadosMultiplicacionInglesaRecursivaDinamico, utilidades.OrdenarAscendenteCantidadMultiplicacionesNumerosGrandes(resultadosMultiplicacionInglesaRecursivaDinamico))
+	sort.Slice(resultadosMultiplicacionRusaIterativa, utilidades.OrdenarAscendenteCantidadMultiplicacionesNumerosGrandes(resultadosMultiplicacionRusaIterativa))
+	sort.Slice(resultadosMultiplicacionRusaRecursiva, utilidades.OrdenarAscendenteCantidadMultiplicacionesNumerosGrandes(resultadosMultiplicacionRusaRecursiva))
+	sort.Slice(resultadosMultiplicacionHinduIterativa, utilidades.OrdenarAscendenteCantidadMultiplicacionesNumerosGrandes(resultadosMultiplicacionHinduIterativa))
+	sort.Slice(resultadosMultiplicacionHinduRecursiva, utilidades.OrdenarAscendenteCantidadMultiplicacionesNumerosGrandes(resultadosMultiplicacionHinduRecursiva))
+	sort.Slice(resultadosMultiplicacionEgipciaIterativa, utilidades.OrdenarAscendenteCantidadMultiplicacionesNumerosGrandes(resultadosMultiplicacionEgipciaIterativa))
+	sort.Slice(resultadosMultiplicacionEgipciaRecursiva, utilidades.OrdenarAscendenteCantidadMultiplicacionesNumerosGrandes(resultadosMultiplicacionEgipciaRecursiva))
+	sort.Slice(resultadosMultiplicacionKaratsuba, utilidades.OrdenarAscendenteCantidadMultiplicacionesNumerosGrandes(resultadosMultiplicacionKaratsuba))
+	sort.Slice(resultadosMultiplicacionCadenas, utilidades.OrdenarAscendenteCantidadMultiplicacionesNumerosGrandes(resultadosMultiplicacionCadenas))
+	sort.Slice(resultadosMultiplicacionDivideVenceras, utilidades.OrdenarAscendenteCantidadMultiplicacionesNumerosGrandes(resultadosMultiplicacionDivideVenceras))
+}
+
+func reconstruirResultadosNumerosGrandes() {
+	ResultadosMultiplicacionNumerosGrandes = []modelos.ResultadoMultiplicacionNumerosGrandes{}
+
+	ResultadosMultiplicacionNumerosGrandes = append(ResultadosMultiplicacionNumerosGrandes, resultadosMultiplicacionAmericanaIterativaEstatico...)
+	ResultadosMultiplicacionNumerosGrandes = append(ResultadosMultiplicacionNumerosGrandes, resultadosMultiplicacionAmericanaIterativaDinamico...)
+	ResultadosMultiplicacionNumerosGrandes = append(ResultadosMultiplicacionNumerosGrandes, resultadosMultiplicacionAmericanaRecursivaEstatico...)
+	ResultadosMultiplicacionNumerosGrandes = append(ResultadosMultiplicacionNumerosGrandes, resultadosMultiplicacionAmericanaRecursivaDinamico...)
+	ResultadosMultiplicacionNumerosGrandes = append(ResultadosMultiplicacionNumerosGrandes, resultadosMultiplicacionInglesaIterativaEstatico...)
+	ResultadosMultiplicacionNumerosGrandes = append(ResultadosMultiplicacionNumerosGrandes, resultadosMultiplicacionInglesaIterativaDinamico...)
+	ResultadosMultiplicacionNumerosGrandes = append(ResultadosMultiplicacionNumerosGrandes, resultadosMultiplicacionInglesaRecursivaEstatico...)
+	ResultadosMultiplicacionNumerosGrandes = append(ResultadosMultiplicacionNumerosGrandes, resultadosMultiplicacionInglesaRecursivaDinamico...)
+	ResultadosMultiplicacionNumerosGrandes = append(ResultadosMultiplicacionNumerosGrandes, resultadosMultiplicacionRusaIterativa...)
+	ResultadosMultiplicacionNumerosGrandes = append(ResultadosMultiplicacionNumerosGrandes, resultadosMultiplicacionRusaRecursiva...)
+	ResultadosMultiplicacionNumerosGrandes = append(ResultadosMultiplicacionNumerosGrandes, resultadosMultiplicacionHinduIterativa...)
+	ResultadosMultiplicacionNumerosGrandes = append(ResultadosMultiplicacionNumerosGrandes, resultadosMultiplicacionHinduRecursiva...)
+	ResultadosMultiplicacionNumerosGrandes = append(ResultadosMultiplicacionNumerosGrandes, resultadosMultiplicacionEgipciaIterativa...)
+	ResultadosMultiplicacionNumerosGrandes = append(ResultadosMultiplicacionNumerosGrandes, resultadosMultiplicacionEgipciaRecursiva...)
+	ResultadosMultiplicacionNumerosGrandes = append(ResultadosMultiplicacionNumerosGrandes, resultadosMultiplicacionKaratsuba...)
+	ResultadosMultiplicacionNumerosGrandes = append(ResultadosMultiplicacionNumerosGrandes, resultadosMultiplicacionCadenas...)
+	ResultadosMultiplicacionNumerosGrandes = append(ResultadosMultiplicacionNumerosGrandes, resultadosMultiplicacionDivideVenceras...)
+}
+
+func EscribirResultadoMultiplicacionesGrandesTXT() {
+	cadena := ""
+
+	for i := range ResultadosMultiplicacionNumerosGrandes {
+		cadena += ResultadosMultiplicacionNumerosGrandes[i].Titulo + " " + strconv.FormatInt(ResultadosMultiplicacionNumerosGrandes[i].Duracion, 10) + "\n"
+	}
+
+	utilidades.EscribirArchivo("resultadosMultiplicacionesNumerosGrandes.txt", []byte(cadena))
+}
+
+func EscribirResultadoMultiplicacionesGrandesJSON() {
+	cadena, err := json.Marshal(ResultadosMultiplicacionNumerosGrandes)
+
+	utilidades.VerificarError(err)
+
+	utilidades.EscribirArchivo("resultadosMultiplicacionesNumerosGrandes.json", cadena)
+}

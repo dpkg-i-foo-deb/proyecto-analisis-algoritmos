@@ -387,6 +387,15 @@ func OrdenarAscendenteCantidadMultiplicacionMatrices(arreglo []modelos.Resultado
 	}
 }
 
+func OrdenarAscendenteCantidadMultiplicacionesNumerosGrandes(arreglo []modelos.ResultadoMultiplicacionNumerosGrandes) func(int, int) bool {
+	return func(i, j int) bool {
+		if arreglo[i].N > arreglo[j].N {
+			return arreglo[i].N > arreglo[j].N
+		}
+		return arreglo[i].N < arreglo[j].N
+	}
+}
+
 func OrdenarAscendenteTiempoMultiplicacionMatrices(arreglo []modelos.ResultadoMultiplicacionMatrices) func(int, int) bool {
 	return func(i, j int) bool {
 		return arreglo[i].Duracion > arreglo[j].Duracion
