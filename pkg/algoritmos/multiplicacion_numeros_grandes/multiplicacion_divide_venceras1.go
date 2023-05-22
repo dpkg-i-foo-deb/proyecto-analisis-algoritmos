@@ -59,29 +59,29 @@ func MultiplicacionDivideVenceras1(num1 []int, num2 []int, resultado []int) []in
 
 	//Auxiliares
 
-	// Se multiplica la mitad izquierda del multiplicando por la mitad derecha del multiplicador
+	// Se multiplica la mitad izquierda del multiplicando por la mitad izquierda del multiplicador
 
-	res1 := make([]int, (len(num1Izda) + len(num2Izda)*2))
+	res1 := make([]int, len(num1Izda)+len(num2Izda))
 
-	res1 = MultiplicacionAmericanaIterativa(num1Izda, num2Izda, res1)
+	res1 = MultiplicacionInglesaIterativa(num1Izda, num2Izda, res1)
 
 	//Se multiplica la mitad izquierda del multiplicando por la mitad derecha del multiplicador
 
-	res2 := make([]int, (len(num1Izda) + len(num2Dcha)*2))
+	res2 := make([]int, len(num1Izda)+len(num2Dcha))
 
-	res2 = MultiplicacionAmericanaIterativa(num1Izda, num2Dcha, res2)
+	res2 = MultiplicacionInglesaIterativa(num1Izda, num2Dcha, res2)
 
 	//Se multiplica la mitad derecha del multiplicando por la mitad izquierda del multiplicador
 
-	res3 := make([]int, (len(num1Dcha) + len(num2Izda)*2))
+	res3 := make([]int, len(num1Dcha)+len(num2Izda))
 
-	res3 = MultiplicacionAmericanaIterativa(num1Dcha, num2Izda, res3)
+	res3 = MultiplicacionInglesaIterativa(num1Dcha, num2Izda, res3)
 
 	//Se multiplica la mitad derecha del multiplicando por la mitad derecha del multiplicador
 
-	res4 := make([]int, (len(num1Dcha) + len(num2Dcha)*2))
+	res4 := make([]int, len(num1Dcha)+len(num2Dcha))
 
-	res4 = MultiplicacionAmericanaIterativa(num1Dcha, num2Dcha, res4)
+	res4 = MultiplicacionInglesaIterativa(num1Dcha, num2Dcha, res4)
 
 	res1 = utilidades.RemoverCerosSlice(res1)
 	res2 = utilidades.RemoverCerosSlice(res2)

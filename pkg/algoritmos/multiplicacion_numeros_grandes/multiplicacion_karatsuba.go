@@ -2,7 +2,6 @@ package multiplicacion_numeros_grandes
 
 import (
 	"generador/pkg/utilidades"
-	"strconv"
 )
 
 /*
@@ -35,12 +34,18 @@ func MultiplicacionKaratsubaRecursiva(num1, num2 []int) []int {
 		return []int{}
 	}
 
-	if n == 1 {
-		multiplicacion := strconv.Itoa(num1[0] * num2[0])
-		return utilidades.FormatearCadenaASlice(multiplicacion)
+	if n <= 16 {
+
+		res := make([]int, len(num1)+len(num2))
+
+		res = MultiplicacionInglesaIterativa(num1, num2, res)
+
+		res = utilidades.RemoverCerosSlice(res)
+
+		return res
 	}
 
-	primeraMitad := n / 2 //se usa para dividir el número
+	primeraMitad := n / 2            //se usa para dividir el número
 	segundaMitad := n - primeraMitad //se usa para la multiplicación de P1 por 10^x
 
 	num1Left := num1[0:primeraMitad]

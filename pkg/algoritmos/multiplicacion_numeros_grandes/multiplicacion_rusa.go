@@ -32,14 +32,11 @@ func MultiplicacionRusaIterativa(n1, n2 []int, resultado []int) []int {
 		}
 		n1 = DividirEstatico(n1, 2)
 
-		tmp := make([]int, (len(n2)+1)*2)
+		temp := make([]int, len(n2)+1)
 
-		tmp = MultiplicacionAmericanaIterativa(n2, []int{2}, tmp)
+		temp = MultiplicacionInglesaIterativa(n2, []int{2}, temp)
 
-		tmp = utilidades.RemoverCerosSlice(tmp)
-
-		//n2 = MultiplicarPorDos(n2)
-		n2 = tmp
+		n2 = temp
 
 		if len(n1) == 1 {
 			if n1[0] == 0 {
@@ -72,20 +69,14 @@ func MultiplicacionRusaRecursiva(n1, n2, resultado []int) []int {
 	if utilidades.SliceIsOdd(n1) {
 		resultado = utilidades.SumarArreglos(resultado, n2)
 	}
-	n1 = DividirEstatico(n1, 2)
-	n2 = MultiplicarPorDos(n2)
-	return MultiplicacionRusaRecursiva(n1, n2, resultado)
-}
 
-func MultiplicarPorDos(n2 []int) []int {
-	carry := 0
-	for i := len(n2) - 1; i >= 0; i-- {
-		n2[i] = n2[i]*2 + carry
-		carry = n2[i] / 10
-		n2[i] %= 10
-	}
-	if carry > 0 {
-		n2 = append([]int{carry}, n2...)
-	}
-	return n2
+	n1 = DividirEstatico(n1, 2)
+
+	temp := make([]int, len(n2)+1)
+
+	temp = MultiplicacionInglesaIterativa(n2, []int{2}, temp)
+
+	n2 = temp
+
+	return MultiplicacionRusaRecursiva(n1, n2, resultado)
 }

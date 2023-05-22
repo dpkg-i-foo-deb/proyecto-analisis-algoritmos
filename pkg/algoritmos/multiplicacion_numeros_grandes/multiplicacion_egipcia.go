@@ -25,7 +25,12 @@ func MultiplicacionEgipciaIterativa(n1, n2 []int, resultado []int) []int {
 			resultado = utilidades.SumarArreglos(resultado, n1)
 		}
 
-		n1 = MultiplicarPorDos(n1)
+		temp := make([]int, len(n1)+1)
+
+		temp = MultiplicacionInglesaIterativa(n1, []int{2}, temp)
+
+		n1 = temp
+
 		n2 = DividirEstatico(n2, 2)
 
 		if len(n2) == 1 {
@@ -57,7 +62,13 @@ func MultiplicacionEgipciaRecursiva(n1, n2, resultado []int) []int {
 	if utilidades.SliceIsOdd(n2) {
 		resultado = utilidades.SumarArreglos(resultado, n1)
 	}
-	n1 = MultiplicarPorDos(n1)
+
+	temp := make([]int, len(n1)+1)
+
+	temp = MultiplicacionInglesaIterativa(n1, []int{2}, temp)
+
+	n1 = temp
+
 	n2 = DividirEstatico(n2, 2)
 	return MultiplicacionEgipciaRecursiva(n1, n2, resultado)
 }
