@@ -3,6 +3,7 @@ package utilidades
 import (
 	"generador/pkg/modelos"
 	"os"
+	"sort"
 
 	"github.com/go-echarts/go-echarts/v2/charts"
 	"github.com/go-echarts/go-echarts/v2/opts"
@@ -78,4 +79,65 @@ func GenerarGraficasPromedioMultiplicacionGrandes(resultados []modelos.Resultado
 
 	VerificarError(err)
 
+}
+
+func GenerarGraficaCrecienteMultiplicacionGrandes(resultados []modelos.ResultadoMultiplicacionNumerosGrandes) {
+	verificarDirectorioGraficas()
+
+	var resultados1024 []modelos.ResultadoMultiplicacionNumerosGrandes
+
+	for i := range resultados {
+		if resultados[i].N == 1024 {
+			resultados1024 = append(resultados1024, resultados[i])
+		}
+
+	}
+
+	sort.Slice(resultados1024, OrdenarAscendenteTiempoMultiplicacionGrandes(resultados1024))
+
+	titulo := "Tiempo de ejecución de los algoritmos de multiplicación de números grandes"
+
+	subtitulo := "Tiempos de ejecución para el caso más grande"
+
+	graficaBarras := charts.NewBar()
+
+	graficaBarras.SetGlobalOptions(
+		charts.WithTitleOpts(
+			opts.Title{
+				Title:    titulo,
+				Subtitle: subtitulo,
+				Right:    "40%",
+			}),
+	)
+
+	graficaBarras.SetGlobalOptions(opciones...)
+
+	x := []string{}
+	series := []opts.BarData{}
+
+	for i := range resultados1024 {
+		x = append(x, string(resultados1024[i].Algoritmo))
+		series = append(series, opts.BarData{Value: resultados1024[i].Duracion})
+	}
+
+	graficaBarras.SetXAxis(x)
+
+	graficaBarras.AddSeries("Tiempo de ejecución", series)
+
+	graficaBarras.XYReversal()
+
+	file, err := os.Create("graficas/graficaCrecienteGrandes.html")
+	VerificarError(err)
+
+	defer file.Close()
+
+	err = graficaBarras.Render(file)
+
+	VerificarError(err)
+}
+
+func OrdenarAscendenteTiempoMultiplicacionGrandes(a []modelos.ResultadoMultiplicacionNumerosGrandes) func(int, int) bool {
+	return func(i, j int) bool {
+		return a[i].Duracion > a[j].Duracion
+	}
 }

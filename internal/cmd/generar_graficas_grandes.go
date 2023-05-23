@@ -25,6 +25,8 @@ func generarGraficasGrandes(cmd *cobra.Command, args []string) {
 	log.Println("Generando gráficas...")
 
 	utilidades.GenerarGraficasPromedioMultiplicacionGrandes(resultados)
-
 	log.Println("Gráfica generada en graficas/graficaPromediosGrandes.html")
+	utilidades.GenerarGraficaCrecienteMultiplicacionGrandes(resultados)
+	log.Println("Gráfica generada en graficas/graficaCrecienteGrandes.html")
+
 }
